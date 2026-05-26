@@ -201,6 +201,34 @@ export class CalendarRenderer {
       cols.push({ dateStr, isToday });
     }
 
+    // ── All-day strip ──
+    const allDayEvents = cols.map(({ dateStr }) =>
+      getEventsForDate(dateStr).filter((e) => e.allDay)
+    );
+    const hasAnyAllDay = allDayEvents.some((evs) => evs.length > 0);
+
+    let allDayRow = null;
+    if (hasAnyAllDay) {
+      allDayRow = document.createElement('div');
+      allDayRow.className = 'cal-week-allday-row';
+
+      const allDaySpacer = document.createElement('div');
+      allDaySpacer.className = 'cal-time-spacer cal-allday-label';
+      allDaySpacer.textContent = '整天';
+      allDayRow.appendChild(allDaySpacer);
+
+      cols.forEach(({ dateStr, isToday }, i) => {
+        const cell = document.createElement('div');
+        cell.className = 'cal-week-allday-cell' + (isToday ? ' today-col' : '');
+        allDayEvents[i].forEach((ev) => {
+          const pill = this._createEventPill(ev, members);
+          pill.classList.add('week-allday-pill');
+          cell.appendChild(pill);
+        });
+        allDayRow.appendChild(cell);
+      });
+    }
+
     const body = document.createElement('div');
     body.className = 'cal-week-body';
 
@@ -253,6 +281,7 @@ export class CalendarRenderer {
     if (todayColEl) todayColEl.appendChild(nowLine);
 
     wrapper.appendChild(header);
+    if (allDayRow) wrapper.appendChild(allDayRow);
     wrapper.appendChild(body);
     this.container.appendChild(wrapper);
 

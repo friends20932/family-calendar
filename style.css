@@ -419,6 +419,39 @@ body.sidebar-closed #sidebar {
 }
 .cal-event-more:hover { color: var(--accent); }
 
+/* All-day strip in week view */
+.cal-week-allday-row {
+  display: flex;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-elevated);
+  flex-shrink: 0;
+}
+.cal-allday-label {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  font-size: 9.5px;
+  font-weight: 700;
+  color: var(--text-muted);
+  padding-right: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.cal-week-allday-cell {
+  flex: 1;
+  border-right: 1px solid var(--border);
+  padding: 4px 3px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-height: 28px;
+}
+.cal-week-allday-cell.today-col { background: var(--accent-light); }
+.week-allday-pill {
+  font-size: 11px;
+  padding: 2px 6px;
+}
+
 /* ── WEEK VIEW ───────────────────────────────────────────── */
 .cal-week-wrapper {
   display: flex;
