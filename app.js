@@ -43,7 +43,7 @@ function setupCalendar() {
       selectedDate = dateStr;
       showDayPanel(dateStr);
     },
-    onEventClick: (ev) => openEventModal(ev),
+    onEventClick: (ev) => openEventViewModal(ev),
     onNewEvent: (dateStr, datetime) => {
       selectedDate = dateStr;
       openNewEventModal(dateStr, datetime);
@@ -185,7 +185,7 @@ function renderUpcoming() {
     item.addEventListener('click', () => {
       const ev = loadEvents().find((e) => e.id === item.dataset.id)
         || getEventsForDate(item.dataset.ds).find((e) => e.id === item.dataset.id);
-      if (ev) openEventModal(ev);
+      if (ev) openEventViewModal(ev);
     });
   });
 }
@@ -222,7 +222,7 @@ function showDayPanel(dateStr) {
           ${ev.url ? `<div class="dp-url" style="margin-top: 4px; font-size: 12px;"><a href="${escapeHtml(ev.url)}" target="_blank" style="color: var(--accent); text-decoration: none;">🔗 連結網址</a></div>` : ''}
           ${member ? `<div class="dp-member" style="color:${member.color}">${member.emoji} ${member.name}</div>` : ''}
         </div>`;
-      item.addEventListener('click', () => openEventModal(ev));
+      item.addEventListener('click', () => openEventViewModal(ev));
       list.appendChild(item);
     });
   }
@@ -233,6 +233,68 @@ function showDayPanel(dateStr) {
 }
 
 // ── Event Modal ───────────────────────────────────────────────
+function openEventViewModal(ev) {
+  const body = document.getElementById('event-view-body');
+  if (!body) return;
+  const members = loadMembers();
+  const member = members.find((m) => ev.memberIds?.includes(m.id));
+  const color = ev.color || member?.color || 'var(--accent)';
+  
+  let timeStr = ev.allDay ? '整天' : formatTime(ev.datetime);
+  if (!ev.allDay && ev.endDatetime) {
+    timeStr += ' - ' + formatTime(ev.endDatetime);
+  } else if (ev.allDay && ev.endDatetime && ev.endDatetime.slice(0,10) !== ev.datetime.slice(0,10)) {
+    timeStr = ev.datetime.slice(0,10) + ' ~ ' + ev.endDatetime.slice(0,10) + ' (整天)';
+  }
+
+  body.innerHTML = `
+    <div style="display:flex; align-items:center; gap:12px;">
+      <div style="width:16px; height:16px; border-radius:4px; background:${color}; flex-shrink:0;"></div>
+      <div style="font-size:20px; font-weight:700; color:var(--text-primary); line-height:1.2;">${escapeHtml(ev.title)}</div>
+    </div>
+    
+    <div style="display:flex; flex-direction:column; gap:10px; margin-top:8px; font-size:14px; color:var(--text-secondary);">
+      <div style="display:flex; align-items:flex-start; gap:8px;">
+        <span>🕒</span>
+        <span>${timeStr}</span>
+      </div>
+      
+      ${ev.location ? `
+      <div style="display:flex; align-items:flex-start; gap:8px;">
+        <span>📍</span>
+        <span>${escapeHtml(ev.location)}</span>
+      </div>` : ''}
+      
+      ${ev.url ? `
+      <div style="display:flex; align-items:flex-start; gap:8px;">
+        <span>🔗</span>
+        <a href="${ev.url}" target="_blank" style="color:var(--accent); text-decoration:none; word-break:break-all;">${escapeHtml(ev.url)}</a>
+      </div>` : ''}
+      
+      ${member ? `
+      <div style="display:flex; align-items:center; gap:8px;">
+        <span>👥</span>
+        <span style="display:flex; align-items:center; gap:6px; background:color-mix(in srgb, ${member.color} 15%, white); padding:2px 8px; border-radius:12px; font-size:12px; font-weight:600; color:${member.color}; border: 1px solid color-mix(in srgb, ${member.color} 30%, white);">
+          ${member.emoji} ${escapeHtml(member.name)}
+        </span>
+      </div>` : ''}
+      
+      ${ev.description ? `
+      <div style="display:flex; align-items:flex-start; gap:8px; margin-top:4px;">
+        <span>📝</span>
+        <div style="white-space:pre-wrap; line-height:1.5;">${escapeHtml(ev.description)}</div>
+      </div>` : ''}
+    </div>
+  `;
+  
+  document.getElementById('btn-edit-event').onclick = () => {
+    closeModal('event-view-modal');
+    openEventModal(ev);
+  };
+  
+  openModal('event-view-modal');
+}
+
 function openNewEventModal(dateStr, datetime) {
   editingEventId = null;
   const defaultDt = datetime || `${dateStr}T09:00`;
@@ -625,10 +687,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Overlay close
   document.getElementById('modal-overlay')?.addEventListener('click', () => {
+    closeModal('event-view-modal');
     closeModal('event-modal');
     closeModal('member-modal');
     closeModal('category-modal');
     document.getElementById('day-panel')?.classList.remove('open');
+  });
+
+  document.getElementById('btn-close-view-modal')?.addEventListener('click', () => {
+    closeModal('event-view-modal');
   });
 
   // Event modal save

@@ -76,7 +76,21 @@
 <!-- ── MODAL OVERLAY ── -->
 <div id="modal-overlay" role="presentation"></div>
 
-<!-- ── EVENT MODAL ── -->
+<!-- ── EVENT VIEW MODAL ── -->
+<div id="event-view-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="view-modal-title">
+  <div class="modal-header">
+    <div id="view-modal-title" style="font-weight:600; font-size: 16px;">活動詳情</div>
+    <div style="display:flex; gap:6px;">
+      <button id="btn-edit-event" title="編輯活動" style="border:none;background:var(--bg-hover);border-radius:6px;width:30px;height:30px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:var(--transition);">✏️</button>
+      <button id="btn-close-view-modal" title="關閉" style="border:none;background:transparent;width:30px;height:30px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text-muted);font-size:16px;">✕</button>
+    </div>
+  </div>
+  <div class="modal-body" id="event-view-body" style="display:flex; flex-direction:column; gap:16px; padding: 16px 20px;">
+    <!-- Content injected via JS -->
+  </div>
+</div>
+
+<!-- ── EVENT MODAL (EDIT) ── -->
 <div id="event-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
   <div class="modal-header">
     <div id="modal-title">新增活動</div>
