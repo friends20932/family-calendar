@@ -77,6 +77,17 @@ function generateInstances(ev, maxDateObj) {
   const max = maxDateObj < endDate ? maxDateObj : endDate;
   
   if (ev.repeat === 'none' || !ev.repeat) {
+    // Multi-day all-day event: return one instance per day in range
+    if (ev.allDay && ev.endDatetime) {
+      const evEndD = new Date(ev.endDatetime.slice(0, 10) + 'T00:00:00');
+      const days = [];
+      let cur = new Date(startD);
+      while (cur <= maxDateObj && cur <= evEndD) {
+        days.push(new Date(cur));
+        cur.setDate(cur.getDate() + 1);
+      }
+      return days;
+    }
     if (startD <= max) return [startD];
     return [];
   }
