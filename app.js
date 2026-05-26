@@ -58,6 +58,19 @@ function setupCalendar() {
   document.getElementById('btn-next').addEventListener('click', () => {
     cal.navigate(1); updateHeaderTitle();
   });
+  
+  let isWheeling = false;
+  document.getElementById('calendar-container').addEventListener('wheel', (e) => {
+    if (cal.view !== 'month') return; // Only apply to month view
+    if (isWheeling || Math.abs(e.deltaY) < 15) return;
+    
+    isWheeling = true;
+    cal.navigate(e.deltaY > 0 ? 1 : -1);
+    updateHeaderTitle();
+    
+    setTimeout(() => { isWheeling = false; }, 500); // 500ms cooldown for smooth trackpad experience
+  }, { passive: true });
+
   document.getElementById('btn-today').addEventListener('click', () => {
     cal.goToday(); updateHeaderTitle();
   });
