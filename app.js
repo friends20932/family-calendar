@@ -8,7 +8,7 @@ import {
   getEventsForDate, toDateStr
 } from './events.js';
 import {
-  loadMembers, addMember, deleteMember
+  loadMembers, addMember, updateMember, deleteMember
 } from './members.js';
 import {
   loadCategories, saveCategories, addCategory, updateCategory,
@@ -454,11 +454,17 @@ function renderMemberList() {
   loadMembers().forEach((m) => {
     const item = document.createElement('div');
     item.className = 'member-list-item';
+    item.dataset.id = m.id;
     item.innerHTML = `
       <div class="member-avatar" style="background:${m.color}">${m.emoji}</div>
       <div class="member-name">${escapeHtml(m.name)}</div>
-      <button class="btn-icon member-delete" data-id="${m.id}" title="刪除">✕</button>`;
+      <button class="btn-icon member-edit" data-id="${m.id}" title="編輯">✏️</button>
+      <button class="btn-icon member-delete" data-id="${m.id}" title="刪除" style="font-size:13px;">✕</button>`;
     container.appendChild(item);
+  });
+
+  container.querySelectorAll('.member-edit').forEach((btn) => {
+    btn.addEventListener('click', () => startMemberEdit(btn.dataset.id));
   });
   container.querySelectorAll('.member-delete').forEach((btn) => {
     btn.addEventListener('click', () => {
@@ -469,6 +475,54 @@ function renderMemberList() {
         showToast('成員已刪除');
       }
     });
+  });
+}
+
+function startMemberEdit(id) {
+  const members = loadMembers();
+  const m = members.find((x) => x.id === id);
+  if (!m) return;
+  const container = document.getElementById('member-list');
+  const item = container.querySelector(`[data-id="${id}"]`);
+  if (!item || item.classList.contains('editing')) return;
+
+  item.classList.add('editing');
+  const editRow = document.createElement('div');
+  editRow.className = 'cat-edit-row';
+  editRow.innerHTML = `
+    <input type="text" class="form-input mem-edit-name" value="${escapeHtml(m.name)}" maxlength="20" placeholder="名稱" style="width:90px">
+    <input type="text" class="form-input mem-edit-emoji" value="${m.emoji}" maxlength="2" placeholder="😀" style="width:52px;text-align:center;font-size:18px">
+    <input type="color" class="member-color-input mem-edit-color" value="${m.color}" style="width:40px;height:34px">
+    <button class="cat-save-btn">儲存</button>
+    <button class="cat-cancel-btn">取消</button>
+  `;
+  item.appendChild(editRow);
+
+  // Live preview avatar
+  const avatar = item.querySelector('.member-avatar');
+  editRow.querySelector('.mem-edit-emoji').addEventListener('input', (e) => {
+    avatar.textContent = e.target.value || m.emoji;
+  });
+  editRow.querySelector('.mem-edit-color').addEventListener('input', (e) => {
+    avatar.style.background = e.target.value;
+  });
+
+  editRow.querySelector('.cat-save-btn').addEventListener('click', () => {
+    const name  = editRow.querySelector('.mem-edit-name').value.trim();
+    const emoji = editRow.querySelector('.mem-edit-emoji').value.trim() || m.emoji;
+    const color = editRow.querySelector('.mem-edit-color').value;
+    if (!name) { showToast('請輸入成員名稱', 'error'); return; }
+    updateMember(id, { name, emoji, color });
+    renderMemberList();
+    refreshAll();
+    showToast('成員已更新 ✓');
+  });
+  editRow.querySelector('.cat-cancel-btn').addEventListener('click', () => {
+    item.classList.remove('editing');
+    editRow.remove();
+    // Restore avatar
+    avatar.textContent = m.emoji;
+    avatar.style.background = m.color;
   });
 }
 
