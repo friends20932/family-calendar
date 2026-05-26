@@ -1,0 +1,663 @@
+// ============================================================
+// app.js — Main application logic
+// ============================================================
+
+import { CalendarRenderer, formatTime } from './calendar.js';
+import {
+  loadEvents, createEvent, updateEvent, deleteEvent,
+  getEventsForDate, toDateStr
+} from './events.js';
+import {
+  loadMembers, addMember, deleteMember
+} from './members.js';
+import {
+  loadCategories, saveCategories, addCategory, updateCategory,
+  deleteCategory, getCategoryColor, DEFAULT_CATEGORIES
+} from './categories.js';
+import {
+  initNotifications, getNotificationPermission,
+  requestNotificationPermission, scheduleLocalReminders, startPeriodicCheck
+} from './notifications.js';
+
+// ── State ───────────────────────────────────────────────────
+let cal;
+let editingEventId = null;
+let selectedDate = toDateStr(new Date());
+
+// ── Init ────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', async () => {
+  await initNotifications();
+  setupCalendar();
+  setupSidebar();
+  updateNotifBadge();
+  scheduleAllReminders();
+  renderUpcoming();
+});
+
+// ── Calendar Setup ──────────────────────────────────────────
+function setupCalendar() {
+  const container = document.getElementById('calendar-container');
+  cal = new CalendarRenderer({
+    container,
+    onDateClick: (dateStr) => {
+      selectedDate = dateStr;
+      showDayPanel(dateStr);
+    },
+    onEventClick: (ev) => openEventModal(ev),
+    onNewEvent: (dateStr, datetime) => {
+      selectedDate = dateStr;
+      openNewEventModal(dateStr, datetime);
+    },
+  });
+  cal.render();
+  updateHeaderTitle();
+
+  document.getElementById('btn-prev').addEventListener('click', () => {
+    cal.navigate(-1); updateHeaderTitle();
+  });
+  document.getElementById('btn-next').addEventListener('click', () => {
+    cal.navigate(1); updateHeaderTitle();
+  });
+  document.getElementById('btn-today').addEventListener('click', () => {
+    cal.goToday(); updateHeaderTitle();
+  });
+  document.querySelectorAll('.view-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.view-btn').forEach((b) => b.classList.remove('active'));
+      btn.classList.add('active');
+      cal.setView(btn.dataset.view);
+      updateHeaderTitle();
+    });
+  });
+  document.getElementById('btn-add-event').addEventListener('click', () => {
+    openNewEventModal(selectedDate);
+  });
+}
+
+function updateHeaderTitle() {
+  const titleEl = document.getElementById('cal-title');
+  if (!titleEl || !cal) return;
+  const MONTHS = ['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月'];
+  if (cal.view === 'month') {
+    titleEl.textContent = `${cal.year} 年 ${MONTHS[cal.month]}`;
+  } else if (cal.view === 'week') {
+    const d = cal.cursor;
+    const start = new Date(d); start.setDate(d.getDate() - d.getDay());
+    const end = new Date(start); end.setDate(start.getDate() + 6);
+    titleEl.textContent = `${start.getMonth()+1}/${start.getDate()} – ${end.getMonth()+1}/${end.getDate()}`;
+  } else {
+    titleEl.textContent = `${cal.cursor.getFullYear()}/${cal.cursor.getMonth()+1}/${cal.cursor.getDate()}`;
+  }
+}
+
+// ── Sidebar ──────────────────────────────────────────────────
+function setupSidebar() {
+  renderMiniCalendar();
+  renderUpcoming();
+}
+
+function renderMiniCalendar() {
+  const el = document.getElementById('mini-calendar');
+  if (!el) return;
+  const now = new Date();
+  const year = now.getFullYear(); const month = now.getMonth();
+  const DAYS = ['日','一','二','三','四','五','六'];
+  const firstDay = new Date(year, month, 1).getDay();
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  const MONTHS = ['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月'];
+
+  let html = `<div class="mini-cal-title">${year} 年 ${MONTHS[month]}</div>`;
+  html += `<div class="mini-cal-grid">`;
+  DAYS.forEach((d) => { html += `<div class="mini-cal-head">${d}</div>`; });
+  for (let i = 0; i < firstDay; i++) html += `<div></div>`;
+  for (let d = 1; d <= daysInMonth; d++) {
+    const ds = toDateStr(new Date(year, month, d));
+    html += `<div class="mini-cal-day${d === now.getDate() ? ' today' : ''}" data-date="${ds}">${d}</div>`;
+  }
+  html += '</div>';
+  el.innerHTML = html;
+  el.querySelectorAll('.mini-cal-day').forEach((cell) => {
+    cell.addEventListener('click', () => {
+      selectedDate = cell.dataset.date;
+      cal.goToDate(cell.dataset.date);
+      updateHeaderTitle();
+      showDayPanel(cell.dataset.date);
+    });
+  });
+}
+
+function renderUpcoming() {
+  const el = document.getElementById('upcoming-list');
+  if (!el) return;
+  const members = loadMembers();
+  const now = new Date();
+  const upcoming = [];
+
+  for (let i = 0; i < 14; i++) {
+    const d = new Date(now); d.setDate(now.getDate() + i);
+    const ds = toDateStr(d);
+    getEventsForDate(ds).forEach((ev) => {
+      const evTime = new Date(ev.datetime);
+      if (evTime >= now || ev.allDay) upcoming.push({ ...ev, _ds: ds });
+    });
+  }
+
+  if (!upcoming.length) {
+    el.innerHTML = '<div class="upcoming-empty">未來 2 週無活動</div>'; return;
+  }
+
+  let lastDate = ''; let html = '';
+  upcoming.slice(0, 10).forEach((ev) => {
+    const member = members.find((m) => ev.memberIds?.includes(m.id));
+    const color = ev.color || member?.color || getCategoryColor(ev.category);
+    if (ev._ds !== lastDate) {
+      const d = new Date(ev._ds + 'T12:00:00');
+      const label = ev._ds === toDateStr(now) ? '今天' : `${d.getMonth()+1}/${d.getDate()}`;
+      html += `<div class="upcoming-date-label">${label}</div>`;
+      lastDate = ev._ds;
+    }
+    html += `
+      <div class="upcoming-item" data-id="${ev.id}" data-ds="${ev._ds}" style="--ev-color:${color}">
+        <div class="upcoming-dot"></div>
+        <div class="upcoming-info">
+          <div class="upcoming-title">${escapeHtml(ev.title)}</div>
+          <div class="upcoming-time">${ev.allDay ? '整天' : formatTime(ev.datetime)}${ev.location ? ' · '+escapeHtml(ev.location) : ''}</div>
+        </div>
+        ${member ? `<div class="upcoming-avatar" style="background:${member.color}">${member.emoji}</div>` : ''}
+      </div>`;
+  });
+
+  el.innerHTML = html;
+  el.querySelectorAll('.upcoming-item').forEach((item) => {
+    item.addEventListener('click', () => {
+      const ev = loadEvents().find((e) => e.id === item.dataset.id)
+        || getEventsForDate(item.dataset.ds).find((e) => e.id === item.dataset.id);
+      if (ev) openEventModal(ev);
+    });
+  });
+}
+
+// ── Day Panel ─────────────────────────────────────────────────
+function showDayPanel(dateStr) {
+  const panel = document.getElementById('day-panel');
+  const title = document.getElementById('day-panel-title');
+  const list  = document.getElementById('day-panel-list');
+  if (!panel) return;
+
+  const d = new Date(dateStr + 'T12:00:00');
+  const WD = ['週日','週一','週二','週三','週四','週五','週六'];
+  title.textContent = `${d.getMonth()+1} 月 ${d.getDate()} 日 ${WD[d.getDay()]}`;
+
+  const events  = getEventsForDate(dateStr);
+  const members = loadMembers();
+
+  if (!events.length) {
+    list.innerHTML = '<div class="day-panel-empty">這天沒有活動<br><small>雙擊日期格子快速新增</small></div>';
+  } else {
+    list.innerHTML = '';
+    events.forEach((ev) => {
+      const member = members.find((m) => ev.memberIds?.includes(m.id));
+      const color  = ev.color || member?.color || getCategoryColor(ev.category);
+      const item   = document.createElement('div');
+      item.className = 'day-panel-event';
+      item.style.setProperty('--ev-color', color);
+      item.innerHTML = `
+        <div class="dp-color-bar"></div>
+        <div class="dp-info">
+          <div class="dp-title">${escapeHtml(ev.title)}</div>
+          <div class="dp-meta">${ev.allDay ? '整天' : formatTime(ev.datetime)}${ev.location ? ' · '+escapeHtml(ev.location) : ''}</div>
+          ${ev.url ? `<div class="dp-url" style="margin-top: 4px; font-size: 12px;"><a href="${escapeHtml(ev.url)}" target="_blank" style="color: var(--accent); text-decoration: none;">🔗 連結網址</a></div>` : ''}
+          ${member ? `<div class="dp-member" style="color:${member.color}">${member.emoji} ${member.name}</div>` : ''}
+        </div>`;
+      item.addEventListener('click', () => openEventModal(ev));
+      list.appendChild(item);
+    });
+  }
+
+  panel.classList.add('open');
+  document.getElementById('day-panel-add').onclick = () => openNewEventModal(dateStr);
+  document.getElementById('day-panel-close').onclick = () => panel.classList.remove('open');
+}
+
+// ── Event Modal ───────────────────────────────────────────────
+function openNewEventModal(dateStr, datetime) {
+  editingEventId = null;
+  const defaultDt = datetime || `${dateStr}T09:00`;
+  populateEventForm({ datetime: defaultDt, endDatetime: '', allDay: false, title: '', url: '',
+    description: '', location: '', category: 'family', reminder: '30', repeat: 'none',
+    repeatEndType: 'never', repeatEndDate: '', repeatEndCount: 10, repeatWeeklyDays: [], repeatMonthlyDate: 1, memberIds: [] });
+  document.getElementById('modal-title').textContent = '新增活動';
+  document.getElementById('btn-delete-event').style.display = 'none';
+  openModal('event-modal');
+}
+
+function openEventModal(ev) {
+  editingEventId = ev.id;
+  populateEventForm(ev);
+  document.getElementById('modal-title').textContent = '編輯活動';
+  document.getElementById('btn-delete-event').style.display = 'flex';
+  openModal('event-modal');
+}
+
+function populateEventForm(ev) {
+  document.getElementById('ev-title').value       = ev.title || '';
+  document.getElementById('ev-url').value         = ev.url || '';
+  document.getElementById('ev-datetime').value    = (ev.datetime || '').slice(0, 16);
+  document.getElementById('ev-end-datetime').value = (ev.endDatetime || '').slice(0, 16);
+  document.getElementById('ev-allday').checked    = ev.allDay || false;
+  document.getElementById('ev-description').value = ev.description || '';
+  document.getElementById('ev-location').value    = ev.location || '';
+  
+  const rem = ev.reminder || '30';
+  if (rem === 'none') {
+    document.getElementById('ev-reminder-toggle').value = 'none';
+    document.getElementById('ev-reminder-value').style.display = 'none';
+    document.getElementById('ev-reminder-unit').style.display = 'none';
+  } else {
+    document.getElementById('ev-reminder-toggle').value = 'custom';
+    document.getElementById('ev-reminder-value').style.display = 'block';
+    document.getElementById('ev-reminder-unit').style.display = 'block';
+    let minutes = parseInt(rem) || 0;
+    if (minutes % 1440 === 0 && minutes !== 0) {
+      document.getElementById('ev-reminder-value').value = minutes / 1440;
+      document.getElementById('ev-reminder-unit').value = '1440';
+    } else if (minutes % 60 === 0 && minutes !== 0) {
+      document.getElementById('ev-reminder-value').value = minutes / 60;
+      document.getElementById('ev-reminder-unit').value = '60';
+    } else {
+      document.getElementById('ev-reminder-value').value = minutes;
+      document.getElementById('ev-reminder-unit').value = '1';
+    }
+  }
+  
+  document.getElementById('ev-repeat').value      = ev.repeat || 'none';
+  const endType = ev.repeatEndType || 'never';
+  document.querySelector(`input[name="ev-repeat-end-type"][value="${endType}"]`).checked = true;
+  document.getElementById('ev-repeat-end-date').value = ev.repeatEndDate || '';
+  document.getElementById('ev-repeat-end-count').value = ev.repeatEndCount || 10;
+  document.getElementById('ev-repeat-monthly-date').value = ev.repeatMonthlyDate || 1;
+  
+  const weeklyDays = ev.repeatWeeklyDays || [];
+  document.querySelectorAll('#repeat-weekly-days input[type="checkbox"]').forEach(cb => {
+    cb.checked = weeklyDays.includes(parseInt(cb.value));
+  });
+
+  toggleAllDay(ev.allDay);
+  renderCategoryPills(ev.category || 'family');
+  renderMemberCheckboxes(ev.memberIds || []);
+  
+  // Trigger UI updates
+  document.getElementById('ev-repeat').dispatchEvent(new Event('change'));
+  document.querySelector(`input[name="ev-repeat-end-type"][value="${endType}"]`).dispatchEvent(new Event('change'));
+}
+
+function renderCategoryPills(activeCatId) {
+  const cats = loadCategories();
+  const container = document.getElementById('cat-pills-container');
+  if (!container) return;
+  container.innerHTML = '';
+  cats.forEach((cat) => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'cat-pill' + (cat.id === activeCatId ? ' active' : '');
+    btn.dataset.cat = cat.id;
+    btn.style.setProperty('--cat-color', cat.color);
+    btn.textContent = `${cat.emoji} ${cat.label}`;
+    btn.addEventListener('click', () => {
+      container.querySelectorAll('.cat-pill').forEach((p) => p.classList.remove('active'));
+      btn.classList.add('active');
+    });
+    container.appendChild(btn);
+  });
+}
+
+function toggleAllDay(isAllDay) {
+  const tf = document.getElementById('time-fields');
+  if (tf) tf.style.display = isAllDay ? 'none' : 'flex';
+}
+
+function renderMemberCheckboxes(selectedIds) {
+  const members = loadMembers();
+  const container = document.getElementById('member-checkboxes');
+  if (!container) return;
+  container.innerHTML = '';
+  members.forEach((m) => {
+    const label = document.createElement('label');
+    label.className = 'member-checkbox-label';
+    label.style.setProperty('--m-color', m.color);
+    label.innerHTML = `
+      <input type="checkbox" value="${m.id}" ${selectedIds.includes(m.id) ? 'checked' : ''}>
+      <span class="member-chip">${m.emoji} ${m.name}</span>`;
+    container.appendChild(label);
+  });
+}
+
+function getFormData() {
+  const title = document.getElementById('ev-title').value.trim();
+  if (!title) { showToast('請輸入活動標題', 'error'); return null; }
+  const datetime = document.getElementById('ev-datetime').value;
+  if (!datetime) { showToast('請選擇日期時間', 'error'); return null; }
+  const allDay    = document.getElementById('ev-allday').checked;
+  const category  = document.querySelector('#cat-pills-container .cat-pill.active')?.dataset.cat || 'family';
+  const memberIds = [...document.querySelectorAll('#member-checkboxes input:checked')].map((c) => c.value);
+  const repeatEndType = document.querySelector('input[name="ev-repeat-end-type"]:checked').value;
+  const repeatWeeklyDays = [...document.querySelectorAll('#repeat-weekly-days input[type="checkbox"]:checked')].map(c => parseInt(c.value));
+  
+  const reminderToggle = document.getElementById('ev-reminder-toggle').value;
+  let reminder = 'none';
+  if (reminderToggle === 'custom') {
+    const val = parseInt(document.getElementById('ev-reminder-value').value) || 0;
+    const unit = parseInt(document.getElementById('ev-reminder-unit').value) || 1;
+    reminder = String(val * unit);
+  }
+
+  return {
+    title, allDay,
+    url: document.getElementById('ev-url').value.trim(),
+    datetime:    allDay ? datetime.slice(0,10)+'T00:00' : datetime,
+    endDatetime: document.getElementById('ev-end-datetime').value || null,
+    description: document.getElementById('ev-description').value.trim(),
+    location:    document.getElementById('ev-location').value.trim(),
+    category, reminder,
+    repeat: document.getElementById('ev-repeat').value,
+    repeatEndType,
+    repeatEndDate: document.getElementById('ev-repeat-end-date').value,
+    repeatEndCount: document.getElementById('ev-repeat-end-count').value,
+    repeatWeeklyDays,
+    repeatMonthlyDate: document.getElementById('ev-repeat-monthly-date').value,
+    memberIds,
+  };
+}
+
+// ── Category Modal ────────────────────────────────────────────
+function renderCategoryList() {
+  const container = document.getElementById('category-list');
+  if (!container) return;
+  const cats = loadCategories();
+  const defaultIds = DEFAULT_CATEGORIES.map((c) => c.id);
+  container.innerHTML = '';
+
+  cats.forEach((cat) => {
+    const isDefault = defaultIds.includes(cat.id);
+    const item = document.createElement('div');
+    item.className = 'category-list-item';
+    item.dataset.id = cat.id;
+    item.innerHTML = `
+      <div class="category-color-dot" style="background:${cat.color}"></div>
+      <span class="category-emoji">${cat.emoji}</span>
+      <span class="category-name">${escapeHtml(cat.label)}</span>
+      ${isDefault ? '<span class="category-is-default">預設</span>' : ''}
+      <button class="category-edit-btn" data-id="${cat.id}" title="編輯">✏️</button>
+      <button class="category-delete-btn" data-id="${cat.id}" title="刪除" ${isDefault ? 'disabled style="opacity:.35;cursor:not-allowed"' : ''}>🗑</button>
+    `;
+    container.appendChild(item);
+  });
+
+  // Edit
+  container.querySelectorAll('.category-edit-btn').forEach((btn) => {
+    btn.addEventListener('click', () => startCategoryEdit(btn.dataset.id));
+  });
+  // Delete
+  container.querySelectorAll('.category-delete-btn:not([disabled])').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      if (confirm('確定刪除此分類？\n已使用此分類的活動將保留原分類 ID')) {
+        deleteCategory(btn.dataset.id);
+        renderCategoryList();
+        refreshAll();
+        showToast('分類已刪除');
+      }
+    });
+  });
+}
+
+function startCategoryEdit(id) {
+  const cats = loadCategories();
+  const cat = cats.find((c) => c.id === id);
+  if (!cat) return;
+  const container = document.getElementById('category-list');
+  const item = container.querySelector(`[data-id="${id}"]`);
+  if (!item) return;
+
+  item.classList.add('editing');
+  const editRow = document.createElement('div');
+  editRow.className = 'cat-edit-row';
+  editRow.innerHTML = `
+    <input type="text"  class="form-input cat-edit-label" value="${escapeHtml(cat.label)}" maxlength="16" placeholder="名稱" style="width:90px">
+    <input type="text"  class="form-input cat-edit-emoji" value="${cat.emoji}" maxlength="2" placeholder="😀" style="width:52px;text-align:center;font-size:18px">
+    <input type="color" class="member-color-input cat-edit-color" value="${cat.color}" style="width:40px;height:34px">
+    <button class="cat-save-btn">儲存</button>
+    <button class="cat-cancel-btn">取消</button>
+  `;
+  item.appendChild(editRow);
+
+  editRow.querySelector('.cat-save-btn').addEventListener('click', () => {
+    const label = editRow.querySelector('.cat-edit-label').value.trim();
+    const emoji = editRow.querySelector('.cat-edit-emoji').value.trim() || cat.emoji;
+    const color = editRow.querySelector('.cat-edit-color').value;
+    if (!label) { showToast('請輸入分類名稱', 'error'); return; }
+    updateCategory(id, { label, emoji, color });
+    renderCategoryList();
+    refreshAll();
+    showToast('分類已更新 ✓');
+  });
+  editRow.querySelector('.cat-cancel-btn').addEventListener('click', () => {
+    item.classList.remove('editing');
+    editRow.remove();
+  });
+}
+
+// ── Member Panel ──────────────────────────────────────────────
+function renderMemberList() {
+  const container = document.getElementById('member-list');
+  if (!container) return;
+  container.innerHTML = '';
+  loadMembers().forEach((m) => {
+    const item = document.createElement('div');
+    item.className = 'member-list-item';
+    item.innerHTML = `
+      <div class="member-avatar" style="background:${m.color}">${m.emoji}</div>
+      <div class="member-name">${escapeHtml(m.name)}</div>
+      <button class="btn-icon member-delete" data-id="${m.id}" title="刪除">✕</button>`;
+    container.appendChild(item);
+  });
+  container.querySelectorAll('.member-delete').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      if (confirm('確定刪除此成員？')) {
+        deleteMember(btn.dataset.id);
+        renderMemberList();
+        refreshAll();
+        showToast('成員已刪除');
+      }
+    });
+  });
+}
+
+// ── Refresh helper ────────────────────────────────────────────
+function refreshAll() {
+  cal.render();
+  renderUpcoming();
+  scheduleAllReminders();
+}
+
+// ── Notification ──────────────────────────────────────────────
+function updateNotifBadge() {
+  const btn = document.getElementById('btn-notif');
+  if (!btn) return;
+  const perm = getNotificationPermission();
+  btn.classList.toggle('notif-off', perm !== 'granted');
+  btn.title = perm === 'granted' ? '推播通知已開啟' : '點擊開啟推播通知';
+}
+
+function scheduleAllReminders() {
+  const events = loadEvents();
+  scheduleLocalReminders(events);
+  startPeriodicCheck(events);
+}
+
+// ── Modal helpers ─────────────────────────────────────────────
+function openModal(id) {
+  document.getElementById(id)?.classList.add('open');
+  document.getElementById('modal-overlay')?.classList.add('open');
+}
+function closeModal(id) {
+  document.getElementById(id)?.classList.remove('open');
+  document.getElementById('modal-overlay')?.classList.remove('open');
+}
+function showToast(msg, type = 'success') {
+  const toast = document.getElementById('toast');
+  if (!toast) return;
+  toast.textContent = msg;
+  toast.className = `toast toast-${type} show`;
+  clearTimeout(toast._timer);
+  toast._timer = setTimeout(() => toast.classList.remove('show'), 2800);
+}
+function escapeHtml(str) {
+  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ── Event Listeners ───────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  // Calendar Name
+  const calNameDisplay = document.getElementById('calendar-name-display');
+  if (calNameDisplay) {
+    const savedName = localStorage.getItem('family_calendar_name') || '家庭行事曆';
+    calNameDisplay.textContent = savedName;
+    document.title = `${savedName} 📅`;
+  }
+
+  document.getElementById('header-logo-btn')?.addEventListener('click', () => {
+    const currentName = calNameDisplay.textContent;
+    const newName = prompt('請輸入新的行事曆名稱：', currentName);
+    if (newName && newName.trim() && newName.trim() !== currentName) {
+      calNameDisplay.textContent = newName.trim();
+      localStorage.setItem('family_calendar_name', newName.trim());
+      document.title = `${newName.trim()} 📅`;
+      showToast('名稱已更新');
+    }
+  });
+
+  // Overlay close
+  document.getElementById('modal-overlay')?.addEventListener('click', () => {
+    closeModal('event-modal');
+    closeModal('member-modal');
+    closeModal('category-modal');
+    document.getElementById('day-panel')?.classList.remove('open');
+  });
+
+  // Event modal save
+  document.getElementById('btn-save-event')?.addEventListener('click', () => {
+    const data = getFormData(); if (!data) return;
+    if (editingEventId) { updateEvent(editingEventId, data); showToast('活動已更新 ✓'); }
+    else { createEvent(data); showToast('活動已新增 ✓'); }
+    closeModal('event-modal');
+    refreshAll();
+  });
+
+  // Event modal delete
+  document.getElementById('btn-delete-event')?.addEventListener('click', () => {
+    if (editingEventId && confirm('確定要刪除這個活動嗎？')) {
+      deleteEvent(editingEventId);
+      showToast('活動已刪除');
+      closeModal('event-modal');
+      refreshAll();
+    }
+  });
+
+  // Event modal close
+  document.getElementById('btn-close-modal')?.addEventListener('click', () => closeModal('event-modal'));
+  document.getElementById('btn-close-modal-footer')?.addEventListener('click', () => closeModal('event-modal'));
+
+  // Custom reminder toggle
+  document.getElementById('ev-reminder-toggle')?.addEventListener('change', (e) => {
+    const show = e.target.value === 'custom';
+    document.getElementById('ev-reminder-value').style.display = show ? 'block' : 'none';
+    document.getElementById('ev-reminder-unit').style.display = show ? 'block' : 'none';
+  });
+
+  // All-day toggle
+  document.getElementById('ev-allday')?.addEventListener('change', (e) => toggleAllDay(e.target.checked));
+
+  // Repeat options toggles
+  document.getElementById('ev-repeat')?.addEventListener('change', (e) => {
+    const val = e.target.value;
+    const adv = document.getElementById('advanced-repeat-options');
+    const weekly = document.getElementById('repeat-weekly-days');
+    const monthly = document.getElementById('repeat-monthly-date');
+    if (val === 'none') {
+      adv.style.display = 'none';
+    } else {
+      adv.style.display = 'flex';
+      weekly.style.display = val === 'weekly' ? 'flex' : 'none';
+      monthly.style.display = val === 'monthly' ? 'flex' : 'none';
+    }
+  });
+
+  document.querySelectorAll('input[name="ev-repeat-end-type"]').forEach(r => {
+    r.addEventListener('change', (e) => {
+      document.getElementById('ev-repeat-end-date').disabled = e.target.value !== 'date';
+      document.getElementById('ev-repeat-end-count').disabled = e.target.value !== 'count';
+    });
+  });
+
+  // Notification
+  document.getElementById('btn-notif')?.addEventListener('click', async () => {
+    const result = await requestNotificationPermission();
+    updateNotifBadge();
+    if (result === 'granted') { showToast('推播通知已開啟 🔔'); scheduleAllReminders(); }
+    else if (result === 'denied') showToast('通知已被封鎖，請在瀏覽器設定中允許', 'error');
+  });
+
+  // Member modal
+  document.getElementById('btn-open-members')?.addEventListener('click', () => {
+    renderMemberList(); openModal('member-modal');
+  });
+  document.getElementById('btn-close-member-modal')?.addEventListener('click', () => closeModal('member-modal'));
+  document.getElementById('btn-add-member')?.addEventListener('click', () => {
+    const name  = document.getElementById('new-member-name').value.trim();
+    const emoji = document.getElementById('new-member-emoji').value.trim() || '👤';
+    const color = document.getElementById('new-member-color').value;
+    if (!name) { showToast('請輸入成員名稱', 'error'); return; }
+    addMember({ name, emoji, color });
+    document.getElementById('new-member-name').value = '';
+    renderMemberList();
+    showToast(`已新增：${name} ✓`);
+    refreshAll();
+  });
+
+  // Category modal
+  document.getElementById('btn-open-categories')?.addEventListener('click', () => {
+    renderCategoryList(); openModal('category-modal');
+  });
+  document.getElementById('btn-close-category-modal')?.addEventListener('click', () => closeModal('category-modal'));
+
+  document.getElementById('btn-add-category')?.addEventListener('click', () => {
+    const label = document.getElementById('new-cat-label').value.trim();
+    const emoji = document.getElementById('new-cat-emoji').value.trim() || '🏷️';
+    const color = document.getElementById('new-cat-color').value;
+    if (!label) { showToast('請輸入分類名稱', 'error'); return; }
+    addCategory({ label, emoji, color });
+    document.getElementById('new-cat-label').value = '';
+    renderCategoryList();
+    showToast(`已新增分類：${label} ✓`);
+    refreshAll();
+  });
+
+  // Sidebar toggle
+  document.getElementById('btn-sidebar')?.addEventListener('click', () => {
+    if (window.innerWidth <= 768) {
+      document.getElementById('sidebar')?.classList.toggle('open');
+    } else {
+      document.body.classList.toggle('sidebar-closed');
+    }
+  });
+
+  // Reset categories to default
+  document.getElementById('btn-reset-categories')?.addEventListener('click', () => {
+    if (confirm('確定要重置為預設分類嗎？自訂分類將被刪除。')) {
+      saveCategories([...DEFAULT_CATEGORIES]);
+      renderCategoryList();
+      refreshAll();
+      showToast('已重置為預設分類');
+    }
+  });
+});

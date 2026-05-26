@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="家庭共用行事曆 — 支援推播提醒、成員管理、分類管理與月週日三種視圖" />
+  <meta name="theme-color" content="#6366f1" />
+  <title>家庭行事曆 📅</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="manifest" href="manifest.json" />
+</head>
+<body>
+<div id="app">
+
+  <!-- ── HEADER ── -->
+  <header id="header">
+    <button id="btn-sidebar" class="btn-icon" title="側欄">☰</button>
+
+    <span class="header-logo" id="header-logo-btn" style="cursor:pointer;" title="點擊修改名稱">
+      <span class="logo-icon">📅</span>
+      <span id="calendar-name-display">家庭行事曆</span>
+    </span>
+
+    <div class="header-nav">
+      <button id="btn-prev" class="nav-btn" title="上一期">‹</button>
+      <button id="btn-next" class="nav-btn" title="下一期">›</button>
+    </div>
+
+    <h1 id="cal-title">載入中…</h1>
+    <button id="btn-today" class="btn-today">今天</button>
+
+    <div class="header-spacer"></div>
+
+    <div class="view-toggle" role="group" aria-label="視圖切換">
+      <button class="view-btn active" data-view="month" id="view-month">月</button>
+      <button class="view-btn" data-view="week"  id="view-week">週</button>
+      <button class="view-btn" data-view="day"   id="view-day">日</button>
+    </div>
+
+    <button id="btn-notif"           class="btn-icon" title="開啟推播通知">🔔</button>
+    <button id="btn-open-categories" class="btn-icon" title="管理分類">🏷️</button>
+    <button id="btn-open-members"    class="btn-icon" title="管理家庭成員">👨‍👩‍👧</button>
+  </header>
+
+  <!-- ── SIDEBAR ── -->
+  <aside id="sidebar">
+    <div class="sidebar-section">
+      <div class="sidebar-label">日曆</div>
+      <div id="mini-calendar"></div>
+    </div>
+    <div class="sidebar-section" style="flex:1;overflow-y:auto;">
+      <div class="sidebar-label">近期活動</div>
+      <div id="upcoming-list"></div>
+    </div>
+  </aside>
+
+  <!-- ── MAIN ── -->
+  <main id="main">
+    <div id="calendar-container"></div>
+  </main>
+
+</div>
+
+<!-- ── DAY PANEL ── -->
+<div id="day-panel" role="complementary" aria-label="當日活動">
+  <div class="day-panel-header">
+    <div id="day-panel-title">活動詳情</div>
+    <button id="day-panel-close" title="關閉">✕</button>
+  </div>
+  <div id="day-panel-list"></div>
+  <div class="day-panel-footer">
+    <button id="day-panel-add" type="button">＋ 新增活動</button>
+  </div>
+</div>
+
+<!-- ── MODAL OVERLAY ── -->
+<div id="modal-overlay" role="presentation"></div>
+
+<!-- ── EVENT MODAL ── -->
+<div id="event-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="modal-header">
+    <div id="modal-title">新增活動</div>
+    <button id="btn-close-modal" title="關閉">✕</button>
+  </div>
+
+  <div class="modal-body">
+
+    <!-- Title -->
+    <div class="form-group">
+      <label class="form-label" for="ev-title">活動標題 *</label>
+      <input id="ev-title" class="form-input" type="text" placeholder="輸入活動名稱…" maxlength="80" autocomplete="off" />
+    </div>
+
+    <!-- All day toggle -->
+    <div class="toggle-row">
+      <input type="checkbox" id="ev-allday" class="toggle-input" />
+      <label for="ev-allday">整天活動</label>
+    </div>
+
+    <!-- DateTime -->
+    <div id="time-fields">
+      <div class="form-group">
+        <label class="form-label" for="ev-datetime">開始時間 *</label>
+        <input id="ev-datetime" class="form-input" type="datetime-local" />
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="ev-end-datetime">結束時間</label>
+        <input id="ev-end-datetime" class="form-input" type="datetime-local" />
+      </div>
+    </div>
+
+    <!-- Category — dynamically rendered by app.js -->
+    <div class="form-group">
+      <div class="form-label">分類</div>
+      <div id="cat-pills-container" class="cat-pills"></div>
+    </div>
+
+    <!-- Members -->
+    <div class="form-group">
+      <div class="form-label">參與成員</div>
+      <div id="member-checkboxes"></div>
+    </div>
+
+    <!-- Location -->
+    <div class="form-group">
+      <label class="form-label" for="ev-location">地點</label>
+      <input id="ev-location" class="form-input" type="text" placeholder="輸入地點（選填）" />
+    </div>
+
+    <!-- URL -->
+    <div class="form-group">
+      <label class="form-label" for="ev-url">網址連結</label>
+      <input id="ev-url" class="form-input" type="url" placeholder="https://...（選填）" />
+    </div>
+
+    <!-- Description -->
+    <div class="form-group">
+      <label class="form-label" for="ev-description">備註</label>
+      <textarea id="ev-description" class="form-textarea" placeholder="新增備註說明（選填）…"></textarea>
+    </div>
+
+    <!-- Reminder -->
+    <div class="form-group">
+      <label class="form-label">提醒時間 (活動開始前)</label>
+      <div style="display: flex; gap: 8px; align-items: center;">
+        <select id="ev-reminder-toggle" class="form-select" style="width: 110px;">
+          <option value="custom">開啟提醒</option>
+          <option value="none">不提醒</option>
+        </select>
+        <input id="ev-reminder-value" type="number" class="form-input" value="30" min="0" style="width: 70px; padding: 6px 8px;" />
+        <select id="ev-reminder-unit" class="form-select" style="width: 80px; padding: 6px 8px;">
+          <option value="1">分鐘</option>
+          <option value="60">小時</option>
+          <option value="1440">天</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Repeat -->
+    <div class="form-group">
+      <label class="form-label" for="ev-repeat">重複</label>
+      <select id="ev-repeat" class="form-select">
+        <option value="none">不重複</option>
+        <option value="daily">每天</option>
+        <option value="weekly">每週</option>
+        <option value="monthly">每月</option>
+        <option value="yearly">每年</option>
+      </select>
+    </div>
+
+    <!-- Advanced Repeat Options -->
+    <div id="advanced-repeat-options" style="display: none; flex-direction: column; gap: 12px; margin-top: 4px; padding: 14px; background: var(--bg-hover); border-radius: var(--radius-md); border: 1px solid var(--border-soft);">
+      
+      <!-- Weekly specific days -->
+      <div id="repeat-weekly-days" class="form-group" style="display: none;">
+        <label class="form-label">重複於星期</label>
+        <div class="weekly-day-pills">
+          <label class="weekly-day-pill"><input type="checkbox" value="1"><span>一</span></label>
+          <label class="weekly-day-pill"><input type="checkbox" value="2"><span>二</span></label>
+          <label class="weekly-day-pill"><input type="checkbox" value="3"><span>三</span></label>
+          <label class="weekly-day-pill"><input type="checkbox" value="4"><span>四</span></label>
+          <label class="weekly-day-pill"><input type="checkbox" value="5"><span>五</span></label>
+          <label class="weekly-day-pill"><input type="checkbox" value="6"><span>六</span></label>
+          <label class="weekly-day-pill"><input type="checkbox" value="0"><span>日</span></label>
+        </div>
+      </div>
+
+      <!-- Monthly specific date -->
+      <div id="repeat-monthly-date" class="form-group" style="display: none;">
+        <label class="form-label" for="ev-repeat-monthly-date">每月重複於</label>
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span style="font-size: 13px; color: var(--text-secondary);">每月</span>
+          <input id="ev-repeat-monthly-date" class="form-input" type="number" min="1" max="31" value="1" style="width: 70px; padding: 6px 8px; text-align: center;" />
+          <span style="font-size: 13px; color: var(--text-secondary);">日</span>
+        </div>
+      </div>
+
+      <!-- Repeat End -->
+      <div class="form-group">
+        <label class="form-label">結束重複</label>
+        <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 4px;">
+          <label style="display: flex; align-items: center; gap: 8px; font-size: 13px; cursor: pointer;">
+            <input type="radio" name="ev-repeat-end-type" value="never" checked class="toggle-input" style="border-radius: 50%;"> 永不結束
+          </label>
+          <label style="display: flex; align-items: center; gap: 8px; font-size: 13px; cursor: pointer;">
+            <input type="radio" name="ev-repeat-end-type" value="date" class="toggle-input" style="border-radius: 50%;"> 
+            直到 <input id="ev-repeat-end-date" type="date" class="form-input" style="width: 140px; padding: 4px 8px;" disabled />
+          </label>
+          <label style="display: flex; align-items: center; gap: 8px; font-size: 13px; cursor: pointer;">
+            <input type="radio" name="ev-repeat-end-type" value="count" class="toggle-input" style="border-radius: 50%;"> 
+            重複 <input id="ev-repeat-end-count" type="number" class="form-input" min="1" max="999" value="10" style="width: 70px; padding: 4px 8px;" disabled /> 次後結束
+          </label>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="modal-footer">
+    <button id="btn-save-event" class="btn-primary" type="button">儲存活動</button>
+    <button id="btn-close-modal-footer" class="btn-secondary" type="button">取消</button>
+    <button id="btn-delete-event" class="btn-danger" type="button" style="display:none">🗑 刪除</button>
+  </div>
+</div>
+
+<!-- ── MEMBER MODAL ── -->
+<div id="member-modal" class="modal" role="dialog" aria-modal="true">
+  <div class="modal-header">
+    <div style="font-size:17px;font-weight:700;flex:1">👨‍👩‍👧 家庭成員</div>
+    <button id="btn-close-member-modal" title="關閉"
+      style="width:30px;height:30px;border-radius:6px;color:var(--text-muted);font-size:18px;display:flex;align-items:center;justify-content:center;transition:var(--transition);">✕</button>
+  </div>
+  <div class="modal-body">
+    <div id="member-list" style="display:flex;flex-direction:column;gap:8px;"></div>
+    <div class="member-add-form">
+      <div class="form-group" style="flex:1;min-width:120px">
+        <label class="form-label" for="new-member-name">成員名稱</label>
+        <input id="new-member-name" class="form-input" type="text" placeholder="e.g. 奶奶" maxlength="20" />
+      </div>
+      <div class="form-group">
+        <label class="form-label">表情</label>
+        <input id="new-member-emoji" class="member-emoji-input" type="text" maxlength="2" placeholder="👤" />
+      </div>
+      <div class="form-group">
+        <label class="form-label">顏色</label>
+        <input id="new-member-color" class="member-color-input" type="color" value="#818cf8" />
+      </div>
+      <button id="btn-add-member" class="btn-add-member" type="button">＋ 新增</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── CATEGORY MODAL ── -->
+<div id="category-modal" class="modal" role="dialog" aria-modal="true">
+  <div class="modal-header">
+    <div style="font-size:17px;font-weight:700;flex:1">🏷️ 管理分類</div>
+    <button id="btn-close-category-modal" title="關閉"
+      style="width:30px;height:30px;border-radius:6px;color:var(--text-muted);font-size:18px;display:flex;align-items:center;justify-content:center;transition:var(--transition);">✕</button>
+  </div>
+  <div class="modal-body">
+
+    <!-- Category list (rendered by JS) -->
+    <div class="category-list" id="category-list"></div>
+
+    <!-- Add new category -->
+    <div class="category-add-form">
+      <div class="form-group" style="flex:1;min-width:120px">
+        <label class="form-label" for="new-cat-label">分類名稱</label>
+        <input id="new-cat-label" class="form-input" type="text" placeholder="e.g. 運動" maxlength="16" />
+      </div>
+      <div class="form-group">
+        <label class="form-label">表情</label>
+        <input id="new-cat-emoji" class="member-emoji-input" type="text" maxlength="2" placeholder="🏷️" />
+      </div>
+      <div class="form-group">
+        <label class="form-label">顏色</label>
+        <input id="new-cat-color" class="member-color-input" type="color" value="#6366f1" />
+      </div>
+      <button id="btn-add-category" class="btn-add-member" type="button">＋ 新增</button>
+    </div>
+
+  </div>
+  <div class="modal-footer">
+    <button id="btn-reset-categories" class="btn-secondary" type="button" style="font-size:12.5px;">
+      ↺ 重置為預設
+    </button>
+  </div>
+</div>
+
+<!-- ── FAB ── -->
+<button id="btn-add-event" title="新增活動" aria-label="新增活動">＋</button>
+
+<!-- ── TOAST ── -->
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>
