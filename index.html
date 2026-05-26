@@ -97,7 +97,19 @@
       <label for="ev-allday">整天活動</label>
     </div>
 
-    <!-- DateTime -->
+    <!-- All-day date range (shown when allDay is checked) -->
+    <div id="allday-fields" style="display:none; gap:10px;">
+      <div class="form-group" style="flex:1">
+        <label class="form-label" for="ev-allday-start">開始日期 *</label>
+        <input id="ev-allday-start" class="form-input" type="date" />
+      </div>
+      <div class="form-group" style="flex:1">
+        <label class="form-label" for="ev-allday-end">結束日期</label>
+        <input id="ev-allday-end" class="form-input" type="date" />
+      </div>
+    </div>
+
+    <!-- DateTime (shown when NOT allDay) -->
     <div id="time-fields">
       <div class="form-group">
         <label class="form-label" for="ev-datetime">開始時間 *</label>

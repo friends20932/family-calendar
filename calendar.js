@@ -2,7 +2,7 @@
 // calendar.js — Calendar rendering (month / week / day views)
 // ============================================================
 
-import { getEventsForMonth, getEventsForDate, toDateStr } from './events.js';
+import { getEventsForMonth, getEventsForDate, loadEvents, toDateStr } from './events.js';
 import { loadMembers } from './members.js';
 import { getCategoryColor } from './categories.js';
 
@@ -202,32 +202,7 @@ export class CalendarRenderer {
     }
 
     // ── All-day strip ──
-    const allDayEvents = cols.map(({ dateStr }) =>
-      getEventsForDate(dateStr).filter((e) => e.allDay)
-    );
-    const hasAnyAllDay = allDayEvents.some((evs) => evs.length > 0);
-
-    let allDayRow = null;
-    if (hasAnyAllDay) {
-      allDayRow = document.createElement('div');
-      allDayRow.className = 'cal-week-allday-row';
-
-      const allDaySpacer = document.createElement('div');
-      allDaySpacer.className = 'cal-time-spacer cal-allday-label';
-      allDaySpacer.textContent = '整天';
-      allDayRow.appendChild(allDaySpacer);
-
-      cols.forEach(({ dateStr, isToday }, i) => {
-        const cell = document.createElement('div');
-        cell.className = 'cal-week-allday-cell' + (isToday ? ' today-col' : '');
-        allDayEvents[i].forEach((ev) => {
-          const pill = this._createEventPill(ev, members);
-          pill.classList.add('week-allday-pill');
-          cell.appendChild(pill);
-        });
-        allDayRow.appendChild(cell);
-      });
-    }
+    const allDayRow = this._buildWeekAllDayStrip(cols, members);
 
     const body = document.createElement('div');
     body.className = 'cal-week-body';
@@ -290,6 +265,100 @@ export class CalendarRenderer {
       const scrollTo = (nowPct / 100) * body.scrollHeight - 100;
       body.scrollTop = Math.max(0, scrollTo);
     }, 50);
+  }
+
+  _buildWeekAllDayStrip(cols, members) {
+    const weekStart = new Date(cols[0].dateStr + 'T00:00:00');
+    const weekEnd   = new Date(cols[6].dateStr + 'T23:59:59');
+
+    // Collect all-day events (non-repeating) that overlap this week
+    const items = [];
+    const seenIds = new Set();
+
+    loadEvents().filter(ev => ev.allDay && (ev.repeat === 'none' || !ev.repeat)).forEach(ev => {
+      const evStart = new Date(ev.datetime.slice(0, 10) + 'T00:00:00');
+      const evEndStr = ev.endDatetime ? ev.endDatetime.slice(0, 10) : ev.datetime.slice(0, 10);
+      const evEnd = new Date(evEndStr + 'T23:59:59');
+      if (evEnd < weekStart || evStart > weekEnd) return;
+
+      const clampedStart = evStart < weekStart ? weekStart : evStart;
+      const clampedEnd   = evEnd   > weekEnd   ? weekEnd   : evEnd;
+      const startCol = Math.round((clampedStart - weekStart) / 86400000);
+      const endCol   = Math.round((clampedEnd   - weekStart) / 86400000);
+      const span = Math.max(1, endCol - startCol + 1);
+      seenIds.add(ev.id);
+      items.push({ ev, startCol, span });
+    });
+
+    // Also pick up repeating all-day events (each occurrence = 1 day)
+    cols.forEach(({ dateStr }, colIdx) => {
+      getEventsForDate(dateStr)
+        .filter(ev => ev.allDay && ev.repeat && ev.repeat !== 'none' && !seenIds.has(ev.id))
+        .forEach(ev => {
+          seenIds.add(ev.id + '_' + colIdx);
+          items.push({ ev, startCol: colIdx, span: 1 });
+        });
+    });
+
+    if (!items.length) return null;
+
+    // Greedy row stacking (no overlaps)
+    items.sort((a, b) => a.startCol - b.startCol || b.span - a.span);
+    const rows = [];
+    items.forEach(item => {
+      let placed = false;
+      for (let r = 0; r < rows.length; r++) {
+        const conflict = rows[r].some(it =>
+          !(it.startCol + it.span <= item.startCol || item.startCol + item.span <= it.startCol)
+        );
+        if (!conflict) { item.row = r; rows[r].push(item); placed = true; break; }
+      }
+      if (!placed) { item.row = rows.length; rows.push([item]); }
+    });
+
+    const ROW_H = 22;
+    const PAD   = 3;
+    const totalH = rows.length * ROW_H + PAD * 2;
+
+    const strip = document.createElement('div');
+    strip.className = 'cal-week-allday-row';
+
+    const label = document.createElement('div');
+    label.className = 'cal-time-spacer cal-allday-label';
+    label.textContent = '整天';
+    strip.appendChild(label);
+
+    const grid = document.createElement('div');
+    grid.className = 'cal-allday-grid';
+    grid.style.minHeight = totalH + 'px';
+
+    // Background day columns
+    cols.forEach(({ isToday }) => {
+      const bg = document.createElement('div');
+      bg.className = 'cal-allday-bg-cell' + (isToday ? ' today-col' : '');
+      grid.appendChild(bg);
+    });
+
+    // Spanning event bars
+    items.forEach(({ ev, startCol, span, row }) => {
+      const member = members.find(m => ev.memberIds?.includes(m.id));
+      const color  = ev.color || member?.color || getCategoryColor(ev.category);
+      const bar = document.createElement('div');
+      bar.className = 'cal-allday-event-bar';
+      bar.style.cssText = [
+        `left: calc(${startCol} / 7 * 100% + 2px)`,
+        `width: calc(${span} / 7 * 100% - 6px)`,
+        `top: ${PAD + row * ROW_H}px`,
+        `--ev-color: ${color}`,
+      ].join(';');
+      bar.textContent = ev.title;
+      bar.title = ev.title;
+      bar.addEventListener('click', e => { e.stopPropagation(); this.onEventClick?.(ev); });
+      grid.appendChild(bar);
+    });
+
+    strip.appendChild(grid);
+    return strip;
   }
 
   _createWeekEventBlock(ev, members) {

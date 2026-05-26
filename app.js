@@ -248,6 +248,14 @@ function populateEventForm(ev) {
   document.getElementById('ev-description').value = ev.description || '';
   document.getElementById('ev-location').value    = ev.location || '';
   
+  // All-day date fields
+  const startDate = (ev.datetime || '').slice(0, 10);
+  const endDate   = (ev.endDatetime || '').slice(0, 10);
+  const alStart = document.getElementById('ev-allday-start');
+  const alEnd   = document.getElementById('ev-allday-end');
+  if (alStart) alStart.value = startDate;
+  if (alEnd)   alEnd.value   = endDate;
+  
   const rem = ev.reminder || '30';
   if (rem === 'none') {
     document.getElementById('ev-reminder-toggle').value = 'none';
@@ -313,7 +321,9 @@ function renderCategoryPills(activeCatId) {
 
 function toggleAllDay(isAllDay) {
   const tf = document.getElementById('time-fields');
+  const af = document.getElementById('allday-fields');
   if (tf) tf.style.display = isAllDay ? 'none' : 'flex';
+  if (af) af.style.display = isAllDay ? 'flex' : 'none';
 }
 
 function renderMemberCheckboxes(selectedIds) {
@@ -335,9 +345,19 @@ function renderMemberCheckboxes(selectedIds) {
 function getFormData() {
   const title = document.getElementById('ev-title').value.trim();
   if (!title) { showToast('請輸入活動標題', 'error'); return null; }
-  const datetime = document.getElementById('ev-datetime').value;
-  if (!datetime) { showToast('請選擇日期時間', 'error'); return null; }
-  const allDay    = document.getElementById('ev-allday').checked;
+  const allDay = document.getElementById('ev-allday').checked;
+  let datetime, endDatetime;
+  if (allDay) {
+    const startD = document.getElementById('ev-allday-start').value;
+    const endD   = document.getElementById('ev-allday-end').value;
+    if (!startD) { showToast('請選擇開始日期', 'error'); return null; }
+    datetime    = startD + 'T00:00';
+    endDatetime = endD ? endD + 'T00:00' : null;
+  } else {
+    datetime = document.getElementById('ev-datetime').value;
+    if (!datetime) { showToast('請選擇日期時間', 'error'); return null; }
+    endDatetime = document.getElementById('ev-end-datetime').value || null;
+  }
   const category  = document.querySelector('#cat-pills-container .cat-pill.active')?.dataset.cat || 'family';
   const memberIds = [...document.querySelectorAll('#member-checkboxes input:checked')].map((c) => c.value);
   const repeatEndType = document.querySelector('input[name="ev-repeat-end-type"]:checked').value;
@@ -354,8 +374,8 @@ function getFormData() {
   return {
     title, allDay,
     url: document.getElementById('ev-url').value.trim(),
-    datetime:    allDay ? datetime.slice(0,10)+'T00:00' : datetime,
-    endDatetime: document.getElementById('ev-end-datetime').value || null,
+    datetime,
+    endDatetime,
     description: document.getElementById('ev-description').value.trim(),
     location:    document.getElementById('ev-location').value.trim(),
     category, reminder,
