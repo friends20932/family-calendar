@@ -99,7 +99,11 @@ export class CalendarRenderer {
     // Current month days
     for (let d = 1; d <= daysInMonth; d++) {
       const dateStr = toDateStr(new Date(year, month, d));
-      const dayEvents = events.filter((e) => e._displayDate === dateStr);
+      const dayEvents = events.filter((e) => e._displayDate === dateStr).sort((a, b) => {
+        if (a.allDay && !b.allDay) return -1;
+        if (!a.allDay && b.allDay) return 1;
+        return a.datetime.localeCompare(b.datetime);
+      });
       const isToday = dateStr === toDateStr(this.today);
       const cell = this._createDayCell(d, dateStr, false, isToday, dayEvents, members);
       grid.appendChild(cell);
