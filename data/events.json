@@ -393,5 +393,28 @@
     "repeatWeeklyDays": [],
     "repeatMonthlyDate": 1,
     "createdAt": "2026-05-27T04:37:31.952Z"
+  },
+  {
+    "id": "523148a1-3f90-4b1e-a381-cb40352f337e",
+    "title": "Long Weekend",
+    "datetime": "2026-09-11T00:00",
+    "endDatetime": null,
+    "allDay": true,
+    "url": "",
+    "description": "",
+    "location": "",
+    "category": "work",
+    "color": null,
+    "memberIds": [
+      "member-2"
+    ],
+    "reminder": "1440",
+    "repeat": "none",
+    "repeatEndType": "never",
+    "repeatEndDate": null,
+    "repeatEndCount": 10,
+    "repeatWeeklyDays": [],
+    "repeatMonthlyDate": 1,
+    "createdAt": "2026-05-27T04:42:32.931Z"
   }
 ]
