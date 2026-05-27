@@ -74,7 +74,7 @@ input, textarea, select { font-family: inherit; }
   grid-template-areas:
     "header header"
     "sidebar main";
-  height: 100vh;
+  height: 100dvh;
   width: 100vw;
   transition: grid-template-columns var(--transition);
 }
@@ -659,7 +659,7 @@ body.sidebar-closed #sidebar {
   right: -380px;
   top: var(--header-h);
   width: 360px;
-  height: calc(100vh - var(--header-h));
+  height: calc(100dvh - var(--header-h));
   background: var(--bg-surface);
   border-left: 1px solid var(--border);
   display: flex;
@@ -1218,7 +1218,7 @@ body.sidebar-closed #sidebar {
     left: -100%;
     top: var(--header-h);
     width: 280px;
-    height: calc(100vh - var(--header-h));
+    height: calc(100dvh - var(--header-h));
     z-index: 250;
     transition: left var(--transition);
   }
