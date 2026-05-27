@@ -172,8 +172,9 @@ function renderUpcoming() {
 
   let lastDate = ''; let html = '';
   upcoming.slice(0, 10).forEach((ev) => {
-    const member = members.find((m) => ev.memberIds?.includes(m.id));
-    const color = ev.color || member?.color || getCategoryColor(ev.category);
+    const evMembers = members.filter((m) => ev.memberIds?.includes(m.id));
+    const firstMember = evMembers[0];
+    const color = ev.color || firstMember?.color || getCategoryColor(ev.category);
     if (ev._ds !== lastDate) {
       const d = new Date(ev._ds + 'T12:00:00');
       const label = ev._ds === toDateStr(now) ? '今天' : `${d.getMonth()+1}/${d.getDate()}`;
@@ -187,7 +188,7 @@ function renderUpcoming() {
           <div class="upcoming-title">${escapeHtml(ev.title)}</div>
           <div class="upcoming-time">${ev.allDay ? '整天' : formatTime(ev.datetime)}${ev.location ? ' · '+escapeHtml(ev.location) : ''}</div>
         </div>
-        ${member ? `<div class="upcoming-avatar" style="background:${member.color}">${member.emoji}</div>` : ''}
+        ${evMembers.length ? `<div style="display:flex; gap:4px; margin-left:auto;">${evMembers.map(m => `<div class="upcoming-avatar" style="background:${m.color}">${m.emoji}</div>`).join('')}</div>` : ''}
       </div>`;
   });
 
@@ -220,8 +221,9 @@ function showDayPanel(dateStr) {
   } else {
     list.innerHTML = '';
     events.forEach((ev) => {
-      const member = members.find((m) => ev.memberIds?.includes(m.id));
-      const color  = ev.color || member?.color || getCategoryColor(ev.category);
+      const evMembers = members.filter((m) => ev.memberIds?.includes(m.id));
+      const firstMember = evMembers[0];
+      const color  = ev.color || firstMember?.color || getCategoryColor(ev.category);
       const item   = document.createElement('div');
       item.className = 'day-panel-event';
       item.style.setProperty('--ev-color', color);
@@ -231,7 +233,7 @@ function showDayPanel(dateStr) {
           <div class="dp-title">${escapeHtml(ev.title)}</div>
           <div class="dp-meta">${ev.allDay ? '整天' : formatTime(ev.datetime)}${ev.location ? ' · '+escapeHtml(ev.location) : ''}</div>
           ${ev.url ? `<div class="dp-url" style="margin-top: 4px; font-size: 12px;"><a href="${escapeHtml(ev.url)}" target="_blank" style="color: var(--accent); text-decoration: none;">🔗 連結網址</a></div>` : ''}
-          ${member ? `<div class="dp-member" style="color:${member.color}">${member.emoji} ${member.name}</div>` : ''}
+          ${evMembers.length ? `<div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:4px;">${evMembers.map(m => `<div class="dp-member" style="color:${m.color}">${m.emoji} ${escapeHtml(m.name)}</div>`).join('')}</div>` : ''}
         </div>`;
       item.addEventListener('click', () => openEventViewModal(ev));
       list.appendChild(item);
@@ -248,8 +250,9 @@ function openEventViewModal(ev) {
   const body = document.getElementById('event-view-body');
   if (!body) return;
   const members = loadMembers();
-  const member = members.find((m) => ev.memberIds?.includes(m.id));
-  const color = ev.color || member?.color || 'var(--accent)';
+  const evMembers = members.filter((m) => ev.memberIds?.includes(m.id));
+  const firstMember = evMembers[0];
+  const color = ev.color || firstMember?.color || 'var(--accent)';
 
   // Format date string like "5月28日（星期四）"
   const WEEKDAYS_ZH = ['星期日','星期一','星期二','星期三','星期四','星期五','星期六'];
@@ -305,16 +308,19 @@ function openEventViewModal(ev) {
         <div style="white-space:pre-wrap; line-height:1.5;">${escapeHtml(ev.description)}</div>
       </div>` : ''}
 
-      ${member ? `
+      ${evMembers.length ? `
       <div class="popup-info-row">
         <span class="popup-info-icon">👥</span>
-        <span class="popup-member-chip" style="
-          background: color-mix(in srgb, ${member.color} 12%, white);
-          color: ${member.color};
-          border-color: color-mix(in srgb, ${member.color} 25%, white);
-        ">
-          ${member.emoji} ${escapeHtml(member.name)}
-        </span>
+        <div style="display:flex; gap:6px; flex-wrap:wrap;">
+          ${evMembers.map(m => `
+          <span class="popup-member-chip" style="
+            background: color-mix(in srgb, ${m.color} 12%, white);
+            color: ${m.color};
+            border-color: color-mix(in srgb, ${m.color} 25%, white);
+          ">
+            ${m.emoji} ${escapeHtml(m.name)}
+          </span>`).join('')}
+        </div>
       </div>` : ''}
     </div>
 
