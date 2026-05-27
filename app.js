@@ -1009,6 +1009,24 @@ async function syncToGitHub(silent = false) {
     if (getResp.ok) {
       const existing = await getResp.json();
       sha = existing.sha;
+      // If remote has locked members, merge them in so we don't wipe custom data
+      try {
+        const remoteDecoded = decodeURIComponent(escape(atob(existing.content.replace(/\n/g, ''))));
+        const remoteData = JSON.parse(remoteDecoded);
+        if (remoteData && remoteData._lockedMembers && remoteData.members && remoteData.members.length > 0) {
+          // Remote has authoritative members — use them instead of local defaults
+          const DEFAULT_MEMBER_IDS = ['member-1', 'member-2', 'member-3'];
+          const localHasDefaults = members.length === 3 && members.every(m => DEFAULT_MEMBER_IDS.includes(m.id));
+          if (localHasDefaults) {
+            members = remoteData.members;
+            saveMembers(members);
+          }
+          if (remoteData.categories && remoteData.categories.length > categories.length) {
+            categories = remoteData.categories;
+            saveCategories(categories);
+          }
+        }
+      } catch(e) { /* ignore parse errors */ }
     } else if (getResp.status !== 404) {
       const err = await getResp.json();
       if (err.message?.includes('Bad credentials')) {

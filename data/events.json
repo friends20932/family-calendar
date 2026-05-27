@@ -457,6 +457,12 @@
       "color": "#8b5cf6"
     },
     {
+      "id": "church",
+      "label": "召會生活",
+      "emoji": "⛪️",
+      "color": "#06b6d4"
+    },
+    {
       "id": "other",
       "label": "其他",
       "emoji": "📌",
@@ -465,22 +471,30 @@
   ],
   "members": [
     {
-      "id": "member-1",
-      "name": "爸爸",
-      "color": "#818cf8",
-      "emoji": "👨"
+      "id": "8fd52380-c506-4a41-9302-e38ea61fff96",
+      "name": "朝慶",
+      "color": "#6f9e8a",
+      "emoji": "☕"
     },
     {
-      "id": "member-2",
-      "name": "媽媽",
+      "id": "b1c23456-0000-0000-0000-000000000001",
+      "name": "蔚婷",
       "color": "#f472b6",
-      "emoji": "👩"
+      "emoji": "🎂"
     },
     {
-      "id": "member-3",
-      "name": "孩子",
-      "color": "#34d399",
-      "emoji": "🧒"
+      "id": "b1c23456-0000-0000-0000-000000000002",
+      "name": "恩言",
+      "color": "#ef4444",
+      "emoji": "🍩"
+    },
+    {
+      "id": "b1c23456-0000-0000-0000-000000000003",
+      "name": "傲晨",
+      "color": "#f59e0b",
+      "emoji": "🍟"
     }
-  ]
+  ],
+  "_version": 2,
+  "_lockedMembers": true
 }
