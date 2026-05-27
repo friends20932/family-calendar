@@ -725,12 +725,12 @@
     },
     {
       "id": "29ecbae6-43cf-4297-9c40-734f05c2e7f0",
-      "title": "賣00850/600股",
+      "title": "股票出售",
       "datetime": "2026-05-28T09:00",
       "endDatetime": "2026-05-28T09:00",
       "allDay": false,
       "url": "",
-      "description": "",
+      "description": "賣00850/600股，賣00919/1張",
       "location": "",
       "category": "family",
       "color": null,
@@ -740,10 +740,10 @@
       "reminder": "10",
       "repeat": "none",
       "repeatEndType": "never",
-      "repeatEndDate": null,
-      "repeatEndCount": 10,
+      "repeatEndDate": "",
+      "repeatEndCount": "10",
       "repeatWeeklyDays": [],
-      "repeatMonthlyDate": 1,
+      "repeatMonthlyDate": "1",
       "createdAt": "2026-05-27T11:13:50.433Z"
     }
   ],
