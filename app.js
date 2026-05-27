@@ -917,7 +917,8 @@ async function syncToGitHub(silent = false) {
   const status = document.getElementById('sync-status');
   const icon   = document.getElementById('sync-icon');
 
-  // Get or prompt for PAT
+  // Always pull first to get latest remote data (including locked members/categories)
+  // Only then decide whether to push
   let pat = localStorage.getItem('github_pat');
   let isNewPat = false;
   if (!pat) {
@@ -974,9 +975,28 @@ async function syncToGitHub(silent = false) {
     const hasOnlyDefaultMembers = members.length === 3 &&
       members.every(m => DEFAULT_MEMBER_IDS.includes(m.id));
 
-    // Safety check: if local calendar is empty OR members are still default, pull instead of overwrite
-    if ((events.length === 0 || hasOnlyDefaultMembers) && !isNewPat) {
-      if (confirm('本機資料不完整（行程或成員為預設值），要改為從 GitHub 下載最新資料嗎？\n(按「確定」下載，按「取消」會上傳本機資料到 GitHub)')) {
+    // Safety check: if local members are still default, AUTO-PULL from remote first before deciding what to do
+    if (hasOnlyDefaultMembers && !isNewPat) {
+      // Auto pull — do NOT prompt, just pull silently to restore correct remote members/categories
+      const success = await pullFromGitHub();
+      btn.disabled = false;
+      if (success) {
+        icon.textContent = '✅';
+        status.textContent = '已從 GitHub 還原成員及分類！';
+        status.className = 'sync-status success';
+        if (!silent) showToast('✅ 已從 GitHub 還原成員及分類');
+      } else {
+        icon.textContent = '❌';
+        status.textContent = '下載失敗，請再試一次';
+        status.className = 'sync-status error';
+      }
+      setTimeout(() => { icon.textContent = '☁️'; }, 3000);
+      return;
+    }
+
+    // If local events are empty, confirm before potentially wiping remote
+    if (events.length === 0 && !isNewPat) {
+      if (confirm('本機沒有任何行程，要從 GitHub 下載嗎？\n(按「取消」會將 GitHub 上的資料清空)')) {
         const success = await pullFromGitHub();
         btn.disabled = false;
         if (success) {
