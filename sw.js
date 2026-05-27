@@ -1,5 +1,5 @@
 // Service Worker for Family Calendar
-const CACHE_NAME = 'family-calendar-v17';
+const CACHE_NAME = 'family-calendar-v19';
 const ASSETS = [
   './',
   './index.html',
@@ -29,10 +29,23 @@ self.addEventListener('activate', (e) => {
   self.clients.claim();
 });
 
-// Fetch (cache first)
+// Fetch (Network First, fallback to cache)
 self.addEventListener('fetch', (e) => {
+  // Use network first for HTML and JS/CSS files to ensure latest app version
   e.respondWith(
-    caches.match(e.request).then((cached) => cached || fetch(e.request))
+    fetch(e.request).then((response) => {
+      // If network fetch succeeds, update the cache
+      if (response && response.status === 200) {
+        const responseClone = response.clone();
+        caches.open(CACHE_NAME).then((cache) => {
+          cache.put(e.request, responseClone);
+        });
+      }
+      return response;
+    }).catch(() => {
+      // If network fails (offline), fallback to cache
+      return caches.match(e.request);
+    })
   );
 });
 
