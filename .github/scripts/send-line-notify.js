@@ -91,13 +91,12 @@ const todayEvents = events
 console.log(`✅ 今日行程：${todayEvents.length} 筆`);
 
 // ── 組合訊息內容 ─────────────────────────────────────────────
-let msg = `📅 ${month}月${day}日（星期${weekday}）行程提醒\n`;
-msg    += '─────────────────\n';
+// 注意：LINE 純文字訊息不支援粗體字，因此這裡用【】符號來強調日期
+let msg = `📅 【${month}月${day}日（星期${weekday}）】行程提醒\n\n`;
 
 if (todayEvents.length === 0) {
-  msg += '今天沒有行程，輕鬆的一天！😊\n';
+  msg += '今天沒有行程，輕鬆的一天！😊\n\n';
 } else {
-  msg += `共 ${todayEvents.length} 個行程：\n\n`;
   todayEvents.forEach(ev => {
     const timeStr = ev.allDay
       ? '整天'
@@ -113,8 +112,7 @@ if (todayEvents.length === 0) {
   });
 }
 
-msg += '─────────────────\n';
-msg += '🔗 家庭行事曆';
+msg += '🔗 Family Calendar';
 
 // ── 透過 LINE Messaging API 傳送 Push Message ────────────────
 function sendLine(text) {
