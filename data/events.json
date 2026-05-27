@@ -589,10 +589,10 @@
     "reminder": "none",
     "repeat": "none",
     "repeatEndType": "never",
-    "repeatEndDate": null,
-    "repeatEndCount": 10,
+    "repeatEndDate": "",
+    "repeatEndCount": "10",
     "repeatWeeklyDays": [],
-    "repeatMonthlyDate": 1,
+    "repeatMonthlyDate": "1",
     "createdAt": "2026-05-27T07:54:23.261Z"
   },
   {
