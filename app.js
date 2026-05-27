@@ -887,7 +887,7 @@ async function pullFromGitHub() {
   try {
     const headers = { 'Authorization': `token ${pat}`, 'Accept': 'application/vnd.github.v3+json' };
     const apiUrl = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${GITHUB_PATH}`;
-    const resp = await fetch(apiUrl, { headers });
+    const resp = await fetch(apiUrl + '?t=' + Date.now(), { headers, cache: 'no-store' });
     if (!resp.ok) return false;
     const data = await resp.json();
     if (data.content) {
@@ -970,7 +970,7 @@ async function syncToGitHub(silent = false) {
 
     // Get current SHA (needed for update)
     let sha = null;
-    const getResp = await fetch(apiUrl, { headers });
+    const getResp = await fetch(apiUrl + '?t=' + Date.now(), { headers, cache: 'no-store' });
     if (getResp.ok) {
       const existing = await getResp.json();
       sha = existing.sha;
