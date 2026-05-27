@@ -239,59 +239,97 @@ function openEventViewModal(ev) {
   const members = loadMembers();
   const member = members.find((m) => ev.memberIds?.includes(m.id));
   const color = ev.color || member?.color || 'var(--accent)';
-  
-  let timeStr = ev.allDay ? '整天' : formatTime(ev.datetime);
-  if (!ev.allDay && ev.endDatetime) {
-    timeStr += ' - ' + formatTime(ev.endDatetime);
-  } else if (ev.allDay && ev.endDatetime && ev.endDatetime.slice(0,10) !== ev.datetime.slice(0,10)) {
-    timeStr = ev.datetime.slice(0,10) + ' ~ ' + ev.endDatetime.slice(0,10) + ' (整天)';
+
+  // Format date string like "5月28日（星期四）"
+  const WEEKDAYS_ZH = ['星期日','星期一','星期二','星期三','星期四','星期五','星期六'];
+  const startDt = new Date(ev.datetime);
+  const dateLabel = `${startDt.getMonth()+1}月${startDt.getDate()}日（${WEEKDAYS_ZH[startDt.getDay()]}）`;
+
+  // Format time string
+  let timeRow = '';
+  if (ev.allDay) {
+    if (ev.endDatetime && ev.endDatetime.slice(0,10) !== ev.datetime.slice(0,10)) {
+      const endDt = new Date(ev.endDatetime);
+      const endLabel = `${endDt.getMonth()+1}月${endDt.getDate()}日（${WEEKDAYS_ZH[endDt.getDay()]}）`;
+      timeRow = `${dateLabel} - ${endLabel} · 整天`;
+    } else {
+      timeRow = `${dateLabel} · 整天`;
+    }
+  } else {
+    const startTime = formatTime(ev.datetime);
+    const endTime   = ev.endDatetime ? ' - ' + formatTime(ev.endDatetime) : '';
+    timeRow = `${dateLabel} · ${startTime}${endTime}`;
   }
 
+  // Calendar name
+  const calName = localStorage.getItem('family_calendar_name') || '家庭行事曆';
+
   body.innerHTML = `
-    <div style="display:flex; align-items:center; gap:12px;">
-      <div style="width:16px; height:16px; border-radius:4px; background:${color}; flex-shrink:0;"></div>
-      <div style="font-size:20px; font-weight:700; color:var(--text-primary); line-height:1.2;">${escapeHtml(ev.title)}</div>
+    <div class="popup-title-row">
+      <span class="popup-color-dot" style="background:${color};"></span>
+      <span class="popup-title">${escapeHtml(ev.title)}</span>
     </div>
-    
-    <div style="display:flex; flex-direction:column; gap:10px; margin-top:8px; font-size:14px; color:var(--text-secondary);">
-      <div style="display:flex; align-items:flex-start; gap:8px;">
-        <span>🕒</span>
-        <span>${timeStr}</span>
+
+    <div class="popup-info-rows">
+      <div class="popup-info-row">
+        <span class="popup-info-icon">🕐</span>
+        <span>${timeRow}</span>
       </div>
-      
+
       ${ev.location ? `
-      <div style="display:flex; align-items:flex-start; gap:8px;">
-        <span>📍</span>
+      <div class="popup-info-row">
+        <span class="popup-info-icon">📍</span>
         <span>${escapeHtml(ev.location)}</span>
       </div>` : ''}
-      
+
       ${ev.url ? `
-      <div style="display:flex; align-items:flex-start; gap:8px;">
-        <span>🔗</span>
-        <a href="${ev.url}" target="_blank" style="color:var(--accent); text-decoration:none; word-break:break-all;">${escapeHtml(ev.url)}</a>
+      <div class="popup-info-row">
+        <span class="popup-info-icon">🔗</span>
+        <a href="${escapeHtml(ev.url)}" target="_blank">${escapeHtml(ev.url)}</a>
       </div>` : ''}
-      
+
+      ${ev.description ? `
+      <div class="popup-info-row">
+        <span class="popup-info-icon">📝</span>
+        <div style="white-space:pre-wrap; line-height:1.5;">${escapeHtml(ev.description)}</div>
+      </div>` : ''}
+
       ${member ? `
-      <div style="display:flex; align-items:center; gap:8px;">
-        <span>👥</span>
-        <span style="display:flex; align-items:center; gap:6px; background:color-mix(in srgb, ${member.color} 15%, white); padding:2px 8px; border-radius:12px; font-size:12px; font-weight:600; color:${member.color}; border: 1px solid color-mix(in srgb, ${member.color} 30%, white);">
+      <div class="popup-info-row">
+        <span class="popup-info-icon">👥</span>
+        <span class="popup-member-chip" style="
+          background: color-mix(in srgb, ${member.color} 12%, white);
+          color: ${member.color};
+          border-color: color-mix(in srgb, ${member.color} 25%, white);
+        ">
           ${member.emoji} ${escapeHtml(member.name)}
         </span>
       </div>` : ''}
-      
-      ${ev.description ? `
-      <div style="display:flex; align-items:flex-start; gap:8px; margin-top:4px;">
-        <span>📝</span>
-        <div style="white-space:pre-wrap; line-height:1.5;">${escapeHtml(ev.description)}</div>
-      </div>` : ''}
+    </div>
+
+    <hr class="popup-divider">
+
+    <div class="popup-footer">
+      <span>📅</span>
+      <span>${escapeHtml(calName)}</span>
     </div>
   `;
-  
+
+  // Edit button
   document.getElementById('btn-edit-event').onclick = () => {
     closeModal('event-view-modal');
     openEventModal(ev);
   };
-  
+
+  // Delete button
+  document.getElementById('btn-delete-event-view').onclick = () => {
+    if (!confirm(`確定要刪除「${ev.title}」嗎？`)) return;
+    deleteEvent(ev.id);
+    closeModal('event-view-modal');
+    showToast('活動已刪除');
+    refreshAll();
+  };
+
   openModal('event-view-modal');
 }
 
