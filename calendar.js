@@ -180,6 +180,7 @@ export class CalendarRenderer {
       e.stopPropagation();
       this.onEventClick?.(ev);
     });
+    pill.addEventListener('dblclick', e => e.stopPropagation());
     return pill;
   }
 
@@ -379,6 +380,7 @@ export class CalendarRenderer {
       bar.textContent = ev.title;
       bar.title = ev.title;
       bar.addEventListener('click', e => { e.stopPropagation(); this.onEventClick?.(ev); });
+      bar.addEventListener('dblclick', e => e.stopPropagation());
       grid.appendChild(bar);
     });
 
@@ -410,6 +412,7 @@ export class CalendarRenderer {
       e.stopPropagation();
       this.onEventClick?.(ev);
     });
+    block.addEventListener('dblclick', e => e.stopPropagation());
     return block;
   }
 
