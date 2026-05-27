@@ -891,7 +891,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ── GitHub Sync ──────────────────────────────────────────────
-  document.getElementById('btn-github-sync')?.addEventListener('click', syncToGitHub);
+  document.getElementById('btn-github-sync')?.addEventListener('click', manualSync);
 });
 
 // ── GitHub Sync to GitHub repo ───────────────────────────────
@@ -988,6 +988,37 @@ async function pullFromGitHub() {
     console.error('Auto-pull error:', e);
   }
   return false;
+}
+
+async function manualSync() {
+  const btn    = document.getElementById('btn-github-sync');
+  const status = document.getElementById('sync-status');
+  const icon   = document.getElementById('sync-icon');
+  if (btn) btn.disabled = true;
+  if (icon) icon.textContent = '⏳';
+  if (status) {
+    status.textContent = '下載中…';
+    status.className = 'sync-status syncing';
+  }
+
+  const success = await pullFromGitHub();
+  
+  if (btn) btn.disabled = false;
+  if (success) {
+    if (icon) icon.textContent = '✅';
+    if (status) {
+      status.textContent = '已更新至最新資料';
+      status.className = 'sync-status success';
+    }
+    showToast('✅ 已成功從雲端載入最新資料');
+  } else {
+    if (icon) icon.textContent = '❌';
+    if (status) {
+      status.textContent = '下載失敗，請重試';
+      status.className = 'sync-status error';
+    }
+  }
+  setTimeout(() => { if (icon) icon.textContent = '☁️'; }, 3000);
 }
 
 async function syncToGitHub(silent = false) {
@@ -1184,8 +1215,10 @@ async function syncToGitHub(silent = false) {
 // 1. Pull on visibility change (e.g., coming back to the app from another tab/app)
 document.addEventListener('visibilitychange', () => {
   if (document.visibilityState === 'visible') {
-    // Wait a brief moment to ensure network is active
-    setTimeout(() => pullFromGitHub(), 1000);
+    // Auto download latest on startup
+    setTimeout(() => {
+      pullFromGitHub();
+    }, 1000);
   }
 });
 
