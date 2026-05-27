@@ -554,6 +554,7 @@ function renderCategoryList() {
         deleteCategory(btn.dataset.id);
         renderCategoryList();
         refreshAll();
+        syncToGitHub(true);
         showToast('分類已刪除');
       }
     });
@@ -588,6 +589,7 @@ function startCategoryEdit(id) {
     updateCategory(id, { label, emoji, color });
     renderCategoryList();
     refreshAll();
+    syncToGitHub(true);
     showToast('分類已更新 ✓');
   });
   editRow.querySelector('.cat-cancel-btn').addEventListener('click', () => {
@@ -622,6 +624,7 @@ function renderMemberList() {
         deleteMember(btn.dataset.id);
         renderMemberList();
         refreshAll();
+        syncToGitHub(true);
         showToast('成員已刪除');
       }
     });
@@ -665,6 +668,7 @@ function startMemberEdit(id) {
     updateMember(id, { name, emoji, color });
     renderMemberList();
     refreshAll();
+    syncToGitHub(true);
     showToast('成員已更新 ✓');
   });
   editRow.querySelector('.cat-cancel-btn').addEventListener('click', () => {
@@ -833,6 +837,7 @@ document.addEventListener('DOMContentLoaded', () => {
     renderMemberList();
     showToast(`已新增：${name} ✓`);
     refreshAll();
+    syncToGitHub(true);
   });
 
   // Category modal
@@ -851,6 +856,7 @@ document.addEventListener('DOMContentLoaded', () => {
     renderCategoryList();
     showToast(`已新增分類：${label} ✓`);
     refreshAll();
+    syncToGitHub(true);
   });
 
   // Sidebar toggle
@@ -902,6 +908,41 @@ async function pullConfigFromGitHub() {
     }
   } catch(e) { console.error('pullConfig error:', e); }
   return false;
+}
+
+// Push members & categories to separate config.json
+async function pushConfigToGitHub() {
+  const pat = localStorage.getItem('github_pat');
+  if (!pat) return false;
+  try {
+    const headers = { 'Authorization': `token ${pat}`, 'Accept': 'application/vnd.github.v3+json' };
+    const apiUrl = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${GITHUB_CONFIG_PATH}`;
+    
+    // Get SHA
+    let sha = null;
+    const getResp = await fetch(apiUrl + '?t=' + Date.now(), { headers, cache: 'no-store' });
+    if (getResp.ok) {
+      const existing = await getResp.json();
+      sha = existing.sha;
+    }
+
+    const configData = {
+      members: loadMembers(),
+      categories: loadCategories()
+    };
+    const content = btoa(unescape(encodeURIComponent(JSON.stringify(configData, null, 2))));
+
+    const body = {
+      message: `sync: update config.json (${new Date().toLocaleString('zh-TW')})`,
+      content,
+      ...(sha ? { sha } : {}),
+    };
+    const putResp = await fetch(apiUrl, { method: 'PUT', headers, body: JSON.stringify(body) });
+    return putResp.ok;
+  } catch (e) {
+    console.error('pushConfig error:', e);
+    return false;
+  }
 }
 
 async function pullFromGitHub() {
@@ -1098,6 +1139,9 @@ async function syncToGitHub(silent = false) {
       const err = await putResp.json();
       throw new Error(err.message || '更新失敗');
     }
+
+    // Push config.json as well to keep members/categories synced
+    await pushConfigToGitHub();
 
     icon.textContent = '✅';
     status.textContent = `已同步 ${events.length} 筆行程`;
