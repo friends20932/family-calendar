@@ -969,9 +969,14 @@ async function syncToGitHub(silent = false) {
     let categories = loadCategories();
     let members = loadMembers();
 
-    // Safety check: if local calendar is empty, we probably want to pull instead of wipe.
-    if (events.length === 0 && !isNewPat) {
-      if (confirm('本機沒有任何行程，請問要從 GitHub 下載行程嗎？\n(按「確定」下載，按「取消」會將 GitHub 上的資料清空)')) {
+    // Detect default members (only the 3 built-in ones, meaning data was never customized or was wiped)
+    const DEFAULT_MEMBER_IDS = ['member-1', 'member-2', 'member-3'];
+    const hasOnlyDefaultMembers = members.length === 3 &&
+      members.every(m => DEFAULT_MEMBER_IDS.includes(m.id));
+
+    // Safety check: if local calendar is empty OR members are still default, pull instead of overwrite
+    if ((events.length === 0 || hasOnlyDefaultMembers) && !isNewPat) {
+      if (confirm('本機資料不完整（行程或成員為預設值），要改為從 GitHub 下載最新資料嗎？\n(按「確定」下載，按「取消」會上傳本機資料到 GitHub)')) {
         const success = await pullFromGitHub();
         btn.disabled = false;
         if (success) {
