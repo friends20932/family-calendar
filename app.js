@@ -964,7 +964,10 @@ async function pullFromGitHub() {
     const headers = { 'Authorization': `token ${pat}`, 'Accept': 'application/vnd.github.v3+json' };
     const apiUrl = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${GITHUB_PATH}`;
     const resp = await fetch(apiUrl + '?t=' + Date.now(), { headers, cache: 'no-store' });
-    if (!resp.ok) return false;
+    if (!resp.ok) {
+      if (resp.status === 401) localStorage.removeItem('github_pat');
+      return false;
+    }
     const data = await resp.json();
     if (data.content) {
       const decoded = decodeURIComponent(escape(atob(data.content.replace(/\n/g, ''))));
@@ -991,6 +994,13 @@ async function pullFromGitHub() {
 }
 
 async function manualSync() {
+  let pat = localStorage.getItem('github_pat');
+  if (!pat) {
+    pat = prompt('請輸入 GitHub Personal Access Token (PAT) 以連接雲端：');
+    if (!pat) return;
+    localStorage.setItem('github_pat', pat.trim());
+  }
+
   const btn    = document.getElementById('btn-github-sync');
   const status = document.getElementById('sync-status');
   const icon   = document.getElementById('sync-icon');
