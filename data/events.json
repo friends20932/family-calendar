@@ -205,13 +205,13 @@
       "url": "",
       "description": "",
       "location": "大里會所",
-      "category": "family",
+      "category": "f0f9c378-de7e-4c69-aa8c-04ecb0d44e6b",
       "color": null,
       "memberIds": [
-        "8fd52380-c506-4a41-9302-e38ea61fff96",
-        "b1c23456-0000-0000-0000-000000000001",
-        "b1c23456-0000-0000-0000-000000000002",
-        "b1c23456-0000-0000-0000-000000000003"
+        "member-1",
+        "member-2",
+        "member-3",
+        "8fd52380-c506-4a41-9302-e38ea61fff96"
       ],
       "reminder": "none",
       "repeat": "none",
@@ -231,21 +231,21 @@
       "url": "",
       "description": "",
       "location": "科園會所",
-      "category": "family",
+      "category": "f0f9c378-de7e-4c69-aa8c-04ecb0d44e6b",
       "color": null,
       "memberIds": [
-        "8fd52380-c506-4a41-9302-e38ea61fff96",
-        "b1c23456-0000-0000-0000-000000000001",
-        "b1c23456-0000-0000-0000-000000000002",
-        "b1c23456-0000-0000-0000-000000000003"
+        "member-1",
+        "member-2",
+        "member-3",
+        "8fd52380-c506-4a41-9302-e38ea61fff96"
       ],
       "reminder": "none",
       "repeat": "none",
       "repeatEndType": "never",
-      "repeatEndDate": "",
-      "repeatEndCount": "10",
+      "repeatEndDate": null,
+      "repeatEndCount": 10,
       "repeatWeeklyDays": [],
-      "repeatMonthlyDate": "1",
+      "repeatMonthlyDate": 1,
       "createdAt": "2026-05-27T04:27:24.467Z"
     },
     {
@@ -257,21 +257,21 @@
       "url": "",
       "description": "",
       "location": "科園會所",
-      "category": "family",
+      "category": "f0f9c378-de7e-4c69-aa8c-04ecb0d44e6b",
       "color": null,
       "memberIds": [
-        "8fd52380-c506-4a41-9302-e38ea61fff96",
-        "b1c23456-0000-0000-0000-000000000001",
-        "b1c23456-0000-0000-0000-000000000002",
-        "b1c23456-0000-0000-0000-000000000003"
+        "member-1",
+        "member-2",
+        "member-3",
+        "8fd52380-c506-4a41-9302-e38ea61fff96"
       ],
       "reminder": "1440",
       "repeat": "none",
       "repeatEndType": "never",
-      "repeatEndDate": "",
-      "repeatEndCount": "10",
+      "repeatEndDate": null,
+      "repeatEndCount": 10,
       "repeatWeeklyDays": [],
-      "repeatMonthlyDate": "1",
+      "repeatMonthlyDate": 1,
       "createdAt": "2026-05-27T04:28:13.487Z"
     },
     {
@@ -358,15 +358,15 @@
       "category": "school",
       "color": null,
       "memberIds": [
-        "b1c23456-0000-0000-0000-000000000003"
+        "8fd52380-c506-4a41-9302-e38ea61fff96"
       ],
       "reminder": "none",
       "repeat": "none",
       "repeatEndType": "never",
-      "repeatEndDate": "",
-      "repeatEndCount": "10",
+      "repeatEndDate": null,
+      "repeatEndCount": 10,
       "repeatWeeklyDays": [],
-      "repeatMonthlyDate": "1",
+      "repeatMonthlyDate": 1,
       "createdAt": "2026-05-27T04:36:07.667Z"
     },
     {
@@ -595,80 +595,6 @@
       "repeatWeeklyDays": [],
       "repeatMonthlyDate": 1,
       "createdAt": "2026-05-27T07:54:23.261Z"
-    },
-    {
-      "id": "e8cdab74-680a-431b-b883-a0a10fc14b51",
-      "title": "出遊－西湖度假村",
-      "datetime": "2026-06-27T00:00",
-      "endDatetime": null,
-      "allDay": true,
-      "url": "https://maps.app.goo.gl/TXV2cQkrDPyWrHHf7",
-      "description": "",
-      "location": "西湖度假村",
-      "category": "travel",
-      "color": null,
-      "memberIds": [
-        "8fd52380-c506-4a41-9302-e38ea61fff96",
-        "b1c23456-0000-0000-0000-000000000001",
-        "b1c23456-0000-0000-0000-000000000002",
-        "b1c23456-0000-0000-0000-000000000003"
-      ],
-      "reminder": "none",
-      "repeat": "none",
-      "repeatEndType": "never",
-      "repeatEndDate": null,
-      "repeatEndCount": 10,
-      "repeatWeeklyDays": [],
-      "repeatMonthlyDate": 1,
-      "createdAt": "2026-05-27T07:58:08.951Z"
-    },
-    {
-      "id": "4527cba2-39c6-4dcb-a69e-24027f6703ea",
-      "title": "青少年特會",
-      "datetime": "2026-07-04T00:00",
-      "endDatetime": "2026-07-06T00:00",
-      "allDay": true,
-      "url": "",
-      "description": "",
-      "location": "小叮噹科學園區",
-      "category": "church",
-      "color": null,
-      "memberIds": [
-        "8fd52380-c506-4a41-9302-e38ea61fff96"
-      ],
-      "reminder": "none",
-      "repeat": "none",
-      "repeatEndType": "never",
-      "repeatEndDate": null,
-      "repeatEndCount": 10,
-      "repeatWeeklyDays": [],
-      "repeatMonthlyDate": 1,
-      "createdAt": "2026-05-27T08:03:04.015Z"
-    },
-    {
-      "id": "2751a487-1bc1-40d6-a6e4-f758d41693bf",
-      "title": "蔚婷&小孩回基隆",
-      "datetime": "2026-07-03T14:40",
-      "endDatetime": "2026-07-03T17:40",
-      "allDay": false,
-      "url": "",
-      "description": "車次122",
-      "location": "",
-      "category": "family",
-      "color": null,
-      "memberIds": [
-        "b1c23456-0000-0000-0000-000000000001",
-        "b1c23456-0000-0000-0000-000000000002",
-        "b1c23456-0000-0000-0000-000000000003"
-      ],
-      "reminder": "none",
-      "repeat": "none",
-      "repeatEndType": "never",
-      "repeatEndDate": null,
-      "repeatEndCount": 10,
-      "repeatWeeklyDays": [],
-      "repeatMonthlyDate": 1,
-      "createdAt": "2026-05-27T08:05:01.812Z"
     }
   ],
   "categories": [
@@ -725,25 +651,25 @@
     {
       "id": "8fd52380-c506-4a41-9302-e38ea61fff96",
       "name": "朝慶",
-      "color": "#9f856f",
+      "color": "#6f9e8a",
       "emoji": "☕"
     },
     {
       "id": "b1c23456-0000-0000-0000-000000000001",
       "name": "蔚婷",
-      "color": "#dab5e8",
+      "color": "#f291aa",
       "emoji": "🍰"
     },
     {
       "id": "b1c23456-0000-0000-0000-000000000002",
       "name": "恩言",
-      "color": "#e58f8f",
+      "color": "#ef4444",
       "emoji": "🍩"
     },
     {
       "id": "b1c23456-0000-0000-0000-000000000003",
-      "name": "儆晨",
-      "color": "#8fc2db",
+      "name": "傲晨",
+      "color": "#f59e0b",
       "emoji": "🍟"
     }
   ]
