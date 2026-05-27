@@ -959,7 +959,28 @@ async function syncToGitHub(silent = false) {
   status.className = 'sync-status syncing';
 
   try {
-    const events  = loadEvents();
+    let events  = loadEvents();
+
+    // Safety check: if local calendar is empty, we probably want to pull instead of wipe.
+    if (events.length === 0 && !isNewPat) {
+      if (confirm('本機沒有任何行程，請問要從 GitHub 下載行程嗎？\n(按「確定」下載，按「取消」會將 GitHub 上的資料清空)')) {
+        const success = await pullFromGitHub();
+        btn.disabled = false;
+        if (success) {
+          icon.textContent = '✅';
+          status.textContent = '已成功載入雲端行程！';
+          status.className = 'sync-status success';
+          if (!silent) showToast('✅ 已成功從 GitHub 載入最新行程');
+        } else {
+          icon.textContent = '❌';
+          status.textContent = '載入失敗或雲端無資料';
+          status.className = 'sync-status error';
+        }
+        setTimeout(() => { icon.textContent = '☁️'; }, 3000);
+        return;
+      }
+    }
+
     const content = btoa(unescape(encodeURIComponent(JSON.stringify(events, null, 2))));
     const headers = {
       'Authorization': `token ${pat}`,
