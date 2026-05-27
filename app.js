@@ -959,38 +959,36 @@ async function pushConfigToGitHub() {
 
 async function pullFromGitHub() {
   const pat = localStorage.getItem('github_pat');
-  if (!pat) return false;
+  if (!pat) return { success: false, error: 'no_pat' };
   try {
     const headers = { 'Authorization': `token ${pat}`, 'Accept': 'application/vnd.github.v3+json' };
     const apiUrl = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${GITHUB_PATH}`;
     const resp = await fetch(apiUrl + '?t=' + Date.now(), { headers, cache: 'no-store' });
     if (!resp.ok) {
       if (resp.status === 401) localStorage.removeItem('github_pat');
-      return false;
+      return { success: false, error: `fetch_failed_${resp.status}` };
     }
     const data = await resp.json();
     if (data.content) {
       const decoded = decodeURIComponent(escape(atob(data.content.replace(/\n/g, ''))));
       const remoteData = JSON.parse(decoded);
       if (Array.isArray(remoteData)) {
-        // Old format (only events) — also pull config separately
         saveEvents(remoteData);
         await pullConfigFromGitHub();
       } else if (remoteData && typeof remoteData === 'object') {
-        // New format (events, categories, members)
         if (remoteData.events) saveEvents(remoteData.events);
         if (remoteData.categories) saveCategories(remoteData.categories);
         if (remoteData.members) saveMembers(remoteData.members);
-        // Also try pulling separate config for latest members
         await pullConfigFromGitHub();
       }
       refreshAll();
-      return true;
+      return { success: true };
     }
+    return { success: false, error: 'no_content_in_response' };
   } catch (e) {
     console.error('Auto-pull error:', e);
+    return { success: false, error: 'catch_' + e.message };
   }
-  return false;
 }
 
 async function manualSync() {
@@ -1011,10 +1009,10 @@ async function manualSync() {
     status.className = 'sync-status syncing';
   }
 
-  const success = await pullFromGitHub();
+  const result = await pullFromGitHub();
   
   if (btn) btn.disabled = false;
-  if (success) {
+  if (result && result.success) {
     if (icon) icon.textContent = '✅';
     if (status) {
       status.textContent = '已更新至最新資料';
@@ -1027,6 +1025,8 @@ async function manualSync() {
       status.textContent = '下載失敗，請重試';
       status.className = 'sync-status error';
     }
+    const errMsg = result ? result.error : 'unknown';
+    alert('同步失敗詳細錯誤：' + errMsg);
   }
   setTimeout(() => { if (icon) icon.textContent = '☁️'; }, 3000);
 }
