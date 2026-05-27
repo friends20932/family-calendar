@@ -1228,6 +1228,7 @@ body.sidebar-closed #sidebar {
   #calendar-name-display { display: none; }
   .header-logo { margin-right: 0; }
   .btn-today { white-space: nowrap; padding: 4px 8px; }
+  #time-fields { flex-direction: column; gap: 8px; }
   #btn-add-event { bottom: 18px; right: 18px; width: 48px; height: 48px; font-size: 22px; }
   .view-btn { padding: 5px 8px; font-size: 12px; }
   #cal-title { font-size: 15px; min-width: auto; white-space: nowrap; }
