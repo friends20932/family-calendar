@@ -695,6 +695,32 @@
       "repeatWeeklyDays": [],
       "repeatMonthlyDate": 1,
       "createdAt": "2026-05-27T10:00:34.725Z"
+    },
+    {
+      "id": "519e1c2a-03fb-49f3-a1a4-8ea93952ade9",
+      "title": "益彰弟兄家用餐相調",
+      "datetime": "2026-06-07T17:00",
+      "endDatetime": "2026-06-07T19:30",
+      "allDay": false,
+      "url": "",
+      "description": "",
+      "location": "益彰弟兄家",
+      "category": "church",
+      "color": null,
+      "memberIds": [
+        "8fd52380-c506-4a41-9302-e38ea61fff96",
+        "b1c23456-0000-0000-0000-000000000001",
+        "b1c23456-0000-0000-0000-000000000002",
+        "b1c23456-0000-0000-0000-000000000003"
+      ],
+      "reminder": "1440",
+      "repeat": "none",
+      "repeatEndType": "never",
+      "repeatEndDate": null,
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [],
+      "repeatMonthlyDate": 1,
+      "createdAt": "2026-05-27T10:01:56.665Z"
     }
   ],
   "categories": [
