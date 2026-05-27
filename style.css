@@ -6,28 +6,28 @@
 
 /* ── CSS Variables ───────────────────────────────────────── */
 :root {
-  --bg-base:     #fdf2f8;
+  --bg-base:     #f5f0f2;
   --bg-surface:  #ffffff;
-  --bg-elevated: #fce7f3;
-  --bg-hover:    rgba(236, 72, 153, 0.08);
+  --bg-elevated: #ebe4e7;
+  --bg-hover:    rgba(183, 145, 155, 0.15);
   --bg-glass:    rgba(255, 255, 255, 0.85);
 
-  --border:      rgba(236, 72, 153, 0.15);
-  --border-soft: rgba(236, 72, 153, 0.08);
-  --border-focus: #ec4899;
+  --border:      rgba(183, 145, 155, 0.3);
+  --border-soft: rgba(183, 145, 155, 0.15);
+  --border-focus: #b7919b;
 
-  --accent:      #ec4899;
-  --accent-2:    #f43f5e;
-  --accent-light: #fdf2f8;
-  --accent-glow: rgba(236, 72, 153, 0.25);
+  --accent:      #b7919b;
+  --accent-2:    #c9a0ac;
+  --accent-light: #f5f0f2;
+  --accent-glow: rgba(183, 145, 155, 0.25);
 
-  --text-primary:   #502234;
-  --text-secondary: #86465f;
-  --text-muted:     #b08696;
+  --text-primary:   #5c4c51;
+  --text-secondary: #826e74;
+  --text-muted:     #a6959b;
 
-  --success: #10b981;
-  --danger:  #ef4444;
-  --warning: #f59e0b;
+  --success: #678b7b;
+  --danger:  #d97373;
+  --warning: #d9ab55;
 
   --radius-sm:   6px;
   --radius-md:   12px;
@@ -35,10 +35,10 @@
   --radius-xl:   24px;
   --radius-full: 9999px;
 
-  --shadow-xs: 0 1px 3px rgba(80,34,52,0.05), 0 1px 2px rgba(80,34,52,0.03);
-  --shadow-sm: 0 3px 10px rgba(80,34,52,0.07), 0 1px 3px rgba(80,34,52,0.04);
-  --shadow-md: 0 8px 28px rgba(80,34,52,0.1), 0 3px 8px rgba(80,34,52,0.05);
-  --shadow-lg: 0 20px 60px rgba(80,34,52,0.14), 0 8px 20px rgba(80,34,52,0.07);
+  --shadow-xs: 0 1px 3px rgba(92,76,81,0.05), 0 1px 2px rgba(92,76,81,0.03);
+  --shadow-sm: 0 3px 10px rgba(92,76,81,0.07), 0 1px 3px rgba(92,76,81,0.04);
+  --shadow-md: 0 8px 28px rgba(92,76,81,0.1), 0 3px 8px rgba(92,76,81,0.05);
+  --shadow-lg: 0 20px 60px rgba(92,76,81,0.14), 0 8px 20px rgba(92,76,81,0.07);
   --shadow-glow: 0 0 0 3px var(--accent-glow);
 
   --sidebar-w: 280px;
