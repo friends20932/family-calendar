@@ -268,8 +268,9 @@ export class CalendarRenderer {
   }
 
   _buildWeekAllDayStrip(cols, members) {
+    // Use midnight for all boundaries — avoids Math.round(3.9999) → 4 bug
     const weekStart = new Date(cols[0].dateStr + 'T00:00:00');
-    const weekEnd   = new Date(cols[6].dateStr + 'T23:59:59');
+    const weekEnd   = new Date(cols[6].dateStr + 'T00:00:00');
 
     // Collect all-day events (non-repeating) that overlap this week
     const items = [];
@@ -277,14 +278,19 @@ export class CalendarRenderer {
 
     loadEvents().filter(ev => ev.allDay && (ev.repeat === 'none' || !ev.repeat)).forEach(ev => {
       const evStart = new Date(ev.datetime.slice(0, 10) + 'T00:00:00');
+      // If no endDatetime, treat as same day (midnight of start day)
       const evEndStr = ev.endDatetime ? ev.endDatetime.slice(0, 10) : ev.datetime.slice(0, 10);
-      const evEnd = new Date(evEndStr + 'T23:59:59');
+      const evEnd = new Date(evEndStr + 'T00:00:00');
+
+      // Overlap check: event ends before week starts OR event starts after week ends
       if (evEnd < weekStart || evStart > weekEnd) return;
 
       const clampedStart = evStart < weekStart ? weekStart : evStart;
       const clampedEnd   = evEnd   > weekEnd   ? weekEnd   : evEnd;
-      const startCol = Math.round((clampedStart - weekStart) / 86400000);
-      const endCol   = Math.round((clampedEnd   - weekStart) / 86400000);
+
+      // Math.floor is safe since all values are exact midnight boundaries
+      const startCol = Math.floor((clampedStart - weekStart) / 86400000);
+      const endCol   = Math.floor((clampedEnd   - weekStart) / 86400000);
       const span = Math.max(1, endCol - startCol + 1);
       seenIds.add(ev.id);
       items.push({ ev, startCol, span });
