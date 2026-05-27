@@ -441,6 +441,31 @@
       "repeatWeeklyDays": [],
       "repeatMonthlyDate": 1,
       "createdAt": "2026-05-27T07:14:19.785Z"
+    },
+    {
+      "id": "e28229e0-24db-49d1-8087-d7d27f584224",
+      "title": "家庭看牙",
+      "datetime": "2026-06-06T15:30",
+      "endDatetime": "2026-06-06T16:30",
+      "allDay": false,
+      "url": "",
+      "description": "",
+      "location": "科隆白金牙醫診所",
+      "category": "health",
+      "color": null,
+      "memberIds": [
+        "8fd52380-c506-4a41-9302-e38ea61fff96",
+        "b1c23456-0000-0000-0000-000000000001",
+        "b1c23456-0000-0000-0000-000000000002"
+      ],
+      "reminder": "1440",
+      "repeat": "none",
+      "repeatEndType": "never",
+      "repeatEndDate": null,
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [],
+      "repeatMonthlyDate": 1,
+      "createdAt": "2026-05-27T07:23:31.736Z"
     }
   ],
   "categories": [
@@ -504,7 +529,7 @@
       "id": "b1c23456-0000-0000-0000-000000000001",
       "name": "蔚婷",
       "color": "#f472b6",
-      "emoji": "🍰"
+      "emoji": "🎂"
     },
     {
       "id": "b1c23456-0000-0000-0000-000000000002",
