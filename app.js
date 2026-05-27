@@ -852,4 +852,102 @@ document.addEventListener('DOMContentLoaded', () => {
       showToast('已重置為預設分類');
     }
   });
+
+  // ── GitHub Sync ──────────────────────────────────────────────
+  document.getElementById('btn-github-sync')?.addEventListener('click', syncToGitHub);
 });
+
+// ── GitHub Sync to GitHub repo ───────────────────────────────
+const GITHUB_OWNER = 'friends20932';
+const GITHUB_REPO  = 'family-calendar';
+const GITHUB_PATH  = 'data/events.json';
+
+async function syncToGitHub() {
+  const btn    = document.getElementById('btn-github-sync');
+  const status = document.getElementById('sync-status');
+  const icon   = document.getElementById('sync-icon');
+
+  // Get or prompt for PAT
+  let pat = localStorage.getItem('github_pat');
+  if (!pat) {
+    pat = prompt(
+      '請輸入 GitHub Personal Access Token (PAT)\n\n' +
+      '取得方式：GitHub → Settings → Developer settings\n' +
+      '→ Personal access tokens → Tokens (classic)\n' +
+      '→ Generate new token → 勾選 repo → 複製'
+    );
+    if (!pat || !pat.trim()) return;
+    localStorage.setItem('github_pat', pat.trim());
+    pat = pat.trim();
+  }
+
+  // Update UI
+  btn.disabled = true;
+  icon.textContent = '⏳';
+  status.textContent = '同步中…';
+  status.className = 'sync-status syncing';
+
+  try {
+    const events  = loadEvents();
+    const content = btoa(unescape(encodeURIComponent(JSON.stringify(events, null, 2))));
+    const headers = {
+      'Authorization': `token ${pat}`,
+      'Accept':        'application/vnd.github.v3+json',
+      'Content-Type':  'application/json',
+    };
+    const apiUrl = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${GITHUB_PATH}`;
+
+    // Get current SHA (needed for update)
+    let sha = null;
+    const getResp = await fetch(apiUrl, { headers });
+    if (getResp.ok) {
+      const existing = await getResp.json();
+      sha = existing.sha;
+    } else if (getResp.status !== 404) {
+      const err = await getResp.json();
+      if (err.message?.includes('Bad credentials')) {
+        localStorage.removeItem('github_pat');
+        throw new Error('PAT 無效，請重新設定');
+      }
+      throw new Error(err.message || '無法取得檔案資訊');
+    }
+
+    // Create or update file
+    const body = {
+      message: `sync: update events.json (${new Date().toLocaleString('zh-TW')})`,
+      content,
+      ...(sha ? { sha } : {}),
+    };
+    const putResp = await fetch(apiUrl, {
+      method: 'PUT',
+      headers,
+      body: JSON.stringify(body),
+    });
+
+    if (!putResp.ok) {
+      const err = await putResp.json();
+      throw new Error(err.message || '更新失敗');
+    }
+
+    icon.textContent = '✅';
+    status.textContent = `已同步 ${events.length} 筆行程`;
+    status.className = 'sync-status success';
+    showToast(`✅ 已同步 ${events.length} 筆行程到 GitHub`);
+
+  } catch (e) {
+    console.error('Sync error:', e);
+    icon.textContent = '❌';
+    status.textContent = e.message || '同步失敗';
+    status.className = 'sync-status error';
+    showToast('❌ 同步失敗：' + (e.message || '未知錯誤'), 'error');
+  } finally {
+    btn.disabled = false;
+    setTimeout(() => {
+      icon.textContent = '☁️';
+      if (status.className.includes('success')) {
+        status.className = 'sync-status';
+      }
+    }, 5000);
+  }
+}
+

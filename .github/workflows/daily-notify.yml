@@ -1,0 +1,22 @@
+name: 每日行程 LINE 通知
+
+on:
+  schedule:
+    # 每天 08:00 台灣時間 (UTC+8 = UTC 00:00)
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+    # 允許手動觸發測試
+
+jobs:
+  send-notify:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 取得最新程式碼
+        uses: actions/checkout@v4
+
+      - name: 傳送 LINE 通知
+        env:
+          LINE_CHANNEL_TOKEN: ${{ secrets.LINE_CHANNEL_TOKEN }}
+          LINE_USER_ID: ${{ secrets.LINE_USER_ID }}
+        run: node .github/scripts/send-line-notify.js
