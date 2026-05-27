@@ -883,12 +883,12 @@ const GITHUB_PATH  = 'data/events.json';
 
 async function pullFromGitHub() {
   const pat = localStorage.getItem('github_pat');
-  if (!pat) return;
+  if (!pat) return false;
   try {
     const headers = { 'Authorization': `token ${pat}`, 'Accept': 'application/vnd.github.v3+json' };
     const apiUrl = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${GITHUB_PATH}`;
     const resp = await fetch(apiUrl, { headers });
-    if (!resp.ok) return;
+    if (!resp.ok) return false;
     const data = await resp.json();
     if (data.content) {
       const decoded = decodeURIComponent(escape(atob(data.content.replace(/\n/g, ''))));
@@ -896,11 +896,13 @@ async function pullFromGitHub() {
       if (Array.isArray(remoteEvents)) {
         saveEvents(remoteEvents);
         refreshAll();
+        return true;
       }
     }
   } catch (e) {
     console.error('Auto-pull error:', e);
   }
+  return false;
 }
 
 async function syncToGitHub(silent = false) {
@@ -911,6 +913,7 @@ async function syncToGitHub(silent = false) {
 
   // Get or prompt for PAT
   let pat = localStorage.getItem('github_pat');
+  let isNewPat = false;
   if (!pat) {
     if (silent) return;
     pat = prompt(
@@ -922,6 +925,31 @@ async function syncToGitHub(silent = false) {
     if (!pat || !pat.trim()) return;
     localStorage.setItem('github_pat', pat.trim());
     pat = pat.trim();
+    isNewPat = true;
+  }
+
+  // If this is a new device (just entered PAT), we should pull first to avoid overwriting remote data with an empty local calendar!
+  if (isNewPat) {
+    btn.disabled = true;
+    icon.textContent = '⏳';
+    status.textContent = '正在下載雲端行程…';
+    status.className = 'sync-status syncing';
+    
+    const success = await pullFromGitHub();
+    
+    btn.disabled = false;
+    if (success) {
+      icon.textContent = '✅';
+      status.textContent = '已成功載入雲端行程！';
+      status.className = 'sync-status success';
+      showToast('✅ 已成功從 GitHub 載入最新行程');
+    } else {
+      icon.textContent = '❌';
+      status.textContent = '載入失敗，可能無雲端資料';
+      status.className = 'sync-status error';
+    }
+    setTimeout(() => { icon.textContent = '☁️'; }, 3000);
+    return;
   }
 
   // Update UI
