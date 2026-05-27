@@ -457,11 +457,42 @@
       "color": "#8b5cf6"
     },
     {
+      "id": "church",
+      "label": "召會生活",
+      "emoji": "⛪️",
+      "color": "#06b6d4"
+    },
+    {
       "id": "other",
       "label": "其他",
       "emoji": "📌",
       "color": "#64748b"
     }
   ],
-  "members": []
+  "members": [
+    {
+      "id": "8fd52380-c506-4a41-9302-e38ea61fff96",
+      "name": "朝慶",
+      "color": "#6f9e8a",
+      "emoji": "☕"
+    },
+    {
+      "id": "member-2",
+      "name": "蔚婷",
+      "color": "#f472b6",
+      "emoji": "🎂"
+    },
+    {
+      "id": "member-3",
+      "name": "恩言",
+      "color": "#ef4444",
+      "emoji": "🍩"
+    },
+    {
+      "id": "member-4",
+      "name": "傲晨",
+      "color": "#f59e0b",
+      "emoji": "🍟"
+    }
+  ]
 }
