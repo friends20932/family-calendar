@@ -9,15 +9,15 @@ import {
 } from './events.js?v=2';
 import {
   loadMembers, saveMembers, addMember, updateMember, deleteMember
-} from './members.js';
+} from './members.js?v=2';
 import {
   loadCategories, saveCategories, addCategory, updateCategory,
   deleteCategory, getCategoryColor, DEFAULT_CATEGORIES
-} from './categories.js';
+} from './categories.js?v=2';
 import {
   initNotifications, getNotificationPermission,
   requestNotificationPermission, scheduleLocalReminders, startPeriodicCheck
-} from './notifications.js';
+} from './notifications.js?v=2';
 
 // ── State ───────────────────────────────────────────────────
 let cal;
