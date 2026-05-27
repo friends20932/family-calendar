@@ -177,16 +177,11 @@ export class CalendarRenderer {
     const color = ev.color || firstMember?.color || getCategoryColor(ev.category);
     pill.style.setProperty('--ev-color', color);
 
-    let emojisHtml = '';
-    if (evMembers.length > 0) {
-      emojisHtml = `<span class="ev-emojis" style="margin-right: 4px; font-size: 11px;">${evMembers.map(m => m.emoji).join('')}</span>`;
-    }
-
     if (!ev.allDay) {
       const time = formatTime(ev.datetime);
-      pill.innerHTML = `<span class="ev-dot"></span><span class="ev-time">${time}</span>${emojisHtml}<span class="ev-title">${escapeHtml(ev.title)}</span>`;
+      pill.innerHTML = `<span class="ev-dot"></span><span class="ev-time">${time}</span><span class="ev-title">${escapeHtml(ev.title)}</span>`;
     } else {
-      pill.innerHTML = `${emojisHtml}<span class="ev-title">${escapeHtml(ev.title)}</span>`;
+      pill.innerHTML = `<span class="ev-title">${escapeHtml(ev.title)}</span>`;
     }
 
     pill.addEventListener('click', (e) => {
@@ -392,11 +387,7 @@ export class CalendarRenderer {
         `--ev-color: ${color}`,
       ].join(';');
 
-      let emojisHtml = '';
-      if (evMembers.length > 0) {
-        emojisHtml = `<span style="margin-right:4px; font-size:11px;">${evMembers.map(m => m.emoji).join('')}</span>`;
-      }
-      bar.innerHTML = `${emojisHtml}${escapeHtml(ev.title)}`;
+      bar.innerHTML = `${escapeHtml(ev.title)}`;
       bar.title = ev.title;
       bar.addEventListener('click', e => { e.stopPropagation(); this.onEventClick?.(ev); });
       bar.addEventListener('dblclick', e => e.stopPropagation());
@@ -419,11 +410,6 @@ export class CalendarRenderer {
     const firstMember = evMembers[0];
     const color = ev.color || firstMember?.color || getCategoryColor(ev.category);
 
-    let emojisHtml = '';
-    if (evMembers.length > 0) {
-      emojisHtml = `<div style="font-size: 11px; margin-top: 2px;">${evMembers.map(m => m.emoji).join('')}</div>`;
-    }
-
     const block = document.createElement('div');
     block.className = 'cal-week-event';
     block.style.top = `${topPct}%`;
@@ -432,7 +418,6 @@ export class CalendarRenderer {
     block.innerHTML = `
       <div class="we-title">${escapeHtml(ev.title)}</div>
       <div class="we-time">${formatTime(ev.datetime)}</div>
-      ${emojisHtml}
     `;
     block.addEventListener('click', (e) => {
       e.stopPropagation();
