@@ -102,7 +102,9 @@ export class CalendarRenderer {
       const dayEvents = events.filter((e) => e._displayDate === dateStr).sort((a, b) => {
         if (a.allDay && !b.allDay) return -1;
         if (!a.allDay && b.allDay) return 1;
-        return a.datetime.localeCompare(b.datetime);
+        const timeA = a.datetime.slice(11) || "00:00";
+        const timeB = b.datetime.slice(11) || "00:00";
+        return timeA.localeCompare(timeB);
       });
       const isToday = dateStr === toDateStr(this.today);
       const cell = this._createDayCell(d, dateStr, false, isToday, dayEvents, members);

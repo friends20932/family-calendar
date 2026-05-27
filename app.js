@@ -2,11 +2,11 @@
 // app.js — Main application logic
 // ============================================================
 
-import { CalendarRenderer, formatTime } from './calendar.js?v=2';
+import { CalendarRenderer, formatTime } from './calendar.js?v=3';
 import {
   loadEvents, saveEvents, createEvent, updateEvent, deleteEvent,
   getEventsForDate, toDateStr
-} from './events.js';
+} from './events.js?v=2';
 import {
   loadMembers, saveMembers, addMember, updateMember, deleteMember
 } from './members.js';

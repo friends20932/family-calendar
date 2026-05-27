@@ -173,7 +173,9 @@ export function getEventsForDate(dateStr) {
   return results.sort((a, b) => {
     if (a.allDay && !b.allDay) return -1;
     if (!a.allDay && b.allDay) return 1;
-    return a.datetime.localeCompare(b.datetime);
+    const timeA = a.datetime.slice(11) || "00:00";
+    const timeB = b.datetime.slice(11) || "00:00";
+    return timeA.localeCompare(timeB);
   });
 }
 
