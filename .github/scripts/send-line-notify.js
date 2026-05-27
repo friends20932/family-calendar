@@ -18,10 +18,11 @@ if (!TOKEN || !USER_ID) {
 let events = [];
 try {
   const raw = fs.readFileSync('data/events.json', 'utf8');
-  events = JSON.parse(raw);
+  const parsed = JSON.parse(raw);
+  events = parsed.events || [];
   console.log(`ℹ️  共讀取 ${events.length} 筆行程`);
 } catch (e) {
-  console.log('ℹ️  找不到 data/events.json，以空行程傳送通知');
+  console.log('ℹ️  讀取 data/events.json 失敗，以空行程傳送通知:', e.message);
 }
 
 // ── 取得台灣今天的日期 (UTC+8) ───────────────────────────────
