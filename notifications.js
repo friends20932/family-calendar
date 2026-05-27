@@ -20,6 +20,7 @@ export async function initNotifications() {
 }
 
 export function getNotificationPermission() {
+  if (!('Notification' in window)) return 'denied';
   return Notification.permission; // 'default' | 'granted' | 'denied'
 }
 
@@ -30,7 +31,7 @@ export async function requestNotificationPermission() {
 }
 
 export function scheduleLocalReminders(events) {
-  if (Notification.permission !== 'granted') return;
+  if (!('Notification' in window) || Notification.permission !== 'granted') return;
   // Clear old timers
   if (window._reminderTimers) {
     window._reminderTimers.forEach(clearTimeout);
@@ -56,7 +57,7 @@ export function scheduleLocalReminders(events) {
 }
 
 function showLocalNotification(ev) {
-  if (Notification.permission !== 'granted') return;
+  if (!('Notification' in window) || Notification.permission !== 'granted') return;
   const reminderLabel = getReminderLabel(ev.reminder);
   const notif = new Notification(`⏰ ${ev.title}`, {
     body: `${reminderLabel}後開始${ev.location ? '\n📍 ' + ev.location : ''}`,
