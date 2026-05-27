@@ -4,7 +4,7 @@
 
 import { CalendarRenderer, formatTime } from './calendar.js';
 import {
-  loadEvents, createEvent, updateEvent, deleteEvent,
+  loadEvents, saveEvents, createEvent, updateEvent, deleteEvent,
   getEventsForDate, toDateStr
 } from './events.js';
 import {
@@ -33,6 +33,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   updateNotifBadge();
   scheduleAllReminders();
   renderUpcoming();
+  pullFromGitHub();
 });
 
 function computeScrollbarWidth() {
@@ -338,6 +339,7 @@ function openEventViewModal(ev) {
     closeModal('event-view-modal');
     showToast('活動已刪除');
     refreshAll();
+    syncToGitHub(true);
   };
 
   openModal('event-view-modal');
@@ -758,6 +760,7 @@ document.addEventListener('DOMContentLoaded', () => {
     else { createEvent(data); showToast('活動已新增 ✓'); }
     closeModal('event-modal');
     refreshAll();
+    syncToGitHub(true);
   });
 
   // Event modal delete
@@ -767,6 +770,7 @@ document.addEventListener('DOMContentLoaded', () => {
       showToast('活動已刪除');
       closeModal('event-modal');
       refreshAll();
+      syncToGitHub(true);
     }
   });
 
@@ -877,7 +881,30 @@ const GITHUB_OWNER = 'friends20932';
 const GITHUB_REPO  = 'family-calendar';
 const GITHUB_PATH  = 'data/events.json';
 
-async function syncToGitHub() {
+async function pullFromGitHub() {
+  const pat = localStorage.getItem('github_pat');
+  if (!pat) return;
+  try {
+    const headers = { 'Authorization': `token ${pat}`, 'Accept': 'application/vnd.github.v3+json' };
+    const apiUrl = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${GITHUB_PATH}`;
+    const resp = await fetch(apiUrl, { headers });
+    if (!resp.ok) return;
+    const data = await resp.json();
+    if (data.content) {
+      const decoded = decodeURIComponent(escape(atob(data.content.replace(/\n/g, ''))));
+      const remoteEvents = JSON.parse(decoded);
+      if (Array.isArray(remoteEvents)) {
+        saveEvents(remoteEvents);
+        refreshAll();
+      }
+    }
+  } catch (e) {
+    console.error('Auto-pull error:', e);
+  }
+}
+
+async function syncToGitHub(silent = false) {
+  if (typeof silent !== 'boolean') silent = false;
   const btn    = document.getElementById('btn-github-sync');
   const status = document.getElementById('sync-status');
   const icon   = document.getElementById('sync-icon');
@@ -885,6 +912,7 @@ async function syncToGitHub() {
   // Get or prompt for PAT
   let pat = localStorage.getItem('github_pat');
   if (!pat) {
+    if (silent) return;
     pat = prompt(
       '請輸入 GitHub Personal Access Token (PAT)\n\n' +
       '取得方式：GitHub → Settings → Developer settings\n' +
@@ -947,14 +975,14 @@ async function syncToGitHub() {
     icon.textContent = '✅';
     status.textContent = `已同步 ${events.length} 筆行程`;
     status.className = 'sync-status success';
-    showToast(`✅ 已同步 ${events.length} 筆行程到 GitHub`);
+    if (!silent) showToast(`✅ 已同步 ${events.length} 筆行程到 GitHub`);
 
   } catch (e) {
     console.error('Sync error:', e);
     icon.textContent = '❌';
     status.textContent = e.message || '同步失敗';
     status.className = 'sync-status error';
-    showToast('❌ 同步失敗：' + (e.message || '未知錯誤'), 'error');
+    if (!silent) showToast('❌ 同步失敗：' + (e.message || '未知錯誤'), 'error');
   } finally {
     btn.disabled = false;
     setTimeout(() => {

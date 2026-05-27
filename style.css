@@ -1224,7 +1224,11 @@ body.sidebar-closed #sidebar {
   }
   #sidebar.open { left: 0; box-shadow: var(--shadow-lg); }
   .cal-day-cell { min-height: 60px; }
+  #header { padding: 0 8px; gap: 4px; }
+  #calendar-name-display { display: none; }
+  .header-logo { margin-right: 0; }
+  .btn-today { white-space: nowrap; padding: 4px 8px; }
   #btn-add-event { bottom: 18px; right: 18px; width: 48px; height: 48px; font-size: 22px; }
   .view-btn { padding: 5px 8px; font-size: 12px; }
-  #cal-title { font-size: 15px; min-width: 110px; }
+  #cal-title { font-size: 15px; min-width: auto; white-space: nowrap; }
 }
