@@ -7,10 +7,9 @@ const fs    = require('fs');
 const https = require('https');
 
 const TOKEN   = process.env.LINE_CHANNEL_TOKEN;
-const USER_ID = process.env.LINE_USER_ID;
 
-if (!TOKEN || !USER_ID) {
-  console.error('❌ 缺少 LINE_CHANNEL_TOKEN 或 LINE_USER_ID');
+if (!TOKEN) {
+  console.error('❌ 缺少 LINE_CHANNEL_TOKEN');
   process.exit(1);
 }
 
@@ -119,13 +118,12 @@ msg += '🔗 Family Calendar';
 function sendLine(text) {
   return new Promise((resolve, reject) => {
     const body = JSON.stringify({
-      to: USER_ID,
       messages: [{ type: 'text', text }],
     });
 
     const req = https.request({
       hostname: 'api.line.me',
-      path:     '/v2/bot/message/push',
+      path:     '/v2/bot/message/broadcast',
       method:   'POST',
       headers: {
         'Content-Type':   'application/json',
