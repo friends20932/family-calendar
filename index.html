@@ -36,14 +36,15 @@
       <button class="view-btn" data-view="week"  id="view-week">週</button>
       <button class="view-btn" data-view="day"   id="view-day">日</button>
     </div>
-
-    <button id="btn-notif"           class="btn-icon" title="開啟推播通知">🔔</button>
-    <button id="btn-open-categories" class="btn-icon" title="管理分類">🏷️</button>
-    <button id="btn-open-members"    class="btn-icon" title="管理家庭成員">👨‍👩‍👧</button>
   </header>
 
   <!-- ── SIDEBAR ── -->
   <aside id="sidebar">
+    <div class="sidebar-section" style="display: flex; gap: 6px; justify-content: space-evenly; border-bottom: 1px solid var(--border-soft); padding: 12px 16px;">
+      <button id="btn-notif"           class="btn-icon" style="width: auto; padding: 0 8px; font-size: 14px;" title="開啟推播通知">🔔 通知</button>
+      <button id="btn-open-categories" class="btn-icon" style="width: auto; padding: 0 8px; font-size: 14px;" title="管理分類">🏷️ 分類</button>
+      <button id="btn-open-members"    class="btn-icon" style="width: auto; padding: 0 8px; font-size: 14px;" title="管理家庭成員">👨‍👩‍👧 成員</button>
+    </div>
     <div class="sidebar-section">
       <div class="sidebar-label">日曆</div>
       <div id="mini-calendar"></div>

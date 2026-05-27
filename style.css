@@ -1208,7 +1208,7 @@ body.sidebar-closed #sidebar {
 /* ── Responsive ──────────────────────────────────────────── */
 @media (max-width: 768px) {
   #app {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     grid-template-areas:
       "header"
       "main";
