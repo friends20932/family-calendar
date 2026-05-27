@@ -1,5 +1,5 @@
 // Service Worker for Family Calendar
-const CACHE_NAME = 'family-calendar-v19';
+const CACHE_NAME = 'family-calendar-v20';
 const ASSETS = [
   './',
   './index.html',
@@ -11,43 +11,45 @@ const ASSETS = [
   './notifications.js',
 ];
 
-// Install
+// Install — pre-cache assets, then immediately take over
 self.addEventListener('install', (e) => {
   e.waitUntil(
     caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS))
   );
+  // Skip waiting so the new SW activates right away (no need to close all tabs)
   self.skipWaiting();
 });
 
-// Activate
+// Activate — delete old caches, claim clients, then tell all pages to reload
 self.addEventListener('activate', (e) => {
   e.waitUntil(
-    caches.keys().then((keys) =>
-      Promise.all(keys.filter((k) => k !== CACHE_NAME).map((k) => caches.delete(k)))
-    )
+    caches.keys()
+      .then((keys) =>
+        Promise.all(keys.filter((k) => k !== CACHE_NAME).map((k) => caches.delete(k)))
+      )
+      .then(() => self.clients.claim())
+      .then(() => {
+        // Notify all open pages to reload so they get the latest code
+        self.clients.matchAll({ type: 'window' }).then((clients) => {
+          clients.forEach((client) => client.postMessage({ type: 'SW_UPDATED' }));
+        });
+      })
   );
-  self.clients.claim();
 });
 
-// Fetch (Network First, fallback to cache)
+// Fetch — Network First; fall back to cache when offline
 self.addEventListener('fetch', (e) => {
-  // Use network first for HTML and JS/CSS files to ensure latest app version
   e.respondWith(
     fetch(e.request).then((response) => {
-      // If network fetch succeeds, update the cache
       if (response && response.status === 200) {
-        const responseClone = response.clone();
-        caches.open(CACHE_NAME).then((cache) => {
-          cache.put(e.request, responseClone);
-        });
+        const clone = response.clone();
+        caches.open(CACHE_NAME).then((cache) => cache.put(e.request, clone));
       }
       return response;
-    }).catch(() => {
-      // If network fails (offline), fallback to cache
-      return caches.match(e.request);
-    })
+    }).catch(() => caches.match(e.request))
   );
 });
+
 
 // Push notification received
 self.addEventListener('push', (e) => {

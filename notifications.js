@@ -12,6 +12,14 @@ export async function initNotifications() {
   try {
     swRegistration = await navigator.serviceWorker.register('./sw.js');
     console.log('Service Worker registered:', swRegistration);
+
+    // When a new SW activates and sends SW_UPDATED, auto-reload to get latest code
+    navigator.serviceWorker.addEventListener('message', (event) => {
+      if (event.data && event.data.type === 'SW_UPDATED') {
+        window.location.reload();
+      }
+    });
+
     return true;
   } catch (err) {
     console.error('SW registration failed:', err);
