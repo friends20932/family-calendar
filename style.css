@@ -392,7 +392,8 @@ body.sidebar-closed #sidebar {
   border-right: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
   padding: 6px;
-  cursor: pointer;
+  cursor: crosshair;
+  user-select: none;
   transition: background var(--transition);
   display: flex;
   flex-direction: column;
@@ -483,6 +484,8 @@ body.sidebar-closed #sidebar {
   flex: 1;
   border-right: 1px solid var(--border);
   min-height: 28px;
+  cursor: crosshair;
+  user-select: none;
 }
 .cal-allday-bg-cell.today-col { background: var(--accent-light); }
 .cal-allday-event-bar {
@@ -583,8 +586,14 @@ body.sidebar-closed #sidebar {
   min-height: calc(48px * 24);
 }
 .cal-week-day-col.today-col { background: #fdf8fb; }
-.cal-hour-line { height: 48px; border-bottom: 1px solid var(--border-soft); }
-.cal-hour-row  { height: 48px; border-bottom: 1px solid var(--border-soft); }
+.cal-hour-line { height: 48px; border-bottom: 1px solid var(--border-soft); user-select: none; cursor: crosshair; }
+.cal-hour-row  { height: 48px; border-bottom: 1px solid var(--border-soft); user-select: none; cursor: crosshair; }
+
+/* Drag Selection Feedback */
+.drag-selecting {
+  background: var(--accent-glow) !important;
+  transition: none !important;
+}
 
 .cal-week-event {
   position: absolute;

@@ -44,9 +44,9 @@ function setupCalendar() {
       showDayPanel(dateStr);
     },
     onEventClick: (ev) => openEventViewModal(ev),
-    onNewEvent: (dateStr, datetime) => {
+    onNewEvent: (dateStr, datetime, endDatetime, allDay) => {
       selectedDate = dateStr;
-      openNewEventModal(dateStr, datetime);
+      openNewEventModal(dateStr, datetime, endDatetime, allDay);
     },
   });
   cal.render();
@@ -333,12 +333,17 @@ function openEventViewModal(ev) {
   openModal('event-view-modal');
 }
 
-function openNewEventModal(dateStr, datetime) {
+function openNewEventModal(dateStr, datetime, endDatetime, allDay = false) {
   editingEventId = null;
   const defaultDt = datetime || `${dateStr}T09:00`;
-  populateEventForm({ datetime: defaultDt, endDatetime: '', allDay: false, title: '', url: '',
+  populateEventForm({ 
+    datetime: defaultDt, 
+    endDatetime: endDatetime || '', 
+    allDay: allDay, 
+    title: '', url: '',
     description: '', location: '', category: 'family', reminder: '30', repeat: 'none',
-    repeatEndType: 'never', repeatEndDate: '', repeatEndCount: 10, repeatWeeklyDays: [], repeatMonthlyDate: 1, memberIds: [] });
+    repeatEndType: 'never', repeatEndDate: '', repeatEndCount: 10, repeatWeeklyDays: [], repeatMonthlyDate: 1, memberIds: [] 
+  });
   document.getElementById('modal-title').textContent = '新增活動';
   document.getElementById('btn-delete-event').style.display = 'none';
   openModal('event-modal');

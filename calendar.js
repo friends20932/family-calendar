@@ -18,6 +18,17 @@ export class CalendarRenderer {
     this.view = 'month'; // month | week | day
     this.today = new Date();
     this.cursor = new Date(); // currently viewed date
+    
+    // Drag state
+    this.dragState = {
+      isDragging: false,
+      startType: null, // 'month-day' | 'week-allday' | 'week-time'
+      startVal: null,
+      currentVal: null,
+    };
+    
+    // Bind global mouseup
+    window.addEventListener('mouseup', this._onMouseUp.bind(this));
   }
 
   get year() { return this.cursor.getFullYear(); }
@@ -108,11 +119,13 @@ export class CalendarRenderer {
     const cell = document.createElement('div');
     cell.className = 'cal-day-cell' + (faded ? ' faded' : '') + (isToday ? ' today' : '');
     if (dateStr) {
+      cell.dataset.date = dateStr;
       cell.addEventListener('click', (e) => {
         if (e.target === cell || e.target.classList.contains('cal-day-num')) {
           this.onDateClick?.(dateStr);
         }
       });
+      this._setupDrag(cell, 'month-day', dateStr);
     }
 
     const numEl = document.createElement('span');
@@ -233,7 +246,10 @@ export class CalendarRenderer {
       // Hour lines
       for (let h = 0; h < 24; h++) {
         const line = document.createElement('div');
-        line.className = 'cal-hour-line';
+        line.className = 'cal-hour-line time-slot-cell';
+        line.dataset.date = dateStr;
+        line.dataset.hour = h;
+        this._setupDrag(line, 'week-time', { dateStr, hour: h });
         dayCol.appendChild(line);
       }
 
@@ -339,9 +355,12 @@ export class CalendarRenderer {
     grid.style.minHeight = totalH + 'px';
 
     // Background day columns
-    cols.forEach(({ isToday }) => {
+    cols.forEach(({ dateStr, isToday }) => {
       const bg = document.createElement('div');
       bg.className = 'cal-allday-bg-cell' + (isToday ? ' today-col' : '');
+      bg.dataset.date = dateStr;
+      bg.addEventListener('dblclick', () => this.onNewEvent?.(dateStr));
+      this._setupDrag(bg, 'week-allday', dateStr);
       grid.appendChild(bg);
     });
 
@@ -432,11 +451,14 @@ export class CalendarRenderer {
       timeCol.appendChild(label);
 
       const row = document.createElement('div');
-      row.className = 'cal-hour-row';
+      row.className = 'cal-hour-row time-slot-cell';
+      row.dataset.date = dateStr;
+      row.dataset.hour = h;
       row.addEventListener('dblclick', () => {
         const dt = `${dateStr}T${String(h).padStart(2, '0')}:00`;
         this.onNewEvent?.(dateStr, dt);
       });
+      this._setupDrag(row, 'week-time', { dateStr, hour: h });
       evCol.appendChild(row);
     }
 
@@ -464,6 +486,90 @@ export class CalendarRenderer {
     setTimeout(() => {
       body.scrollTop = Math.max(0, (nowPct / 100) * body.scrollHeight - 100);
     }, 50);
+  }
+
+  // ── DRAG EVENTS ────────────────────────────────────────────
+  _setupDrag(cell, type, val) {
+    // type: 'month-day' (val = dateStr)
+    //       'week-allday' (val = dateStr)
+    //       'week-time' (val = { dateStr, hour })
+    
+    cell.addEventListener('mousedown', (e) => {
+      if (e.button !== 0) return; // only left click
+      this.dragState = {
+        isDragging: true,
+        startType: type,
+        startVal: val,
+        currentVal: val
+      };
+      this._updateDragSelection();
+    });
+
+    cell.addEventListener('mouseenter', () => {
+      if (!this.dragState.isDragging || this.dragState.startType !== type) return;
+      this.dragState.currentVal = val;
+      this._updateDragSelection();
+    });
+  }
+
+  _updateDragSelection() {
+    // Clear all existing selection
+    document.querySelectorAll('.drag-selecting').forEach(el => el.classList.remove('drag-selecting'));
+    if (!this.dragState.isDragging) return;
+
+    const { startType, startVal, currentVal } = this.dragState;
+    if (startType === 'month-day' || startType === 'week-allday') {
+      const start = startVal < currentVal ? startVal : currentVal;
+      const end = startVal < currentVal ? currentVal : startVal;
+      
+      const selector = startType === 'month-day' ? '.cal-day-cell' : '.cal-allday-bg-cell';
+      document.querySelectorAll(selector).forEach(cell => {
+        const d = cell.dataset.date;
+        if (d && d >= start && d <= end) {
+          cell.classList.add('drag-selecting');
+        }
+      });
+    } else if (startType === 'week-time') {
+      // Need same date to simplify UI (no cross-day time dragging for now)
+      if (startVal.dateStr !== currentVal.dateStr) return;
+      const startH = Math.min(startVal.hour, currentVal.hour);
+      const endH = Math.max(startVal.hour, currentVal.hour);
+      const dateStr = startVal.dateStr;
+      
+      document.querySelectorAll('.time-slot-cell').forEach(cell => {
+        if (cell.dataset.date === dateStr) {
+          const h = parseInt(cell.dataset.hour, 10);
+          if (h >= startH && h <= endH) {
+            cell.classList.add('drag-selecting');
+          }
+        }
+      });
+    }
+  }
+
+  _onMouseUp() {
+    if (!this.dragState.isDragging) return;
+    const { startType, startVal, currentVal } = this.dragState;
+    this.dragState.isDragging = false;
+    this._updateDragSelection(); // clear selection
+
+    if (!startVal || !currentVal) return;
+
+    if (startType === 'month-day' || startType === 'week-allday') {
+      const start = startVal < currentVal ? startVal : currentVal;
+      const end = startVal < currentVal ? currentVal : startVal;
+      // All day event: start to end
+      this.onNewEvent?.(start, start + 'T00:00', end + 'T00:00', true);
+    } else if (startType === 'week-time') {
+      if (startVal.dateStr === currentVal.dateStr) {
+        const dateStr = startVal.dateStr;
+        const startH = Math.min(startVal.hour, currentVal.hour);
+        const endH = Math.max(startVal.hour, currentVal.hour) + 1; // span to end of the hour
+        const startDt = `${dateStr}T${String(startH).padStart(2, '0')}:00`;
+        const endDt = `${dateStr}T${String(endH).padStart(2, '0')}:00`;
+        this.onNewEvent?.(dateStr, startDt, endDt, false);
+      }
+    }
   }
 }
 
