@@ -8,7 +8,7 @@ import {
   getEventsForDate, toDateStr
 } from './events.js';
 import {
-  loadMembers, addMember, updateMember, deleteMember
+  loadMembers, saveMembers, addMember, updateMember, deleteMember
 } from './members.js';
 import {
   loadCategories, saveCategories, addCategory, updateCategory,
@@ -900,10 +900,7 @@ async function pullFromGitHub() {
         // New format (events, categories, members)
         if (remoteData.events) saveEvents(remoteData.events);
         if (remoteData.categories) saveCategories(remoteData.categories);
-        if (remoteData.members) {
-          localStorage.setItem('cal_members', JSON.stringify(remoteData.members));
-          // Note: import loadMembers/saveMembers might be needed, but we can directly set localStorage since refreshAll reloads them.
-        }
+        if (remoteData.members) saveMembers(remoteData.members);
       }
       refreshAll();
       return true;
@@ -970,7 +967,7 @@ async function syncToGitHub(silent = false) {
   try {
     let events  = loadEvents();
     let categories = loadCategories();
-    let members = JSON.parse(localStorage.getItem('cal_members') || '[]');
+    let members = loadMembers();
 
     // Safety check: if local calendar is empty, we probably want to pull instead of wipe.
     if (events.length === 0 && !isNewPat) {
