@@ -892,12 +892,21 @@ async function pullFromGitHub() {
     const data = await resp.json();
     if (data.content) {
       const decoded = decodeURIComponent(escape(atob(data.content.replace(/\n/g, ''))));
-      const remoteEvents = JSON.parse(decoded);
-      if (Array.isArray(remoteEvents)) {
-        saveEvents(remoteEvents);
-        refreshAll();
-        return true;
+      const remoteData = JSON.parse(decoded);
+      if (Array.isArray(remoteData)) {
+        // Old format (only events)
+        saveEvents(remoteData);
+      } else if (remoteData && typeof remoteData === 'object') {
+        // New format (events, categories, members)
+        if (remoteData.events) saveEvents(remoteData.events);
+        if (remoteData.categories) saveCategories(remoteData.categories);
+        if (remoteData.members) {
+          localStorage.setItem('cal_members', JSON.stringify(remoteData.members));
+          // Note: import loadMembers/saveMembers might be needed, but we can directly set localStorage since refreshAll reloads them.
+        }
       }
+      refreshAll();
+      return true;
     }
   } catch (e) {
     console.error('Auto-pull error:', e);
@@ -960,6 +969,8 @@ async function syncToGitHub(silent = false) {
 
   try {
     let events  = loadEvents();
+    let categories = loadCategories();
+    let members = JSON.parse(localStorage.getItem('cal_members') || '[]');
 
     // Safety check: if local calendar is empty, we probably want to pull instead of wipe.
     if (events.length === 0 && !isNewPat) {
@@ -968,9 +979,9 @@ async function syncToGitHub(silent = false) {
         btn.disabled = false;
         if (success) {
           icon.textContent = '✅';
-          status.textContent = '已成功載入雲端行程！';
+          status.textContent = '已成功載入雲端資料！';
           status.className = 'sync-status success';
-          if (!silent) showToast('✅ 已成功從 GitHub 載入最新行程');
+          if (!silent) showToast('✅ 已成功從 GitHub 載入最新資料');
         } else {
           icon.textContent = '❌';
           status.textContent = '載入失敗或雲端無資料';
@@ -981,7 +992,8 @@ async function syncToGitHub(silent = false) {
       }
     }
 
-    const content = btoa(unescape(encodeURIComponent(JSON.stringify(events, null, 2))));
+    const syncData = { events, categories, members };
+    const content = btoa(unescape(encodeURIComponent(JSON.stringify(syncData, null, 2))));
     const headers = {
       'Authorization': `token ${pat}`,
       'Accept':        'application/vnd.github.v3+json',
