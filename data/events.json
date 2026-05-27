@@ -572,6 +572,29 @@
       "repeatWeeklyDays": [],
       "repeatMonthlyDate": 1,
       "createdAt": "2026-05-27T07:53:59.641Z"
+    },
+    {
+      "id": "2aba8bb2-ad05-4033-affd-6ad5d941e01b",
+      "title": "姊妹聚會－信息分享",
+      "datetime": "2026-06-13T19:45",
+      "endDatetime": "2026-06-13T21:00",
+      "allDay": false,
+      "url": "",
+      "description": "",
+      "location": "",
+      "category": "church",
+      "color": null,
+      "memberIds": [
+        "b1c23456-0000-0000-0000-000000000001"
+      ],
+      "reminder": "none",
+      "repeat": "none",
+      "repeatEndType": "never",
+      "repeatEndDate": null,
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [],
+      "repeatMonthlyDate": 1,
+      "createdAt": "2026-05-27T07:54:23.261Z"
     }
   ],
   "categories": [
@@ -645,7 +668,7 @@
     },
     {
       "id": "b1c23456-0000-0000-0000-000000000003",
-      "name": "儆晨",
+      "name": "傲晨",
       "color": "#f59e0b",
       "emoji": "🍟"
     }
