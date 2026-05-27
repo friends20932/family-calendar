@@ -1,0 +1,78 @@
+{
+  "members": [
+    {
+      "id": "8fd52380-c506-4a41-9302-e38ea61fff96",
+      "name": "朝慶",
+      "color": "#6f9e8a",
+      "emoji": "☕"
+    },
+    {
+      "id": "b1c23456-0000-0000-0000-000000000001",
+      "name": "蔚婷",
+      "color": "#f472b6",
+      "emoji": "🎂"
+    },
+    {
+      "id": "b1c23456-0000-0000-0000-000000000002",
+      "name": "恩言",
+      "color": "#ef4444",
+      "emoji": "🍩"
+    },
+    {
+      "id": "b1c23456-0000-0000-0000-000000000003",
+      "name": "傲晨",
+      "color": "#f59e0b",
+      "emoji": "🍟"
+    }
+  ],
+  "categories": [
+    {
+      "id": "family",
+      "label": "家庭",
+      "emoji": "🏠",
+      "color": "#6366f1"
+    },
+    {
+      "id": "work",
+      "label": "工作",
+      "emoji": "💼",
+      "color": "#3b82f6"
+    },
+    {
+      "id": "health",
+      "label": "醫療",
+      "emoji": "🏥",
+      "color": "#10b981"
+    },
+    {
+      "id": "birthday",
+      "label": "生日",
+      "emoji": "🎂",
+      "color": "#ec4899"
+    },
+    {
+      "id": "travel",
+      "label": "旅遊",
+      "emoji": "✈️",
+      "color": "#f59e0b"
+    },
+    {
+      "id": "school",
+      "label": "學校",
+      "emoji": "📚",
+      "color": "#8b5cf6"
+    },
+    {
+      "id": "church",
+      "label": "召會生活",
+      "emoji": "⛪️",
+      "color": "#06b6d4"
+    },
+    {
+      "id": "other",
+      "label": "其他",
+      "emoji": "📌",
+      "color": "#64748b"
+    }
+  ]
+}

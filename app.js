@@ -880,6 +880,29 @@ document.addEventListener('DOMContentLoaded', () => {
 const GITHUB_OWNER = 'friends20932';
 const GITHUB_REPO  = 'family-calendar';
 const GITHUB_PATH  = 'data/events.json';
+const GITHUB_CONFIG_PATH = 'data/config.json';
+
+// Pull members & categories from separate config.json (unaffected by event sync)
+async function pullConfigFromGitHub() {
+  const pat = localStorage.getItem('github_pat');
+  if (!pat) return false;
+  try {
+    const headers = { 'Authorization': `token ${pat}`, 'Accept': 'application/vnd.github.v3+json' };
+    const apiUrl = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${GITHUB_CONFIG_PATH}`;
+    const resp = await fetch(apiUrl + '?t=' + Date.now(), { headers, cache: 'no-store' });
+    if (!resp.ok) return false;
+    const data = await resp.json();
+    if (data.content) {
+      const decoded = decodeURIComponent(escape(atob(data.content.replace(/\n/g, ''))));
+      const config = JSON.parse(decoded);
+      if (config.members && config.members.length > 0) saveMembers(config.members);
+      if (config.categories && config.categories.length > 0) saveCategories(config.categories);
+      refreshAll();
+      return true;
+    }
+  } catch(e) { console.error('pullConfig error:', e); }
+  return false;
+}
 
 async function pullFromGitHub() {
   const pat = localStorage.getItem('github_pat');
@@ -894,13 +917,16 @@ async function pullFromGitHub() {
       const decoded = decodeURIComponent(escape(atob(data.content.replace(/\n/g, ''))));
       const remoteData = JSON.parse(decoded);
       if (Array.isArray(remoteData)) {
-        // Old format (only events)
+        // Old format (only events) — also pull config separately
         saveEvents(remoteData);
+        await pullConfigFromGitHub();
       } else if (remoteData && typeof remoteData === 'object') {
         // New format (events, categories, members)
         if (remoteData.events) saveEvents(remoteData.events);
         if (remoteData.categories) saveCategories(remoteData.categories);
         if (remoteData.members) saveMembers(remoteData.members);
+        // Also try pulling separate config for latest members
+        await pullConfigFromGitHub();
       }
       refreshAll();
       return true;
