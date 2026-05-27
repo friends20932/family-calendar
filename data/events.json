@@ -335,15 +335,15 @@
       "category": "work",
       "color": null,
       "memberIds": [
-        "member-2"
+        "b1c23456-0000-0000-0000-000000000001"
       ],
       "reminder": "1440",
       "repeat": "none",
       "repeatEndType": "never",
-      "repeatEndDate": null,
-      "repeatEndCount": 10,
+      "repeatEndDate": "",
+      "repeatEndCount": "10",
       "repeatWeeklyDays": [],
-      "repeatMonthlyDate": 1,
+      "repeatMonthlyDate": "1",
       "createdAt": "2026-05-27T04:35:36.034Z"
     },
     {
