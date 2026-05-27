@@ -685,6 +685,12 @@ function refreshAll() {
   cal.render();
   renderUpcoming();
   scheduleAllReminders();
+  
+  // 如果側邊欄（每日行程）開著，也順便更新它
+  const dayPanel = document.getElementById('day-panel');
+  if (dayPanel && dayPanel.classList.contains('open') && selectedDate) {
+    showDayPanel(selectedDate);
+  }
 }
 
 // ── Notification ──────────────────────────────────────────────
