@@ -463,6 +463,7 @@ body.sidebar-closed #sidebar {
   border-bottom: 1px solid var(--border);
   background: var(--bg-surface);
   flex-shrink: 0;
+  padding-right: var(--scrollbar-w, 0px);
 }
 .cal-allday-label {
   display: flex;
@@ -523,6 +524,7 @@ body.sidebar-closed #sidebar {
   background: var(--bg-surface);
   flex-shrink: 0;
   box-shadow: var(--shadow-xs);
+  padding-right: var(--scrollbar-w, 0px);
 }
 .cal-time-spacer { width: 56px; flex-shrink: 0; border-right: 1px solid var(--border); }
 .cal-week-day-header {

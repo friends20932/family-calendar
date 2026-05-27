@@ -26,6 +26,7 @@ let selectedDate = toDateStr(new Date());
 
 // ── Init ────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', async () => {
+  computeScrollbarWidth();
   await initNotifications();
   setupCalendar();
   setupSidebar();
@@ -33,6 +34,15 @@ document.addEventListener('DOMContentLoaded', async () => {
   scheduleAllReminders();
   renderUpcoming();
 });
+
+function computeScrollbarWidth() {
+  const scrollDiv = document.createElement('div');
+  scrollDiv.style.cssText = 'width: 100px; height: 100px; overflow: scroll; position: absolute; top: -9999px;';
+  document.body.appendChild(scrollDiv);
+  const scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth;
+  document.body.removeChild(scrollDiv);
+  document.documentElement.style.setProperty('--scrollbar-w', `${scrollbarWidth}px`);
+}
 
 // ── Calendar Setup ──────────────────────────────────────────
 function setupCalendar() {
