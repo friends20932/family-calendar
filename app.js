@@ -1121,3 +1121,20 @@ async function syncToGitHub(silent = false) {
   }
 }
 
+// ============================================================
+// Auto Background Sync
+// ============================================================
+
+// 1. Pull on visibility change (e.g., coming back to the app from another tab/app)
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible') {
+    // Wait a brief moment to ensure network is active
+    setTimeout(() => pullFromGitHub(), 1000);
+  }
+});
+
+// 2. Poll every 5 minutes while the app is open
+setInterval(() => {
+  pullFromGitHub();
+}, 5 * 60 * 1000);
+
