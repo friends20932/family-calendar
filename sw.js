@@ -1,5 +1,5 @@
 // Service Worker for Family Calendar
-const CACHE_NAME = 'family-calendar-v16';
+const CACHE_NAME = 'family-calendar-v17';
 const ASSETS = [
   './',
   './index.html',

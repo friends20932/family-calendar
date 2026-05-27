@@ -559,12 +559,14 @@ export class CalendarRenderer {
     if (!startVal || !currentVal) return;
 
     if (startType === 'month-day' || startType === 'week-allday') {
+      if (startVal === currentVal) return; // single click, do nothing here (handled by click/dblclick)
       const start = startVal < currentVal ? startVal : currentVal;
       const end = startVal < currentVal ? currentVal : startVal;
       // All day event: start to end
       this.onNewEvent?.(start, start + 'T00:00', end + 'T00:00', true);
     } else if (startType === 'week-time') {
       if (startVal.dateStr === currentVal.dateStr) {
+        if (startVal.hour === currentVal.hour) return; // single slot, do nothing here
         const dateStr = startVal.dateStr;
         const startH = Math.min(startVal.hour, currentVal.hour);
         const endH = Math.max(startVal.hour, currentVal.hour) + 1; // span to end of the hour
