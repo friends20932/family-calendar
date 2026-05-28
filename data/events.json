@@ -1267,6 +1267,30 @@
       "repeatMonthlyDate": 1,
       "excludeDates": [],
       "createdAt": "2026-05-28T06:50:53.944Z"
+    },
+    {
+      "id": "be72a4a9-03c5-44d8-9174-1a43541cd10d",
+      "title": "儆晨新生家長座談會",
+      "datetime": "2026-08-22T08:30",
+      "endDatetime": "2026-08-22T11:30",
+      "allDay": false,
+      "url": "",
+      "description": "",
+      "location": "校本部明樓4樓采薈廳",
+      "category": "school",
+      "color": null,
+      "memberIds": [
+        "b1c23456-0000-0000-0000-000000000003"
+      ],
+      "reminder": "none",
+      "repeat": "none",
+      "repeatEndType": "never",
+      "repeatEndDate": null,
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-05-28T06:52:06.575Z"
     }
   ],
   "categories": [
