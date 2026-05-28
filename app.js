@@ -28,7 +28,8 @@ let selectedDate = toDateStr(new Date());
 
 // ── Init ────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', async () => {
-  computeScrollbarWidth();
+  syncScrollbarWidth();
+  window.addEventListener('resize', syncScrollbarWidth);
   await initNotifications();
   setupCalendar();
   setupSidebar();
@@ -38,9 +39,24 @@ document.addEventListener('DOMContentLoaded', async () => {
   pullFromGitHub();
 });
 
-function computeScrollbarWidth() {
-  // We now hardcode --scrollbar-w: 6px in style.css to match the ::-webkit-scrollbar
-  // This prevents race conditions where DOMContentLoaded fires before CSS is fully applied.
+function syncScrollbarWidth() {
+  let scrollbarWidth = 0;
+  const weekBody = document.querySelector('.cal-week-body');
+  const dayBody = document.querySelector('.cal-day-body');
+  
+  if (weekBody) {
+    scrollbarWidth = weekBody.offsetWidth - weekBody.clientWidth;
+  } else if (dayBody) {
+    scrollbarWidth = dayBody.offsetWidth - dayBody.clientWidth;
+  } else {
+    const scrollDiv = document.createElement('div');
+    scrollDiv.style.cssText = 'width: 100px; height: 100px; overflow: scroll; position: absolute; top: -9999px;';
+    document.body.appendChild(scrollDiv);
+    scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth;
+    document.body.removeChild(scrollDiv);
+  }
+  
+  document.documentElement.style.setProperty('--scrollbar-w', `${scrollbarWidth}px`);
 }
 
 // ── Calendar Setup ──────────────────────────────────────────
@@ -729,6 +745,7 @@ function startMemberEdit(id) {
 // ── Refresh helper ────────────────────────────────────────────
 function refreshAll() {
   cal.render();
+  syncScrollbarWidth();
   renderUpcoming();
   scheduleAllReminders();
   
