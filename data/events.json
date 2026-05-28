@@ -826,7 +826,9 @@
         1
       ],
       "repeatMonthlyDate": 1,
-      "excludeDates": [],
+      "excludeDates": [
+        "2026-07-06"
+      ],
       "createdAt": "2026-05-28T01:28:44.277Z"
     }
   ],
