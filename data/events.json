@@ -830,6 +830,33 @@
         "2026-07-06"
       ],
       "createdAt": "2026-05-28T01:28:44.277Z"
+    },
+    {
+      "id": "35853d56-0893-42ba-bf09-fb7c34800d7f",
+      "title": "登峰計畫相調－花蓮",
+      "datetime": "2026-08-15T00:00",
+      "endDatetime": "2026-08-18T00:00",
+      "allDay": true,
+      "url": "",
+      "description": "",
+      "location": "",
+      "category": "church",
+      "color": null,
+      "memberIds": [
+        "8fd52380-c506-4a41-9302-e38ea61fff96",
+        "b1c23456-0000-0000-0000-000000000001",
+        "b1c23456-0000-0000-0000-000000000002",
+        "b1c23456-0000-0000-0000-000000000003"
+      ],
+      "reminder": "none",
+      "repeat": "none",
+      "repeatEndType": "never",
+      "repeatEndDate": null,
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-05-28T01:29:28.888Z"
     }
   ],
   "categories": [
