@@ -1052,7 +1052,7 @@
       "allDay": false,
       "url": "",
       "description": "",
-      "location": "台南",
+      "location": "台南裕忠路會所",
       "category": "church",
       "color": null,
       "memberIds": [
@@ -1064,10 +1064,10 @@
       "reminder": "none",
       "repeat": "none",
       "repeatEndType": "never",
-      "repeatEndDate": null,
-      "repeatEndCount": 10,
+      "repeatEndDate": "",
+      "repeatEndCount": "10",
       "repeatWeeklyDays": [],
-      "repeatMonthlyDate": 1,
+      "repeatMonthlyDate": "1",
       "excludeDates": [],
       "createdAt": "2026-05-28T06:42:12.217Z"
     },
