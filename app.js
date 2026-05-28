@@ -6,7 +6,7 @@ import { CalendarRenderer, formatTime } from './calendar.js?v=4';
 import {
   loadEvents, saveEvents, createEvent, updateEvent, deleteEvent,
   getEventsForDate, toDateStr
-} from './events.js?v=2';
+} from './events.js?v=3';
 import {
   loadMembers, saveMembers, addMember, updateMember, deleteMember
 } from './members.js?v=2';
