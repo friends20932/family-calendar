@@ -558,7 +558,7 @@ body.sidebar-closed #sidebar {
 .cal-week-body {
   flex: 1;
   display: flex;
-  overflow-y: auto;
+  overflow-y: scroll;
   position: relative;
   background: var(--bg-surface);
 }
@@ -648,7 +648,7 @@ body.sidebar-closed #sidebar {
 .cal-day-body {
   flex: 1;
   display: flex;
-  overflow-y: auto;
+  overflow-y: scroll;
   background: var(--bg-surface);
 }
 .cal-day-ev-col { flex: 1; position: relative; min-height: calc(48px * 24); }
