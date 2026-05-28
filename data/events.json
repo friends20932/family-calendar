@@ -942,7 +942,7 @@
       "endDatetime": "2026-06-08T00:00",
       "allDay": true,
       "url": "",
-      "description": "車次",
+      "description": "車次129 親子座*3",
       "location": "",
       "category": "family",
       "color": null,
@@ -952,10 +952,10 @@
       "reminder": "none",
       "repeat": "none",
       "repeatEndType": "never",
-      "repeatEndDate": null,
-      "repeatEndCount": 10,
+      "repeatEndDate": "",
+      "repeatEndCount": "10",
       "repeatWeeklyDays": [],
-      "repeatMonthlyDate": 1,
+      "repeatMonthlyDate": "1",
       "excludeDates": [],
       "createdAt": "2026-05-28T04:05:26.379Z"
     }
