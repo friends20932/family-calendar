@@ -96,7 +96,10 @@
         4
       ],
       "repeatMonthlyDate": "1",
-      "createdAt": "2026-05-26T08:49:06.367Z"
+      "createdAt": "2026-05-26T08:49:06.367Z",
+      "excludeDates": [
+        "2026-05-28"
+      ]
     },
     {
       "id": "32f5d950-5e21-4050-bfce-0a054197453f",
@@ -768,6 +771,35 @@
       "repeatWeeklyDays": [],
       "repeatMonthlyDate": 1,
       "createdAt": "2026-05-28T00:46:44.500Z"
+    },
+    {
+      "id": "aa68a737-8197-4f92-b23f-a31e9b4b1e32",
+      "title": "青職排",
+      "datetime": "2026-05-28T20:00",
+      "endDatetime": "2026-05-28T21:30",
+      "allDay": false,
+      "url": "",
+      "description": "",
+      "location": "蔣弟兄家",
+      "category": "family",
+      "color": null,
+      "memberIds": [
+        "8fd52380-c506-4a41-9302-e38ea61fff96",
+        "b1c23456-0000-0000-0000-000000000001",
+        "b1c23456-0000-0000-0000-000000000002",
+        "b1c23456-0000-0000-0000-000000000003"
+      ],
+      "reminder": "none",
+      "repeat": "none",
+      "repeatEndType": "date",
+      "repeatEndDate": "2026-12-31",
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [
+        4
+      ],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-05-28T01:27:51.358Z"
     }
   ],
   "categories": [
