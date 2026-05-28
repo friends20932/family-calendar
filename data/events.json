@@ -1011,6 +1011,32 @@
       "repeatMonthlyDate": 1,
       "excludeDates": [],
       "createdAt": "2026-05-28T06:38:28.101Z"
+    },
+    {
+      "id": "4c8a7722-8d55-434e-a3cb-e9e1e3de3c04",
+      "title": "弟兄事奉交通",
+      "datetime": "2026-06-01T20:00",
+      "endDatetime": "2026-06-01T21:30",
+      "allDay": false,
+      "url": "",
+      "description": "",
+      "location": "",
+      "category": "church",
+      "color": null,
+      "memberIds": [
+        "8fd52380-c506-4a41-9302-e38ea61fff96"
+      ],
+      "reminder": "none",
+      "repeat": "weekly",
+      "repeatEndType": "date",
+      "repeatEndDate": "2026-12-31",
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [
+        1
+      ],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-05-28T06:39:06.081Z"
     }
   ],
   "categories": [
