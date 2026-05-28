@@ -37,6 +37,7 @@ export function createEvent(data) {
     repeatEndCount: parseInt(data.repeatEndCount, 10) || 10,
     repeatWeeklyDays: Array.isArray(data.repeatWeeklyDays) ? data.repeatWeeklyDays.map(Number) : [],
     repeatMonthlyDate: parseInt(data.repeatMonthlyDate, 10) || 1,
+    excludeDates: Array.isArray(data.excludeDates) ? data.excludeDates : [],
     createdAt: new Date().toISOString(),
   };
   events.push(newEvent);
@@ -94,7 +95,9 @@ function generateInstances(ev, maxDateObj) {
   
   if (ev.repeat === 'daily') {
     while (cursor <= max && (endType !== 'count' || count < endCount)) {
-      instances.push(new Date(cursor));
+      if (!ev.excludeDates?.includes(toDateStr(cursor))) {
+        instances.push(new Date(cursor));
+      }
       count++;
       cursor.setDate(cursor.getDate() + 1);
     }
@@ -109,7 +112,9 @@ function generateInstances(ev, maxDateObj) {
         inst.setDate(inst.getDate() + d);
         if (inst >= startD && inst <= max) {
           if (endType === 'count' && count >= endCount) break;
-          instances.push(inst);
+          if (!ev.excludeDates?.includes(toDateStr(inst))) {
+            instances.push(inst);
+          }
           count++;
         }
       }
@@ -121,14 +126,18 @@ function generateInstances(ev, maxDateObj) {
     while (cursor <= max && (endType !== 'count' || count < endCount)) {
       const inst = new Date(cursor.getFullYear(), cursor.getMonth(), targetDate);
       if (inst >= startD && inst <= max && inst.getMonth() === cursor.getMonth()) {
-        instances.push(inst);
+        if (!ev.excludeDates?.includes(toDateStr(inst))) {
+          instances.push(inst);
+        }
         count++;
       }
       cursor.setMonth(cursor.getMonth() + 1);
     }
   } else if (ev.repeat === 'yearly') {
     while (cursor <= max && (endType !== 'count' || count < endCount)) {
-      instances.push(new Date(cursor));
+      if (!ev.excludeDates?.includes(toDateStr(cursor))) {
+        instances.push(new Date(cursor));
+      }
       count++;
       cursor.setFullYear(cursor.getFullYear() + 1);
     }

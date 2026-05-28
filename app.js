@@ -22,6 +22,8 @@ import {
 // ── State ───────────────────────────────────────────────────
 let cal;
 let editingEventId = null;
+let editingEvent = null;
+let editingEventInstanceDate = null;
 let selectedDate = toDateStr(new Date());
 
 // ── Init ────────────────────────────────────────────────────
@@ -340,12 +342,19 @@ function openEventViewModal(ev) {
 
   // Delete button
   document.getElementById('btn-delete-event-view').onclick = () => {
-    if (!confirm(`確定要刪除「${ev.title}」嗎？`)) return;
-    deleteEvent(ev.id);
-    closeModal('event-view-modal');
-    showToast('活動已刪除');
-    refreshAll();
-    syncToGitHub(true);
+    if (ev.repeat && ev.repeat !== 'none') {
+      editingEventId = ev.id;
+      editingEvent = ev;
+      editingEventInstanceDate = ev._displayDate || (ev.datetime || '').slice(0, 10);
+      promptRepeatAction('delete', null);
+    } else {
+      if (!confirm(`確定要刪除「${ev.title}」嗎？`)) return;
+      deleteEvent(ev.id);
+      closeModal('event-view-modal');
+      showToast('活動已刪除');
+      refreshAll();
+      syncToGitHub(true);
+    }
   };
 
   openModal('event-view-modal');
@@ -353,6 +362,8 @@ function openEventViewModal(ev) {
 
 function openNewEventModal(dateStr, datetime, endDatetime, allDay = false) {
   editingEventId = null;
+  editingEvent = null;
+  editingEventInstanceDate = null;
   const defaultDt = datetime || `${dateStr}T09:00`;
   populateEventForm({ 
     datetime: defaultDt, 
@@ -369,6 +380,8 @@ function openNewEventModal(dateStr, datetime, endDatetime, allDay = false) {
 
 function openEventModal(ev) {
   editingEventId = ev.id;
+  editingEvent = ev;
+  editingEventInstanceDate = ev._displayDate || (ev.datetime || '').slice(0, 10);
   populateEventForm(ev);
   document.getElementById('modal-title').textContent = '編輯活動';
   document.getElementById('btn-delete-event').style.display = 'flex';
@@ -378,15 +391,30 @@ function openEventModal(ev) {
 function populateEventForm(ev) {
   document.getElementById('ev-title').value       = ev.title || '';
   document.getElementById('ev-url').value         = ev.url || '';
-  document.getElementById('ev-datetime').value    = (ev.datetime || '').slice(0, 16);
-  document.getElementById('ev-end-datetime').value = (ev.endDatetime || '').slice(0, 16);
+  
+  let formStartDt = ev.datetime || '';
+  let formEndDt = ev.endDatetime || '';
+  if (editingEventInstanceDate && ev.repeat && ev.repeat !== 'none') {
+    formStartDt = editingEventInstanceDate + formStartDt.slice(10);
+    if (formEndDt) {
+      const origStart = new Date((ev.datetime||'').slice(0,10));
+      const origEnd = new Date(formEndDt.slice(0,10));
+      const diffDays = Math.round((origEnd - origStart) / 86400000);
+      const newEnd = new Date(editingEventInstanceDate + 'T12:00:00');
+      newEnd.setDate(newEnd.getDate() + diffDays);
+      formEndDt = toDateStr(newEnd) + formEndDt.slice(10);
+    }
+  }
+
+  document.getElementById('ev-datetime').value    = formStartDt.slice(0, 16);
+  document.getElementById('ev-end-datetime').value = formEndDt.slice(0, 16);
   document.getElementById('ev-allday').checked    = ev.allDay || false;
   document.getElementById('ev-description').value = ev.description || '';
   document.getElementById('ev-location').value    = ev.location || '';
   
   // All-day date fields
-  const startDate = (ev.datetime || '').slice(0, 10);
-  const endDate   = (ev.endDatetime || '').slice(0, 10);
+  const startDate = formStartDt.slice(0, 10);
+  const endDate   = formEndDt.slice(0, 10);
   const alStart = document.getElementById('ev-allday-start');
   const alEnd   = document.getElementById('ev-allday-end');
   if (alStart) alStart.value = startDate;
@@ -772,21 +800,40 @@ document.addEventListener('DOMContentLoaded', () => {
   // Event modal save
   document.getElementById('btn-save-event')?.addEventListener('click', () => {
     const data = getFormData(); if (!data) return;
-    if (editingEventId) { updateEvent(editingEventId, data); showToast('活動已更新 ✓'); }
-    else { createEvent(data); showToast('活動已新增 ✓'); }
-    closeModal('event-modal');
-    refreshAll();
-    syncToGitHub(true);
+    
+    if (editingEventId) {
+      if (editingEvent && editingEvent.repeat && editingEvent.repeat !== 'none') {
+        promptRepeatAction('save', data);
+      } else {
+        updateEvent(editingEventId, data); 
+        showToast('活動已更新 ✓');
+        closeModal('event-modal');
+        refreshAll();
+        syncToGitHub(true);
+      }
+    } else { 
+      createEvent(data); 
+      showToast('活動已新增 ✓'); 
+      closeModal('event-modal');
+      refreshAll();
+      syncToGitHub(true);
+    }
   });
 
   // Event modal delete
   document.getElementById('btn-delete-event')?.addEventListener('click', () => {
-    if (editingEventId && confirm('確定要刪除這個活動嗎？')) {
-      deleteEvent(editingEventId);
-      showToast('活動已刪除');
-      closeModal('event-modal');
-      refreshAll();
-      syncToGitHub(true);
+    if (editingEventId) {
+      if (editingEvent && editingEvent.repeat && editingEvent.repeat !== 'none') {
+        promptRepeatAction('delete', null);
+      } else {
+        if (confirm('確定要刪除這個活動嗎？')) {
+          deleteEvent(editingEventId);
+          showToast('活動已刪除');
+          closeModal('event-modal');
+          refreshAll();
+          syncToGitHub(true);
+        }
+      }
     }
   });
 
@@ -1237,3 +1284,77 @@ setInterval(() => {
   pullFromGitHub();
 }, 5 * 60 * 1000);
 
+// ── Repeat Event Action Logic ─────────────────────────────────
+let pendingRepeatAction = null; 
+let pendingRepeatData = null;
+
+function promptRepeatAction(action, data) {
+  pendingRepeatAction = action;
+  pendingRepeatData = data;
+  openModal('repeat-action-modal');
+}
+
+document.getElementById('btn-repeat-only-this')?.addEventListener('click', () => executeRepeatAction('only-this'));
+document.getElementById('btn-repeat-following')?.addEventListener('click', () => executeRepeatAction('following'));
+document.getElementById('btn-repeat-all')?.addEventListener('click', () => executeRepeatAction('all'));
+document.getElementById('btn-repeat-cancel')?.addEventListener('click', () => closeModal('repeat-action-modal'));
+
+function executeRepeatAction(scope) {
+  closeModal('repeat-action-modal');
+  if (!editingEventId || !editingEvent) return;
+  
+  if (pendingRepeatAction === 'delete') {
+    if (scope === 'all') {
+      deleteEvent(editingEventId);
+    } else if (scope === 'only-this') {
+      const excludes = editingEvent.excludeDates || [];
+      if (!excludes.includes(editingEventInstanceDate)) excludes.push(editingEventInstanceDate);
+      updateEvent(editingEventId, { excludeDates: excludes });
+    } else if (scope === 'following') {
+      const prevDate = new Date(editingEventInstanceDate + 'T12:00:00');
+      prevDate.setDate(prevDate.getDate() - 1);
+      updateEvent(editingEventId, { repeatEndType: 'date', repeatEndDate: toDateStr(prevDate) });
+    }
+    showToast('活動已刪除');
+  } else if (pendingRepeatAction === 'save') {
+    const data = pendingRepeatData;
+    if (scope === 'all') {
+      const formDateStr = data.datetime.slice(0, 10);
+      if (formDateStr !== editingEventInstanceDate) {
+        const diffDays = Math.round((new Date(formDateStr) - new Date(editingEventInstanceDate)) / 86400000);
+        const origD = new Date(editingEvent.datetime.slice(0,10) + 'T12:00:00');
+        origD.setDate(origD.getDate() + diffDays);
+        data.datetime = toDateStr(origD) + data.datetime.slice(10);
+        
+        if (data.endDatetime && editingEvent.endDatetime) {
+          const origEndD = new Date(editingEvent.endDatetime.slice(0,10) + 'T12:00:00');
+          origEndD.setDate(origEndD.getDate() + diffDays);
+          data.endDatetime = toDateStr(origEndD) + data.endDatetime.slice(10);
+        }
+      } else {
+        data.datetime = editingEvent.datetime.slice(0, 10) + data.datetime.slice(10);
+        if (data.endDatetime && editingEvent.endDatetime) {
+          data.endDatetime = editingEvent.endDatetime.slice(0, 10) + data.endDatetime.slice(10);
+        }
+      }
+      updateEvent(editingEventId, data);
+    } else if (scope === 'only-this') {
+      const excludes = editingEvent.excludeDates || [];
+      if (!excludes.includes(editingEventInstanceDate)) excludes.push(editingEventInstanceDate);
+      updateEvent(editingEventId, { excludeDates: excludes });
+      data.repeat = 'none';
+      createEvent(data);
+    } else if (scope === 'following') {
+      const prevDate = new Date(editingEventInstanceDate + 'T12:00:00');
+      prevDate.setDate(prevDate.getDate() - 1);
+      updateEvent(editingEventId, { repeatEndType: 'date', repeatEndDate: toDateStr(prevDate) });
+      createEvent(data);
+    }
+    showToast('活動已更新 ✓');
+  }
+  
+  closeModal('event-modal');
+  closeModal('event-view-modal');
+  refreshAll();
+  syncToGitHub(true);
+}

@@ -321,6 +321,26 @@
   </div>
 </div>
 
+<!-- ── REPEAT ACTION MODAL ── -->
+<div id="repeat-action-modal" class="modal" role="dialog" aria-modal="true" style="z-index: 2000; width: 320px;">
+  <div class="modal-header" style="border-bottom: none; padding-bottom: 0;">
+    <div style="font-size:16px;font-weight:700;">編輯重複活動</div>
+  </div>
+  <div class="modal-body" style="padding-top: 10px;">
+    <div style="font-size: 14px; color: var(--text-secondary); margin-bottom: 16px;">
+      這是一個重複的活動。你要套用變更到哪個範圍？
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 8px;">
+      <button id="btn-repeat-only-this" class="btn-primary" style="background: var(--bg-hover); color: var(--text-main);">僅此活動</button>
+      <button id="btn-repeat-following" class="btn-primary" style="background: var(--bg-hover); color: var(--text-main);">此活動及後續活動</button>
+      <button id="btn-repeat-all" class="btn-primary" style="background: var(--bg-hover); color: var(--text-main);">所有活動</button>
+    </div>
+  </div>
+  <div class="modal-footer" style="border-top: none;">
+    <button id="btn-repeat-cancel" class="btn-secondary" style="width: 100%;">取消</button>
+  </div>
+</div>
+
 <!-- ── FAB ── -->
 <button id="btn-add-event" title="新增活動" aria-label="新增活動">＋</button>
 
