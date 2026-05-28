@@ -745,6 +745,29 @@
       "repeatWeeklyDays": [],
       "repeatMonthlyDate": "1",
       "createdAt": "2026-05-27T11:13:50.433Z"
+    },
+    {
+      "id": "0d5b1636-16f9-4d04-87fa-721340d4c75a",
+      "title": "兒童排－朝慶講故事",
+      "datetime": "2026-05-29T09:00",
+      "endDatetime": null,
+      "allDay": false,
+      "url": "",
+      "description": "",
+      "location": "",
+      "category": "church",
+      "color": null,
+      "memberIds": [
+        "8fd52380-c506-4a41-9302-e38ea61fff96"
+      ],
+      "reminder": "480",
+      "repeat": "none",
+      "repeatEndType": "never",
+      "repeatEndDate": null,
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [],
+      "repeatMonthlyDate": 1,
+      "createdAt": "2026-05-28T00:46:44.500Z"
     }
   ],
   "categories": [
