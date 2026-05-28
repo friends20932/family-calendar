@@ -258,22 +258,38 @@ function openEventViewModal(ev) {
 
   // Format date string like "5月28日（星期四）"
   const WEEKDAYS_ZH = ['星期日','星期一','星期二','星期三','星期四','星期五','星期六'];
-  const startDt = new Date(ev.datetime);
+  
+  let startDtStr = ev.datetime;
+  let endDtStr = ev.endDatetime;
+  
+  if (ev._displayDate && ev.repeat && ev.repeat !== 'none') {
+    startDtStr = ev._displayDate + startDtStr.slice(10);
+    if (endDtStr) {
+      const origStart = new Date((ev.datetime||'').slice(0,10));
+      const origEnd = new Date(endDtStr.slice(0,10));
+      const diffDays = Math.round((origEnd - origStart) / 86400000);
+      const newEnd = new Date(ev._displayDate + 'T12:00:00');
+      newEnd.setDate(newEnd.getDate() + diffDays);
+      endDtStr = toDateStr(newEnd) + endDtStr.slice(10);
+    }
+  }
+  
+  const startDt = new Date(startDtStr);
   const dateLabel = `${startDt.getMonth()+1}月${startDt.getDate()}日（${WEEKDAYS_ZH[startDt.getDay()]}）`;
 
   // Format time string
   let timeRow = '';
   if (ev.allDay) {
-    if (ev.endDatetime && ev.endDatetime.slice(0,10) !== ev.datetime.slice(0,10)) {
-      const endDt = new Date(ev.endDatetime);
+    if (endDtStr && endDtStr.slice(0,10) !== startDtStr.slice(0,10)) {
+      const endDt = new Date(endDtStr);
       const endLabel = `${endDt.getMonth()+1}月${endDt.getDate()}日（${WEEKDAYS_ZH[endDt.getDay()]}）`;
       timeRow = `${dateLabel} - ${endLabel} · 整天`;
     } else {
       timeRow = `${dateLabel} · 整天`;
     }
   } else {
-    const startTime = formatTime(ev.datetime);
-    const endTime   = ev.endDatetime ? ' - ' + formatTime(ev.endDatetime) : '';
+    const startTime = formatTime(startDtStr);
+    const endTime   = endDtStr ? ' - ' + formatTime(endDtStr) : '';
     timeRow = `${dateLabel} · ${startTime}${endTime}`;
   }
 
