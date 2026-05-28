@@ -591,8 +591,13 @@ body.sidebar-closed #sidebar {
   min-height: calc(48px * 24);
 }
 .cal-week-day-col.today-col { background: #fdf8fb; }
-.cal-hour-line { height: 48px; border-bottom: 1px solid var(--border-soft); user-select: none; cursor: crosshair; }
-.cal-hour-row  { height: 48px; border-bottom: 1px solid var(--border-soft); user-select: none; cursor: crosshair; }
+.cal-hour-line, .cal-hour-row {
+  height: calc(100% / 24);
+  min-height: 48px;
+  border-bottom: 1px solid var(--border-soft);
+  user-select: none;
+  cursor: crosshair;
+}
 
 /* Drag Selection Feedback */
 .drag-selecting {
