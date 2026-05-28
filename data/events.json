@@ -829,7 +829,8 @@
       "excludeDates": [
         "2026-07-06",
         "2026-08-17",
-        "2026-09-28"
+        "2026-09-28",
+        "2026-06-01"
       ],
       "createdAt": "2026-05-28T01:28:44.277Z"
     },
@@ -982,6 +983,34 @@
       "repeatMonthlyDate": 1,
       "excludeDates": [],
       "createdAt": "2026-05-28T05:35:10.279Z"
+    },
+    {
+      "id": "4670fca2-ac77-479c-95a5-e2395845f7db",
+      "title": "德芳社區排",
+      "datetime": "2026-06-01T18:30",
+      "endDatetime": "2026-06-01T21:00",
+      "allDay": false,
+      "url": "",
+      "description": "",
+      "location": "文珠姊妹家",
+      "category": "church",
+      "color": null,
+      "memberIds": [
+        "b1c23456-0000-0000-0000-000000000001",
+        "b1c23456-0000-0000-0000-000000000002",
+        "b1c23456-0000-0000-0000-000000000003"
+      ],
+      "reminder": "none",
+      "repeat": "none",
+      "repeatEndType": "date",
+      "repeatEndDate": "2026-12-31",
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [
+        1
+      ],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-05-28T06:38:28.101Z"
     }
   ],
   "categories": [
