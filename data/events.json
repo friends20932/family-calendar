@@ -752,8 +752,8 @@
     {
       "id": "0d5b1636-16f9-4d04-87fa-721340d4c75a",
       "title": "兒童排－朝慶講故事",
-      "datetime": "2026-05-29T09:00",
-      "endDatetime": null,
+      "datetime": "2026-05-29T20:00",
+      "endDatetime": "2026-05-29T21:00",
       "allDay": false,
       "url": "",
       "description": "",
@@ -766,10 +766,10 @@
       "reminder": "480",
       "repeat": "none",
       "repeatEndType": "never",
-      "repeatEndDate": null,
-      "repeatEndCount": 10,
+      "repeatEndDate": "",
+      "repeatEndCount": "10",
       "repeatWeeklyDays": [],
-      "repeatMonthlyDate": 1,
+      "repeatMonthlyDate": "1",
       "createdAt": "2026-05-28T00:46:44.500Z"
     },
     {
