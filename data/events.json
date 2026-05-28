@@ -913,7 +913,7 @@
     },
     {
       "id": "7a4fa9ca-0b9a-49bd-9ce0-9dde8cdb7664",
-      "title": "買火車票",
+      "title": "蔚婷買火車票",
       "datetime": "2026-06-05T00:00",
       "endDatetime": "2026-06-05T00:00",
       "allDay": true,
@@ -928,10 +928,10 @@
       "reminder": "none",
       "repeat": "none",
       "repeatEndType": "never",
-      "repeatEndDate": null,
-      "repeatEndCount": 10,
+      "repeatEndDate": "",
+      "repeatEndCount": "10",
       "repeatWeeklyDays": [],
-      "repeatMonthlyDate": 1,
+      "repeatMonthlyDate": "1",
       "excludeDates": [],
       "createdAt": "2026-05-28T04:01:53.412Z"
     }
