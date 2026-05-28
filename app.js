@@ -39,12 +39,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 function computeScrollbarWidth() {
-  const scrollDiv = document.createElement('div');
-  scrollDiv.style.cssText = 'width: 100px; height: 100px; overflow: scroll; position: absolute; top: -9999px;';
-  document.body.appendChild(scrollDiv);
-  const scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth;
-  document.body.removeChild(scrollDiv);
-  document.documentElement.style.setProperty('--scrollbar-w', `${scrollbarWidth}px`);
+  // We now hardcode --scrollbar-w: 6px in style.css to match the ::-webkit-scrollbar
+  // This prevents race conditions where DOMContentLoaded fires before CSS is fully applied.
 }
 
 // ── Calendar Setup ──────────────────────────────────────────

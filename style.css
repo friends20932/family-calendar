@@ -43,6 +43,7 @@
 
   --sidebar-w: 280px;
   --header-h:  60px;
+  --scrollbar-w: 6px;
   --transition: 0.2s cubic-bezier(0.4,0,0.2,1);
 }
 
@@ -466,6 +467,9 @@ body.sidebar-closed #sidebar {
   padding-right: var(--scrollbar-w, 0px);
 }
 .cal-allday-label {
+  width: 56px;
+  flex-shrink: 0;
+  border-right: 1px solid var(--border);
   display: flex;
   align-items: flex-start;
   justify-content: flex-end;
