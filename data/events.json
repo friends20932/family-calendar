@@ -958,6 +958,30 @@
       "repeatMonthlyDate": "1",
       "excludeDates": [],
       "createdAt": "2026-05-28T04:05:26.379Z"
+    },
+    {
+      "id": "2d1c09c4-e4de-4a05-bd41-c77b00065a36",
+      "title": "test",
+      "datetime": "2026-05-29T00:00",
+      "endDatetime": null,
+      "allDay": true,
+      "url": "",
+      "description": "",
+      "location": "123456",
+      "category": "church",
+      "color": null,
+      "memberIds": [
+        "8fd52380-c506-4a41-9302-e38ea61fff96"
+      ],
+      "reminder": "30",
+      "repeat": "none",
+      "repeatEndType": "never",
+      "repeatEndDate": null,
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-05-28T05:33:43.320Z"
     }
   ],
   "categories": [
