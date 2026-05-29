@@ -1302,7 +1302,7 @@
       "allDay": false,
       "url": "",
       "description": "",
-      "location": "峻毅弟兄家",
+      "location": "黃峻毅弟兄家",
       "category": "family",
       "color": null,
       "memberIds": [
@@ -1315,11 +1315,11 @@
       "repeat": "none",
       "repeatEndType": "date",
       "repeatEndDate": "2026-12-31",
-      "repeatEndCount": 10,
+      "repeatEndCount": "10",
       "repeatWeeklyDays": [
         4
       ],
-      "repeatMonthlyDate": 1,
+      "repeatMonthlyDate": "1",
       "excludeDates": [],
       "createdAt": "2026-05-28T12:20:53.424Z"
     },
