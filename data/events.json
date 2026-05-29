@@ -1374,6 +1374,31 @@
       "repeatMonthlyDate": 1,
       "excludeDates": [],
       "createdAt": "2026-05-29T17:01:37.737Z"
+    },
+    {
+      "id": "80a50400-6d27-45d5-9a20-f3fc81386fe3",
+      "title": "青少年吉他服事教學",
+      "datetime": "2026-05-31T12:30",
+      "endDatetime": "2026-05-30T14:30",
+      "allDay": false,
+      "url": "",
+      "description": "",
+      "location": "復興大樓6樓",
+      "category": "church",
+      "color": null,
+      "memberIds": [
+        "8fd52380-c506-4a41-9302-e38ea61fff96",
+        "b1c23456-0000-0000-0000-000000000001"
+      ],
+      "reminder": "none",
+      "repeat": "none",
+      "repeatEndType": "never",
+      "repeatEndDate": null,
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-05-29T17:02:20.790Z"
     }
   ],
   "categories": [
