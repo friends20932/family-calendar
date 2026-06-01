@@ -1635,6 +1635,31 @@
       "repeatMonthlyDate": 1,
       "excludeDates": [],
       "createdAt": "2026-06-01T05:06:03.434Z"
+    },
+    {
+      "id": "00a6593c-7e1b-4a45-95aa-712c45049631",
+      "title": "大買家",
+      "datetime": "2026-06-02T18:00",
+      "endDatetime": "2026-06-02T19:30",
+      "allDay": false,
+      "url": "",
+      "description": "奶粉、洗碗精",
+      "location": "",
+      "category": "family",
+      "color": null,
+      "memberIds": [
+        "b1c23456-0000-0000-0000-000000000001",
+        "b1c23456-0000-0000-0000-000000000002"
+      ],
+      "reminder": "none",
+      "repeat": "none",
+      "repeatEndType": "never",
+      "repeatEndDate": null,
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-06-01T23:22:28.925Z"
     }
   ],
   "categories": [
