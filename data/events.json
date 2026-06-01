@@ -1579,6 +1579,33 @@
       "repeatMonthlyDate": 1,
       "excludeDates": [],
       "createdAt": "2026-06-01T04:51:16.131Z"
+    },
+    {
+      "id": "12cde8ac-cfd2-4f36-81c1-a6c96b262f17",
+      "title": "23會所青少年主日相調",
+      "datetime": "2026-06-07T09:00",
+      "endDatetime": "2026-06-07T14:00",
+      "allDay": false,
+      "url": "",
+      "description": "",
+      "location": "仁化會所",
+      "category": "church",
+      "color": null,
+      "memberIds": [
+        "8fd52380-c506-4a41-9302-e38ea61fff96",
+        "b1c23456-0000-0000-0000-000000000001",
+        "b1c23456-0000-0000-0000-000000000002",
+        "b1c23456-0000-0000-0000-000000000003"
+      ],
+      "reminder": "none",
+      "repeat": "none",
+      "repeatEndType": "never",
+      "repeatEndDate": null,
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-06-01T04:52:15.729Z"
     }
   ],
   "categories": [
