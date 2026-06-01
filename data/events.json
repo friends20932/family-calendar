@@ -1579,6 +1579,33 @@
       "repeatMonthlyDate": 1,
       "excludeDates": [],
       "createdAt": "2026-06-01T04:50:30.801Z"
+    },
+    {
+      "id": "30827c41-2aaa-461b-a0c5-d0e7613bdd8f",
+      "title": "侑翰家看望",
+      "datetime": "2026-06-03T20:00",
+      "endDatetime": "2026-06-03T21:30",
+      "allDay": false,
+      "url": "",
+      "description": "",
+      "location": "",
+      "category": "church",
+      "color": null,
+      "memberIds": [
+        "8fd52380-c506-4a41-9302-e38ea61fff96",
+        "b1c23456-0000-0000-0000-000000000001",
+        "b1c23456-0000-0000-0000-000000000002",
+        "b1c23456-0000-0000-0000-000000000003"
+      ],
+      "reminder": "480",
+      "repeat": "none",
+      "repeatEndType": "never",
+      "repeatEndDate": null,
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-06-01T04:51:16.131Z"
     }
   ],
   "categories": [
