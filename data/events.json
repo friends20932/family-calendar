@@ -1684,6 +1684,30 @@
       "repeatMonthlyDate": 1,
       "excludeDates": [],
       "createdAt": "2026-06-02T04:48:18.468Z"
+    },
+    {
+      "id": "23fbc260-02e4-4ad1-b11d-e13dac1e4455",
+      "title": "賣台企銀、玉山金",
+      "datetime": "2026-06-03T09:00",
+      "endDatetime": "2026-06-03T09:15",
+      "allDay": false,
+      "url": "",
+      "description": "",
+      "location": "",
+      "category": "family",
+      "color": null,
+      "memberIds": [
+        "b1c23456-0000-0000-0000-000000000001"
+      ],
+      "reminder": "none",
+      "repeat": "none",
+      "repeatEndType": "never",
+      "repeatEndDate": null,
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-06-02T16:44:55.307Z"
     }
   ],
   "categories": [
