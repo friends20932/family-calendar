@@ -1875,6 +1875,32 @@
       "repeatMonthlyDate": 1,
       "excludeDates": [],
       "createdAt": "2026-06-03T04:17:59.760Z"
+    },
+    {
+      "id": "8c955020-7653-4e2a-b0ea-7ae907f7fbd8",
+      "title": "可慕家聚會",
+      "datetime": "2026-06-03T20:00",
+      "endDatetime": "2026-06-03T20:10",
+      "allDay": false,
+      "url": "",
+      "description": "",
+      "location": "",
+      "category": "church",
+      "color": null,
+      "memberIds": [
+        "b1c23456-0000-0000-0000-000000000001"
+      ],
+      "reminder": "none",
+      "repeat": "weekly",
+      "repeatEndType": "date",
+      "repeatEndDate": "2026-08-31",
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [
+        3
+      ],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-06-03T07:42:53.209Z"
     }
   ],
   "categories": [
