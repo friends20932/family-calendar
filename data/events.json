@@ -50,9 +50,9 @@
     {
       "id": "2c7f0943-4035-4bf7-a6a4-3f506ebfa852",
       "title": "蔚婷禱研背講",
-      "datetime": "2026-06-05T10:00",
-      "endDatetime": "2026-06-06T12:00",
-      "allDay": false,
+      "datetime": "2026-06-05T00:00",
+      "endDatetime": "2026-06-06T00:00",
+      "allDay": true,
       "url": "",
       "description": "",
       "location": "",
