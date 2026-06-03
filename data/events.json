@@ -834,7 +834,8 @@
         "2026-08-17",
         "2026-09-28",
         "2026-06-01",
-        "2026-07-20"
+        "2026-07-20",
+        "2026-06-08"
       ],
       "createdAt": "2026-05-28T01:28:44.277Z"
     },
@@ -1735,6 +1736,34 @@
       "repeatMonthlyDate": 1,
       "excludeDates": [],
       "createdAt": "2026-06-03T02:43:14.367Z"
+    },
+    {
+      "id": "f4d3b13d-68d4-4289-b99b-c2a5e1ff5468",
+      "title": "德芳社區排",
+      "datetime": "2026-06-08T18:30",
+      "endDatetime": "2026-06-08T21:00",
+      "allDay": false,
+      "url": "",
+      "description": "",
+      "location": "素賢姊妹家",
+      "category": "church",
+      "color": null,
+      "memberIds": [
+        "b1c23456-0000-0000-0000-000000000001",
+        "b1c23456-0000-0000-0000-000000000002",
+        "b1c23456-0000-0000-0000-000000000003"
+      ],
+      "reminder": "none",
+      "repeat": "none",
+      "repeatEndType": "date",
+      "repeatEndDate": "2026-12-31",
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [
+        1
+      ],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-06-03T02:43:32.804Z"
     }
   ],
   "categories": [
