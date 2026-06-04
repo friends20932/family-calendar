@@ -2,9 +2,9 @@ name: 每日行程 LINE 通知
 
 on:
   schedule:
-    # 每天早上 06:45 台灣時間 (UTC+8 = 前一天 UTC 22:45)
+    # 每天早上 05:15 台灣時間 (UTC+8 = 前一天 UTC 21:15)
     # 刻意避開整點 (0 23) 以免 GitHub Actions 伺服器塞車導致嚴重延遲
-    - cron: '45 22 * * *'
+    - cron: '15 21 * * *'
   workflow_dispatch:
     # 允許手動觸發測試
 

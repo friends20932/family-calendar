@@ -55,6 +55,13 @@
     </div>
     <!-- GitHub Sync -->
     <div class="sidebar-sync">
+      <div style="margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid var(--border-soft);">
+        <label for="line-notify-time" style="display: block; font-size: 13px; color: var(--text-secondary); margin-bottom: 6px;">LINE 每日通知時間</label>
+        <div style="display: flex; gap: 8px;">
+          <input type="time" id="line-notify-time" class="form-input" style="flex: 1; padding: 4px 8px; font-size: 13px;">
+          <button id="btn-save-notify-time" class="btn-primary" style="padding: 4px 12px; font-size: 13px; width: auto;">儲存</button>
+        </div>
+      </div>
       <button id="btn-github-sync" class="github-sync-btn" title="同步行程到 GitHub（讓每日 LINE 通知生效）">
         <span id="sync-icon">☁️</span> 同步行程
       </button>

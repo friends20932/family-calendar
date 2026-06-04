@@ -132,6 +132,27 @@ function updateHeaderTitle() {
 function setupSidebar() {
   renderMiniCalendar();
   renderUpcoming();
+  setupLineNotifyTime();
+}
+
+function setupLineNotifyTime() {
+  const notifyTimeInput = document.getElementById('line-notify-time');
+  if (!notifyTimeInput) return;
+  const savedTime = localStorage.getItem('line_notify_time') || '05:15';
+  notifyTimeInput.value = savedTime;
+  
+  const btnSave = document.getElementById('btn-save-notify-time');
+  if (btnSave) {
+    btnSave.addEventListener('click', async () => {
+      const timeStr = notifyTimeInput.value;
+      if (!timeStr) {
+        showToast('請輸入時間', 'error');
+        return;
+      }
+      localStorage.setItem('line_notify_time', timeStr);
+      await updateLineNotifyCronOnGitHub(timeStr);
+    });
+  }
 }
 
 function renderMiniCalendar() {
@@ -1105,6 +1126,79 @@ async function manualSync() {
     alert('同步失敗詳細錯誤：' + errMsg);
   }
   setTimeout(() => { if (icon) icon.textContent = '☁️'; }, 3000);
+}
+
+async function updateLineNotifyCronOnGitHub(timeStr) {
+  let pat = localStorage.getItem('github_pat');
+  if (!pat) {
+    pat = prompt(
+      '請輸入 GitHub Personal Access Token (PAT) 以更新通知時間\n\n' +
+      '取得方式：GitHub → Settings → Developer settings\n' +
+      '→ Personal access tokens → Tokens (classic)\n' +
+      '→ Generate new token → 勾選 repo → 複製'
+    );
+    if (!pat) return;
+    localStorage.setItem('github_pat', pat.trim());
+    pat = pat.trim();
+  }
+
+  const btn = document.getElementById('btn-save-notify-time');
+  const originalText = btn ? btn.textContent : '儲存';
+  if (btn) {
+    btn.textContent = '儲存中...';
+    btn.disabled = true;
+  }
+
+  try {
+    const headers = { 'Authorization': `token ${pat}`, 'Accept': 'application/vnd.github.v3+json' };
+    const workflowPath = '.github/workflows/daily-notify.yml';
+    const apiUrl = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${workflowPath}`;
+    
+    // Get current file
+    const getResp = await fetch(apiUrl + '?t=' + Date.now(), { headers, cache: 'no-store' });
+    if (!getResp.ok) {
+      if (getResp.status === 401) localStorage.removeItem('github_pat');
+      throw new Error('無法取得 Workflow 檔案，請確認 PAT 權限是否包含 repo 以及 workflow');
+    }
+    const existing = await getResp.json();
+    const sha = existing.sha;
+    
+    let contentStr = decodeURIComponent(escape(atob(existing.content.replace(/\n/g, ''))));
+    
+    // Convert local time (assume UTC+8 for Taiwan) to UTC for cron
+    const [hours, minutes] = timeStr.split(':').map(Number);
+    let utcHours = hours - 8;
+    if (utcHours < 0) utcHours += 24;
+    
+    // Replace cron string: "- cron: '15 21 * * *'"
+    const newCron = `- cron: '${minutes} ${utcHours} * * *'`;
+    contentStr = contentStr.replace(/- cron: '.*'/, newCron);
+    contentStr = contentStr.replace(/每天.*台灣時間.*/, `每天 ${timeStr} 台灣時間 (UTC+8)`);
+
+    const newContentBase64 = btoa(unescape(encodeURIComponent(contentStr)));
+
+    const body = {
+      message: `Update LINE notify time to ${timeStr}`,
+      content: newContentBase64,
+      sha: sha
+    };
+    
+    const putResp = await fetch(apiUrl, { method: 'PUT', headers, body: JSON.stringify(body) });
+    if (!putResp.ok) {
+      const errData = await putResp.json();
+      throw new Error(errData.message || '更新失敗');
+    }
+    
+    showToast(`✅ LINE 通知時間已更新為 ${timeStr}`);
+  } catch (e) {
+    console.error('Update cron error:', e);
+    alert('更新通知時間失敗：' + e.message + '\n\n請確保您的 PAT 擁有 "workflow" 權限！');
+  } finally {
+    if (btn) {
+      btn.textContent = originalText;
+      btn.disabled = false;
+    }
+  }
 }
 
 async function syncToGitHub(silent = false) {

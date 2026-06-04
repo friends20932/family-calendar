@@ -46,6 +46,9 @@ function occursToday(ev) {
   // 重複結束日判斷
   if (ev.repeatEndType === 'date' && ev.repeatEndDate && todayStr > ev.repeatEndDate) return false;
 
+  // 判斷是否為排除日期 (單一刪除)
+  if (ev.excludeDates && Array.isArray(ev.excludeDates) && ev.excludeDates.includes(todayStr)) return false;
+
   const repeat = ev.repeat || 'none';
 
   // 非重複事件
