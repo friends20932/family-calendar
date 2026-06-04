@@ -15,9 +15,44 @@ jobs:
     steps:
       - name: 取得最新程式碼
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: 防重複通知：檢查今天是否已傳送
+        id: check-dup
+        run: |
+          TAIWAN_DATE=$(TZ='Asia/Taipei' date +%Y-%m-%d)
+          echo "taiwan_date=$TAIWAN_DATE" >> $GITHUB_OUTPUT
+          if [ -f data/last_notified.txt ]; then
+            LAST=$(cat data/last_notified.txt)
+            echo "last_notified=$LAST" >> $GITHUB_OUTPUT
+            if [ "$LAST" = "$TAIWAN_DATE" ]; then
+              echo "already_sent=true" >> $GITHUB_OUTPUT
+            else
+              echo "already_sent=false" >> $GITHUB_OUTPUT
+            fi
+          else
+            echo "already_sent=false" >> $GITHUB_OUTPUT
+          fi
 
       - name: 傳送 LINE 通知
+        if: steps.check-dup.outputs.already_sent == 'false'
         env:
           LINE_CHANNEL_TOKEN: ${{ secrets.LINE_CHANNEL_TOKEN }}
           LINE_USER_ID: ${{ secrets.LINE_USER_ID }}
         run: node .github/scripts/send-line-notify.js
+
+      - name: 記錄今天已傳送
+        if: steps.check-dup.outputs.already_sent == 'false'
+        run: |
+          TAIWAN_DATE=${{ steps.check-dup.outputs.taiwan_date }}
+          echo "$TAIWAN_DATE" > data/last_notified.txt
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/last_notified.txt
+          git commit -m "chore: mark LINE notified for $TAIWAN_DATE [skip ci]" || echo "Nothing to commit"
+          git push
+
+      - name: 已傳送今日通知，略過
+        if: steps.check-dup.outputs.already_sent == 'true'
+        run: echo "⏭️ 今天 (${{ steps.check-dup.outputs.taiwan_date }}) 已傳送過 LINE 通知，略過本次執行。"
