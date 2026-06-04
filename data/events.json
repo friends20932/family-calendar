@@ -1951,6 +1951,30 @@
       "repeatMonthlyDate": 1,
       "excludeDates": [],
       "createdAt": "2026-06-04T04:22:48.488Z"
+    },
+    {
+      "id": "f62e4276-c41a-4064-9cee-100f0a4199a4",
+      "title": "蔚婷約診",
+      "datetime": "2026-06-11T00:00",
+      "endDatetime": "2026-06-11T00:00",
+      "allDay": true,
+      "url": "",
+      "description": "",
+      "location": "",
+      "category": "health",
+      "color": null,
+      "memberIds": [
+        "b1c23456-0000-0000-0000-000000000001"
+      ],
+      "reminder": "none",
+      "repeat": "none",
+      "repeatEndType": "never",
+      "repeatEndDate": null,
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-06-04T04:23:18.118Z"
     }
   ],
   "categories": [
