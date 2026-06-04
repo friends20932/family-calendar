@@ -1958,7 +1958,7 @@
       "datetime": "2026-06-11T00:00",
       "endDatetime": "2026-06-11T00:00",
       "allDay": true,
-      "url": "",
+      "url": "https://www.jah.org.tw/JCHReg/Department/J/J7000A",
       "description": "",
       "location": "",
       "category": "health",
@@ -1969,10 +1969,10 @@
       "reminder": "none",
       "repeat": "none",
       "repeatEndType": "never",
-      "repeatEndDate": null,
-      "repeatEndCount": 10,
+      "repeatEndDate": "",
+      "repeatEndCount": "10",
       "repeatWeeklyDays": [],
-      "repeatMonthlyDate": 1,
+      "repeatMonthlyDate": "1",
       "excludeDates": [],
       "createdAt": "2026-06-04T04:23:18.118Z"
     }
