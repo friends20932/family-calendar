@@ -85,16 +85,90 @@ function setupCalendar() {
   });
   
   let isWheeling = false;
-  document.getElementById('calendar-container').addEventListener('wheel', (e) => {
-    if (cal.view !== 'month') return; // Only apply to month view
-    if (isWheeling || Math.abs(e.deltaY) < 15) return;
-    
-    isWheeling = true;
-    cal.navigate(e.deltaY > 0 ? 1 : -1);
-    updateHeaderTitle();
-    
-    setTimeout(() => { isWheeling = false; }, 500); // 500ms cooldown for smooth trackpad experience
+  const calContainer = document.getElementById('calendar-container');
+  
+  calContainer.addEventListener('wheel', (e) => {
+    if (isWheeling) return;
+
+    // Horizontal swipe (trackpad) works for all views
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY) && Math.abs(e.deltaX) > 15) {
+      isWheeling = true;
+      cal.navigate(e.deltaX > 0 ? 1 : -1);
+      updateHeaderTitle();
+      setTimeout(() => { isWheeling = false; }, 500);
+      return;
+    }
+
+    // Vertical swipe (mouse wheel) only applies to month view
+    if (cal.view === 'month' && Math.abs(e.deltaY) > 15) {
+      isWheeling = true;
+      cal.navigate(e.deltaY > 0 ? 1 : -1);
+      updateHeaderTitle();
+      setTimeout(() => { isWheeling = false; }, 500);
+    }
   }, { passive: true });
+
+  // --- Swipe / Drag Navigation ---
+  let dragStartX = 0;
+  let dragStartY = 0;
+  let isNavDragging = false;
+  let navHasMoved = false;
+
+  const handleNavStart = (x, y) => {
+    dragStartX = x;
+    dragStartY = y;
+    isNavDragging = true;
+    navHasMoved = false;
+  };
+
+  const handleNavMove = (x, y) => {
+    if (!isNavDragging) return;
+    const dx = dragStartX - x;
+    const dy = dragStartY - y;
+    if (Math.abs(dx) > 10 || Math.abs(dy) > 10) {
+      navHasMoved = true;
+    }
+  };
+
+  const handleNavEnd = (x, y) => {
+    if (!isNavDragging) return;
+    isNavDragging = false;
+    if (!navHasMoved) return;
+    
+    const dx = dragStartX - x;
+    const dy = dragStartY - y;
+
+    // Primarily horizontal swipe with enough distance
+    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 50) {
+      if (cal && cal.dragState) cal.dragState.isDragging = false; // abort cell selection
+      cal.navigate(dx > 0 ? 1 : -1);
+      updateHeaderTitle();
+    }
+  };
+
+  // Touch support
+  calContainer.addEventListener('touchstart', (e) => {
+    if (e.touches.length === 1) handleNavStart(e.touches[0].clientX, e.touches[0].clientY);
+  }, { passive: true });
+  calContainer.addEventListener('touchmove', (e) => {
+    if (e.touches.length === 1) handleNavMove(e.touches[0].clientX, e.touches[0].clientY);
+  }, { passive: true });
+  calContainer.addEventListener('touchend', (e) => {
+    if (e.changedTouches.length === 1) handleNavEnd(e.changedTouches[0].clientX, e.changedTouches[0].clientY);
+  });
+
+  // Mouse drag support
+  calContainer.addEventListener('mousedown', (e) => {
+    // Ignore clicks on interactive elements
+    if (e.target.closest('.modal') || e.target.closest('.day-panel-event') || e.target.closest('.cal-event-pill') || e.target.closest('.cal-week-event') || e.target.closest('.cal-allday-event-bar') || e.target.closest('.btn-icon') || e.target.closest('button')) return;
+    handleNavStart(e.clientX, e.clientY);
+  });
+  window.addEventListener('mousemove', (e) => {
+    handleNavMove(e.clientX, e.clientY);
+  });
+  window.addEventListener('mouseup', (e) => {
+    handleNavEnd(e.clientX, e.clientY);
+  }, true); // use capture phase so this runs before calendar.js's window.mouseup
 
   document.getElementById('btn-today').addEventListener('click', () => {
     cal.goToday(); updateHeaderTitle();
