@@ -1975,6 +1975,30 @@
       "repeatMonthlyDate": "1",
       "excludeDates": [],
       "createdAt": "2026-06-04T04:23:18.118Z"
+    },
+    {
+      "id": "f5788691-a49a-4c82-969d-3e30282c47dd",
+      "title": "油漆廠商場勘",
+      "datetime": "2026-06-06T09:00",
+      "endDatetime": "2026-06-06T09:00",
+      "allDay": false,
+      "url": "",
+      "description": "",
+      "location": "大里會所",
+      "category": "church",
+      "color": null,
+      "memberIds": [
+        "8fd52380-c506-4a41-9302-e38ea61fff96"
+      ],
+      "reminder": "none",
+      "repeat": "none",
+      "repeatEndType": "never",
+      "repeatEndDate": null,
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-06-05T09:58:05.209Z"
     }
   ],
   "categories": [
