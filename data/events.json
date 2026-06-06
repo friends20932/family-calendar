@@ -606,9 +606,9 @@
     {
       "id": "e8cdab74-680a-431b-b883-a0a10fc14b51",
       "title": "出遊－西湖度假村",
-      "datetime": "2026-06-27T00:00",
-      "endDatetime": null,
-      "allDay": true,
+      "datetime": "2026-06-27T09:00",
+      "endDatetime": "2026-06-27T16:00",
+      "allDay": false,
       "url": "https://maps.app.goo.gl/TXV2cQkrDPyWrHHf7",
       "description": "",
       "location": "西湖度假村",
@@ -623,10 +623,10 @@
       "reminder": "none",
       "repeat": "none",
       "repeatEndType": "never",
-      "repeatEndDate": null,
-      "repeatEndCount": 10,
+      "repeatEndDate": "",
+      "repeatEndCount": "10",
       "repeatWeeklyDays": [],
-      "repeatMonthlyDate": 1,
+      "repeatMonthlyDate": "1",
       "createdAt": "2026-05-27T07:58:08.951Z"
     },
     {
