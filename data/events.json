@@ -2026,6 +2026,30 @@
       "repeatMonthlyDate": 1,
       "excludeDates": [],
       "createdAt": "2026-06-05T13:43:22.866Z"
+    },
+    {
+      "id": "688614b3-858b-4781-9f1c-b3b85a7e4cbd",
+      "title": "結婚聚會流程交通",
+      "datetime": "2026-06-27T19:30",
+      "endDatetime": "2026-06-27T21:00",
+      "allDay": false,
+      "url": "",
+      "description": "",
+      "location": "益彰弟兄家",
+      "category": "church",
+      "color": null,
+      "memberIds": [
+        "8fd52380-c506-4a41-9302-e38ea61fff96"
+      ],
+      "reminder": "none",
+      "repeat": "none",
+      "repeatEndType": "never",
+      "repeatEndDate": null,
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-06-06T16:17:42.370Z"
     }
   ],
   "categories": [
