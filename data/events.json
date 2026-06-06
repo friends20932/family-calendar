@@ -2050,6 +2050,33 @@
       "repeatMonthlyDate": 1,
       "excludeDates": [],
       "createdAt": "2026-06-06T16:17:42.370Z"
+    },
+    {
+      "id": "cff53263-76dc-41d5-abc4-45f7b25afd34",
+      "title": "南照顧區愛筵諒恩",
+      "datetime": "2026-06-28T17:30",
+      "endDatetime": "2026-06-28T19:30",
+      "allDay": false,
+      "url": "",
+      "description": "",
+      "location": "甘獻基弟兄家",
+      "category": "church",
+      "color": null,
+      "memberIds": [
+        "8fd52380-c506-4a41-9302-e38ea61fff96",
+        "b1c23456-0000-0000-0000-000000000001",
+        "b1c23456-0000-0000-0000-000000000002",
+        "b1c23456-0000-0000-0000-000000000003"
+      ],
+      "reminder": "none",
+      "repeat": "none",
+      "repeatEndType": "never",
+      "repeatEndDate": null,
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-06-06T16:19:21.127Z"
     }
   ],
   "categories": [
