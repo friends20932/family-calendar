@@ -2077,6 +2077,31 @@
       "repeatMonthlyDate": 1,
       "excludeDates": [],
       "createdAt": "2026-06-06T16:19:21.127Z"
+    },
+    {
+      "id": "0f84fa2e-7d70-4227-a834-6d28d778600c",
+      "title": "結婚聚會事務服事交通",
+      "datetime": "2026-06-10T21:00",
+      "endDatetime": "2026-06-10T21:40",
+      "allDay": false,
+      "url": "",
+      "description": "",
+      "location": "線上交通",
+      "category": "church",
+      "color": null,
+      "memberIds": [
+        "8fd52380-c506-4a41-9302-e38ea61fff96",
+        "b1c23456-0000-0000-0000-000000000001"
+      ],
+      "reminder": "none",
+      "repeat": "none",
+      "repeatEndType": "never",
+      "repeatEndDate": null,
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-06-06T16:20:10.815Z"
     }
   ],
   "categories": [
