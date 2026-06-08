@@ -8,6 +8,9 @@ on:
   workflow_dispatch:
     # 允許手動觸發測試
 
+permissions:
+  contents: write
+
 jobs:
   send-notify:
     runs-on: ubuntu-latest
