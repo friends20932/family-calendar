@@ -51,4 +51,15 @@ export function clearDoneTodos() {
   saveTodos(loadTodos().filter(t => !t.done));
 }
 
+export function updateTodo(id, changes) {
+  const todos = loadTodos();
+  const idx = todos.findIndex(t => t.id === id);
+  if (idx !== -1) {
+    todos[idx] = { ...todos[idx], ...changes };
+    saveTodos(todos);
+    return todos[idx];
+  }
+  return null;
+}
+
 export { PRIORITY_CONFIG };

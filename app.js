@@ -19,7 +19,7 @@ import {
   requestNotificationPermission, scheduleLocalReminders, startPeriodicCheck
 } from './notifications.js?v=2';
 import {
-  loadTodos, saveTodos, addTodo, toggleTodo, deleteTodo, clearDoneTodos, PRIORITY_CONFIG
+  loadTodos, saveTodos, addTodo, toggleTodo, deleteTodo, clearDoneTodos, updateTodo, PRIORITY_CONFIG
 } from './todos.js';
 
 // ── State ───────────────────────────────────────────────────
@@ -1154,6 +1154,7 @@ async function pullFromGitHub() {
         if (remoteData.events) saveEvents(remoteData.events);
         if (remoteData.categories) saveCategories(remoteData.categories);
         if (remoteData.members) saveMembers(remoteData.members);
+        if (Array.isArray(remoteData.todos)) { saveTodos(remoteData.todos); renderTodos(); }
         await pullConfigFromGitHub();
       }
       refreshAll();
@@ -1382,7 +1383,8 @@ async function syncToGitHub(silent = false) {
       }
     }
 
-    const syncData = { events, categories, members };
+    const todos = loadTodos();
+    const syncData = { events, categories, members, todos };
     const content = btoa(unescape(encodeURIComponent(JSON.stringify(syncData, null, 2))));
     const headers = {
       'Authorization': `token ${pat}`,
@@ -1445,9 +1447,9 @@ async function syncToGitHub(silent = false) {
     await pushConfigToGitHub();
 
     icon.textContent = '✅';
-    status.textContent = `已同步 ${events.length} 筆行程`;
+    status.textContent = `已同步 ${events.length} 筆行程、${todos.length} 筆待辦`;
     status.className = 'sync-status success';
-    if (!silent) showToast(`✅ 已同步 ${events.length} 筆行程到 GitHub`);
+    if (!silent) showToast(`✅ 已同步 ${events.length} 筆行程、${todos.length} 筆待辦到 GitHub`);
 
   } catch (e) {
     console.error('Sync error:', e);
@@ -1660,7 +1662,7 @@ function renderTodos() {
   if (todoFilter === 'pending') filtered = todos.filter(t => !t.done);
   if (todoFilter === 'done')    filtered = todos.filter(t => t.done);
 
-  // Sort: undone first, then by priority (high > medium > low), then by date
+  // Sort: undone first, then by priority (high > medium > low)
   const PRIORITY_ORDER = { high: 0, medium: 1, low: 2 };
   filtered = [...filtered].sort((a, b) => {
     if (a.done !== b.done) return a.done ? 1 : -1;
@@ -1686,6 +1688,7 @@ function renderTodos() {
 
     const item = document.createElement('div');
     item.className = `todo-item${todo.done ? ' done' : ''}`;
+    item.dataset.id = todo.id;
     item.style.setProperty('--todo-priority-color', pc.color);
     item.style.setProperty('--todo-priority-bg', pc.bg);
     item.style.setProperty('--todo-priority-border', pc.border);
@@ -1696,20 +1699,29 @@ function renderTodos() {
         <input type="checkbox" class="todo-checkbox" ${todo.done ? 'checked' : ''} data-id="${todo.id}" title="標記完成" />
       </div>
       <div class="todo-body">
-        <div class="todo-text">${escapeHtml(todo.text)}</div>
+        <div class="todo-text" title="雙擊編輯">${escapeHtml(todo.text)}</div>
         <div class="todo-meta">
           <span class="todo-priority-tag">${pc.label}優先</span>
           ${cat ? `<span class="todo-cat-tag">${cat.emoji} ${escapeHtml(cat.label)}</span>` : ''}
         </div>
       </div>
-      <button class="todo-delete-btn" data-id="${todo.id}" title="刪除">✕</button>
+      <div class="todo-item-actions">
+        <button class="todo-edit-btn" data-id="${todo.id}" title="編輯">✏️</button>
+        <button class="todo-delete-btn" data-id="${todo.id}" title="刪除">✕</button>
+      </div>
     `;
 
     // Checkbox toggle
     item.querySelector('.todo-checkbox').addEventListener('change', () => {
       toggleTodo(todo.id);
+      syncToGitHub(true);
       renderTodos();
     });
+
+    // Edit button OR double-click text → enter edit mode
+    const enterEdit = () => startTodoEdit(item, todo, cats);
+    item.querySelector('.todo-edit-btn').addEventListener('click', enterEdit);
+    item.querySelector('.todo-text').addEventListener('dblclick', enterEdit);
 
     // Delete
     item.querySelector('.todo-delete-btn').addEventListener('click', () => {
@@ -1718,10 +1730,74 @@ function renderTodos() {
       item.style.transform = 'translateX(12px)';
       setTimeout(() => {
         deleteTodo(todo.id);
+        syncToGitHub(true);
         renderTodos();
       }, 150);
     });
 
     list.appendChild(item);
+  });
+}
+
+function startTodoEdit(item, todo, cats) {
+  if (item.classList.contains('editing')) return;
+  item.classList.add('editing');
+
+  // Build priority options
+  const priorityOptions = Object.entries(PRIORITY_CONFIG).map(([key, val]) =>
+    `<option value="${key}" ${todo.priority === key ? 'selected' : ''}>${key === 'high' ? '🔴' : key === 'medium' ? '🟡' : '🟢'} ${val.label}</option>`
+  ).join('');
+
+  // Build category options
+  const catOptions = `<option value="" ${!todo.category ? 'selected' : ''}>無標籤</option>` +
+    cats.map(c => `<option value="${c.id}" ${todo.category === c.id ? 'selected' : ''}>${c.emoji} ${escapeHtml(c.label)}</option>`).join('');
+
+  // Replace body content with edit form
+  const body = item.querySelector('.todo-body');
+  const originalHTML = body.innerHTML;
+  body.innerHTML = `
+    <input class="todo-edit-input" type="text" value="${escapeHtml(todo.text)}" maxlength="60" />
+    <div class="todo-edit-selects">
+      <select class="todo-select todo-edit-priority">${priorityOptions}</select>
+      <select class="todo-select todo-edit-cat">${catOptions}</select>
+    </div>
+    <div class="todo-edit-actions">
+      <button class="todo-save-edit-btn">儲存</button>
+      <button class="todo-cancel-edit-btn">取消</button>
+    </div>
+  `;
+
+  // Hide action buttons while editing
+  const actions = item.querySelector('.todo-item-actions');
+  if (actions) actions.style.display = 'none';
+
+  const editInput = body.querySelector('.todo-edit-input');
+  editInput.focus();
+  editInput.select();
+
+  const save = () => {
+    const newText = editInput.value.trim();
+    if (!newText) { editInput.focus(); return; }
+    updateTodo(todo.id, {
+      text: newText,
+      priority: body.querySelector('.todo-edit-priority').value,
+      category: body.querySelector('.todo-edit-cat').value,
+    });
+    syncToGitHub(true);
+    renderTodos();
+    showToast('待辦已更新 ✓', 'info');
+  };
+
+  const cancel = () => {
+    item.classList.remove('editing');
+    body.innerHTML = originalHTML;
+    if (actions) actions.style.display = '';
+  };
+
+  body.querySelector('.todo-save-edit-btn').addEventListener('click', save);
+  body.querySelector('.todo-cancel-edit-btn').addEventListener('click', cancel);
+  editInput.addEventListener('keydown', e => {
+    if (e.key === 'Enter') save();
+    if (e.key === 'Escape') cancel();
   });
 }

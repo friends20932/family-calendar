@@ -1504,6 +1504,26 @@ body.sidebar-closed #sidebar {
   border: 1px solid color-mix(in srgb, var(--cat-color, var(--accent)) 25%, white);
 }
 
+.todo-item-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex-shrink: 0;
+  opacity: 0;
+  transition: var(--transition);
+}
+.todo-item:hover .todo-item-actions { opacity: 1; }
+
+.todo-edit-btn {
+  width: 22px; height: 22px;
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  font-size: 11px;
+  display: flex; align-items: center; justify-content: center;
+  transition: var(--transition);
+}
+.todo-edit-btn:hover { background: var(--accent-light); color: var(--accent); }
+
 .todo-delete-btn {
   width: 22px; height: 22px;
   border-radius: var(--radius-sm);
@@ -1511,9 +1531,65 @@ body.sidebar-closed #sidebar {
   font-size: 11px;
   display: flex; align-items: center; justify-content: center;
   transition: var(--transition);
-  opacity: 0;
-  flex-shrink: 0;
-  margin-top: 1px;
 }
-.todo-item:hover .todo-delete-btn { opacity: 1; }
 .todo-delete-btn:hover { background: #fee2e2; color: var(--danger); }
+
+/* Edit mode */
+.todo-item.editing {
+  border-color: var(--accent);
+  box-shadow: var(--shadow-glow);
+  flex-wrap: wrap;
+}
+.todo-edit-input {
+  width: 100%;
+  padding: 5px 8px;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--border);
+  background: var(--bg-elevated);
+  color: var(--text-primary);
+  font-size: 12.5px;
+  font-family: inherit;
+  outline: none;
+  transition: var(--transition);
+  margin-bottom: 4px;
+}
+.todo-edit-input:focus { border-color: var(--accent); box-shadow: var(--shadow-glow); background: var(--bg-surface); }
+
+.todo-edit-selects {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 5px;
+}
+.todo-edit-selects .todo-select { font-size: 11px; padding: 3px 6px; }
+
+.todo-edit-actions {
+  display: flex;
+  gap: 4px;
+}
+.todo-save-edit-btn {
+  flex: 1;
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  background: var(--accent);
+  color: #fff;
+  font-size: 11.5px;
+  font-weight: 600;
+  font-family: inherit;
+  transition: var(--transition);
+  cursor: pointer;
+  border: none;
+}
+.todo-save-edit-btn:hover { background: var(--accent-2); }
+.todo-cancel-edit-btn {
+  flex: 1;
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  font-size: 11.5px;
+  font-family: inherit;
+  transition: var(--transition);
+  cursor: pointer;
+}
+.todo-cancel-edit-btn:hover { border-color: var(--danger); color: var(--danger); }
