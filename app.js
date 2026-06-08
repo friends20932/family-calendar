@@ -18,6 +18,9 @@ import {
   initNotifications, getNotificationPermission,
   requestNotificationPermission, scheduleLocalReminders, startPeriodicCheck
 } from './notifications.js?v=2';
+import {
+  loadTodos, saveTodos, addTodo, toggleTodo, deleteTodo, clearDoneTodos, PRIORITY_CONFIG
+} from './todos.js';
 
 // ── State ───────────────────────────────────────────────────
 let cal;
@@ -33,6 +36,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   await initNotifications();
   setupCalendar();
   setupSidebar();
+  setupTodos();
   updateNotifBadge();
   scheduleAllReminders();
   renderUpcoming();
@@ -1554,4 +1558,170 @@ function executeRepeatAction(scope) {
   closeModal('event-view-modal');
   refreshAll();
   syncToGitHub(true);
+}
+
+// ── Todo List ─────────────────────────────────────────────────
+let todoFilter = 'all';
+
+function setupTodos() {
+  // Populate category select from existing categories
+  populateTodoCategorySelect();
+
+  // Initial render
+  renderTodos();
+
+  // Input: press Enter to add
+  const input = document.getElementById('todo-input');
+  input?.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') addTodoFromForm();
+  });
+
+  // Add button
+  document.getElementById('btn-add-todo')?.addEventListener('click', addTodoFromForm);
+
+  // Clear done button
+  document.getElementById('btn-clear-done-todos')?.addEventListener('click', () => {
+    clearDoneTodos();
+    renderTodos();
+    showToast('已清除完成項目 ✓', 'info');
+  });
+
+  // Filter tabs
+  document.querySelectorAll('.todo-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      todoFilter = tab.dataset.filter;
+      document.querySelectorAll('.todo-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      renderTodos();
+    });
+  });
+}
+
+function populateTodoCategorySelect() {
+  const sel = document.getElementById('todo-category');
+  if (!sel) return;
+  const cats = loadCategories();
+  // Keep the first "無標籤" option, then add categories
+  sel.innerHTML = '<option value="">無標籤</option>';
+  cats.forEach(cat => {
+    const opt = document.createElement('option');
+    opt.value = cat.id;
+    opt.textContent = `${cat.emoji} ${cat.label}`;
+    sel.appendChild(opt);
+  });
+}
+
+function addTodoFromForm() {
+  const input = document.getElementById('todo-input');
+  const prioritySel = document.getElementById('todo-priority');
+  const catSel = document.getElementById('todo-category');
+  if (!input) return;
+
+  const text = input.value.trim();
+  if (!text) {
+    input.focus();
+    input.classList.add('shake');
+    setTimeout(() => input.classList.remove('shake'), 400);
+    return;
+  }
+
+  addTodo({
+    text,
+    priority: prioritySel?.value || 'medium',
+    category: catSel?.value || '',
+  });
+
+  input.value = '';
+  input.focus();
+  renderTodos();
+  showToast('待辦已新增 ✓', 'info');
+}
+
+function renderTodos() {
+  const list = document.getElementById('todo-list');
+  const badge = document.getElementById('todo-count-badge');
+  if (!list) return;
+
+  const todos = loadTodos();
+  const pendingCount = todos.filter(t => !t.done).length;
+
+  // Update badge
+  if (badge) {
+    if (pendingCount > 0) {
+      badge.textContent = pendingCount;
+      badge.classList.add('visible');
+    } else {
+      badge.classList.remove('visible');
+    }
+  }
+
+  // Filter
+  let filtered = todos;
+  if (todoFilter === 'pending') filtered = todos.filter(t => !t.done);
+  if (todoFilter === 'done')    filtered = todos.filter(t => t.done);
+
+  // Sort: undone first, then by priority (high > medium > low), then by date
+  const PRIORITY_ORDER = { high: 0, medium: 1, low: 2 };
+  filtered = [...filtered].sort((a, b) => {
+    if (a.done !== b.done) return a.done ? 1 : -1;
+    return (PRIORITY_ORDER[a.priority] ?? 1) - (PRIORITY_ORDER[b.priority] ?? 1);
+  });
+
+  if (!filtered.length) {
+    const msgs = {
+      all:     '尚無待辦事項\n點擊上方輸入框新增！',
+      pending: '沒有待完成的事項 🎉',
+      done:    '還沒有完成的事項',
+    };
+    list.innerHTML = `<div class="todo-empty">${msgs[todoFilter]}</div>`;
+    return;
+  }
+
+  const cats = loadCategories();
+
+  list.innerHTML = '';
+  filtered.forEach(todo => {
+    const pc = PRIORITY_CONFIG[todo.priority] || PRIORITY_CONFIG.medium;
+    const cat = cats.find(c => c.id === todo.category);
+
+    const item = document.createElement('div');
+    item.className = `todo-item${todo.done ? ' done' : ''}`;
+    item.style.setProperty('--todo-priority-color', pc.color);
+    item.style.setProperty('--todo-priority-bg', pc.bg);
+    item.style.setProperty('--todo-priority-border', pc.border);
+    if (cat) item.style.setProperty('--cat-color', cat.color);
+
+    item.innerHTML = `
+      <div class="todo-checkbox-wrap">
+        <input type="checkbox" class="todo-checkbox" ${todo.done ? 'checked' : ''} data-id="${todo.id}" title="標記完成" />
+      </div>
+      <div class="todo-body">
+        <div class="todo-text">${escapeHtml(todo.text)}</div>
+        <div class="todo-meta">
+          <span class="todo-priority-tag">${pc.label}優先</span>
+          ${cat ? `<span class="todo-cat-tag">${cat.emoji} ${escapeHtml(cat.label)}</span>` : ''}
+        </div>
+      </div>
+      <button class="todo-delete-btn" data-id="${todo.id}" title="刪除">✕</button>
+    `;
+
+    // Checkbox toggle
+    item.querySelector('.todo-checkbox').addEventListener('change', () => {
+      toggleTodo(todo.id);
+      renderTodos();
+    });
+
+    // Delete
+    item.querySelector('.todo-delete-btn').addEventListener('click', () => {
+      item.style.transition = 'opacity 0.15s, transform 0.15s';
+      item.style.opacity = '0';
+      item.style.transform = 'translateX(12px)';
+      setTimeout(() => {
+        deleteTodo(todo.id);
+        renderTodos();
+      }, 150);
+    });
+
+    list.appendChild(item);
+  });
 }

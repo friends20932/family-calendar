@@ -49,10 +49,48 @@
       <div class="sidebar-label">日曆</div>
       <div id="mini-calendar"></div>
     </div>
-    <div class="sidebar-section" style="flex:1;overflow-y:auto;">
+    <div class="sidebar-section" style="max-height:180px;overflow-y:auto;">
       <div class="sidebar-label">近期活動</div>
       <div id="upcoming-list"></div>
     </div>
+
+    <!-- ── TODO LIST ── -->
+    <div class="sidebar-section todo-section" style="flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:0;">
+      <div class="todo-header">
+        <div class="sidebar-label" style="margin-bottom:0;">待辦事項</div>
+        <div class="todo-header-actions">
+          <span id="todo-count-badge" class="todo-count-badge"></span>
+          <button id="btn-clear-done-todos" class="todo-clear-btn" title="清除已完成">✓ 清除</button>
+        </div>
+      </div>
+
+      <!-- Add todo input -->
+      <div class="todo-add-row">
+        <input id="todo-input" class="todo-input" type="text" placeholder="新增待辦…" maxlength="60" autocomplete="off" />
+        <div class="todo-add-options">
+          <select id="todo-priority" class="todo-select" title="優先度">
+            <option value="high">🔴 高</option>
+            <option value="medium" selected>🟡 中</option>
+            <option value="low">🟢 低</option>
+          </select>
+          <select id="todo-category" class="todo-select" title="分類標籤">
+            <option value="">無標籤</option>
+          </select>
+          <button id="btn-add-todo" class="todo-add-btn" title="新增">＋</button>
+        </div>
+      </div>
+
+      <!-- Filter tabs -->
+      <div class="todo-filter-tabs">
+        <button class="todo-tab active" data-filter="all" id="todo-tab-all">全部</button>
+        <button class="todo-tab" data-filter="pending" id="todo-tab-pending">待辦</button>
+        <button class="todo-tab" data-filter="done" id="todo-tab-done">已完成</button>
+      </div>
+
+      <!-- Todo list -->
+      <div id="todo-list" class="todo-list"></div>
+    </div>
+
     <!-- GitHub Sync -->
     <div class="sidebar-sync">
       <div style="margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid var(--border-soft);">
