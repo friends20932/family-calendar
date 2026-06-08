@@ -218,7 +218,22 @@ function setupLineNotifyTime() {
   if (!notifyTimeInput) return;
   const savedTime = localStorage.getItem('line_notify_time') || '05:15';
   notifyTimeInput.value = savedTime;
-  
+
+  // Show current time on the collapsed label
+  const timeDisplay = document.getElementById('line-notify-time-display');
+  if (timeDisplay) timeDisplay.textContent = savedTime;
+
+  // Collapsible toggle
+  const toggleBtn  = document.getElementById('btn-line-notify-toggle');
+  const panel      = toggleBtn?.closest('.line-notify-collapsible');
+  if (toggleBtn && panel) {
+    toggleBtn.addEventListener('click', () => {
+      const isOpen = panel.classList.toggle('open');
+      toggleBtn.setAttribute('aria-expanded', isOpen);
+      if (isOpen) notifyTimeInput.focus();
+    });
+  }
+
   const btnSave = document.getElementById('btn-save-notify-time');
   if (btnSave) {
     btnSave.addEventListener('click', async () => {
@@ -228,6 +243,13 @@ function setupLineNotifyTime() {
         return;
       }
       localStorage.setItem('line_notify_time', timeStr);
+      // Update the display label
+      if (timeDisplay) timeDisplay.textContent = timeStr;
+      // Close panel after saving
+      if (panel) {
+        panel.classList.remove('open');
+        toggleBtn?.setAttribute('aria-expanded', 'false');
+      }
       await updateLineNotifyCronOnGitHub(timeStr);
     });
   }

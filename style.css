@@ -238,6 +238,75 @@ body.sidebar-closed #sidebar {
   flex-direction: column;
   gap: 6px;
 }
+/* LINE Notify collapsible */
+.line-notify-collapsible {
+  margin-bottom: 8px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-soft);
+  overflow: hidden;
+  background: var(--bg-elevated);
+}
+
+.line-notify-toggle-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  text-align: left;
+  transition: var(--transition);
+}
+.line-notify-toggle-btn:hover { background: var(--bg-hover); }
+
+.line-notify-toggle-icon { font-size: 13px; flex-shrink: 0; }
+
+.line-notify-toggle-label {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  flex: 1;
+  white-space: nowrap;
+}
+
+.line-notify-current-time {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent);
+  background: var(--accent-light);
+  border-radius: var(--radius-full);
+  padding: 1px 7px;
+  font-variant-numeric: tabular-nums;
+}
+
+.line-notify-chevron {
+  font-size: 15px;
+  color: var(--text-muted);
+  transition: transform var(--transition);
+  line-height: 1;
+  flex-shrink: 0;
+}
+.line-notify-collapsible.open .line-notify-chevron {
+  transform: rotate(90deg);
+}
+
+.line-notify-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.line-notify-collapsible.open .line-notify-body {
+  max-height: 80px;
+}
+
+.line-notify-inner {
+  padding: 4px 10px 10px;
+  border-top: 1px solid var(--border-soft);
+}
+
 .github-sync-btn {
   width: 100%;
   padding: 8px 12px;
