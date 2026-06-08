@@ -2188,6 +2188,14 @@
       "category": "church",
       "done": false,
       "createdAt": "2026-06-08T05:58:03.200Z"
+    },
+    {
+      "id": "todo_1780909874416_2qg6o",
+      "text": "南照顧區升班聚會簡報",
+      "priority": "medium",
+      "category": "",
+      "done": false,
+      "createdAt": "2026-06-08T09:11:14.416Z"
     }
   ]
 }
