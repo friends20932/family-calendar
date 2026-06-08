@@ -45,13 +45,13 @@
       <button id="btn-open-categories" class="btn-icon" style="width: auto; padding: 0 8px; font-size: 14px;" title="管理分類">🏷️ 分類</button>
       <button id="btn-open-members"    class="btn-icon" style="width: auto; padding: 0 8px; font-size: 14px;" title="管理家庭成員">👨‍👩‍👧 成員</button>
     </div>
-    <div class="sidebar-section" style="max-height:220px;overflow-y:auto;">
-      <div class="sidebar-label">近期活動</div>
-      <div id="upcoming-list"></div>
+    <div class="sidebar-section" style="flex:1; display:flex; flex-direction:column; min-height:0; padding-bottom:0;">
+      <div class="sidebar-label" style="flex-shrink:0;">近期活動</div>
+      <div id="upcoming-list" style="flex:1; overflow-y:auto; padding-bottom:14px; margin:0 -4px; padding:0 4px;"></div>
     </div>
 
     <!-- ── TODO LIST ── -->
-    <div class="sidebar-section todo-section" style="flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:0;">
+    <div class="sidebar-section todo-section" style="flex:1; display:flex; flex-direction:column; min-height:0; gap:0;">
       <div class="todo-header">
         <div class="sidebar-label" style="margin-bottom:0;">待辦事項</div>
         <div class="todo-header-actions">
