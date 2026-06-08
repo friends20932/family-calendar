@@ -2179,5 +2179,15 @@
       "color": "#f59e0b",
       "emoji": "🍟"
     }
+  ],
+  "todos": [
+    {
+      "id": "todo_1780898283199_cv4to",
+      "text": "南照顧區讀書園表單",
+      "priority": "high",
+      "category": "church",
+      "done": false,
+      "createdAt": "2026-06-08T05:58:03.200Z"
+    }
   ]
 }
