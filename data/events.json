@@ -2133,8 +2133,8 @@
     {
       "id": "b840d187-d1c6-4401-9df5-d44d9f669b32",
       "title": "蔚婷&小孩回台中",
-      "datetime": "2026-07-06T13:27",
-      "endDatetime": "2026-07-06T16:14",
+      "datetime": "2026-07-06T13:20",
+      "endDatetime": "2026-07-06T16:20",
       "allDay": false,
       "url": "",
       "description": "",
@@ -2149,10 +2149,10 @@
       "reminder": "none",
       "repeat": "none",
       "repeatEndType": "never",
-      "repeatEndDate": null,
-      "repeatEndCount": 10,
+      "repeatEndDate": "",
+      "repeatEndCount": "10",
       "repeatWeeklyDays": [],
-      "repeatMonthlyDate": 1,
+      "repeatMonthlyDate": "1",
       "excludeDates": [],
       "createdAt": "2026-06-10T02:16:25.355Z"
     }
