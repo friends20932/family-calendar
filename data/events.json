@@ -2159,7 +2159,7 @@
     },
     {
       "id": "4a29bb2d-6462-4304-8bb9-1b731c425100",
-      "title": "還書",
+      "title": "還書、取貨",
       "datetime": "2026-06-12T13:30",
       "endDatetime": "2026-06-12T14:30",
       "allDay": false,
@@ -2174,10 +2174,10 @@
       "reminder": "none",
       "repeat": "none",
       "repeatEndType": "never",
-      "repeatEndDate": null,
-      "repeatEndCount": 10,
+      "repeatEndDate": "",
+      "repeatEndCount": "10",
       "repeatWeeklyDays": [],
-      "repeatMonthlyDate": 1,
+      "repeatMonthlyDate": "1",
       "excludeDates": [],
       "createdAt": "2026-06-11T04:37:09.847Z"
     },
