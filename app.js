@@ -514,9 +514,19 @@ function openNewEventModal(dateStr, datetime, endDatetime, allDay = false) {
   editingEvent = null;
   editingEventInstanceDate = null;
   const defaultDt = datetime || `${dateStr}T09:00`;
+  // 若沒有指定結束時間，預設為開始時間 +1 小時
+  let defaultEnd = endDatetime || '';
+  if (!defaultEnd && !allDay) {
+    const startMs = new Date(defaultDt).getTime();
+    if (!isNaN(startMs)) {
+      const endMs = startMs + 60 * 60 * 1000;
+      const ed = new Date(endMs);
+      defaultEnd = `${ed.getFullYear()}-${String(ed.getMonth()+1).padStart(2,'0')}-${String(ed.getDate()).padStart(2,'0')}T${String(ed.getHours()).padStart(2,'0')}:${String(ed.getMinutes()).padStart(2,'0')}`;
+    }
+  }
   populateEventForm({ 
     datetime: defaultDt, 
-    endDatetime: endDatetime || '', 
+    endDatetime: defaultEnd, 
     allDay: allDay, 
     title: '', url: '',
     description: '', location: '', category: 'family', reminder: '30', repeat: 'none',
@@ -558,6 +568,28 @@ function populateEventForm(ev) {
   document.getElementById('ev-datetime').value    = formStartDt.slice(0, 16);
   document.getElementById('ev-end-datetime').value = formEndDt.slice(0, 16);
   document.getElementById('ev-allday').checked    = ev.allDay || false;
+
+  // 監聽開始時間變更 → 自動維持原本時長
+  const startInput = document.getElementById('ev-datetime');
+  const endInput   = document.getElementById('ev-end-datetime');
+  // 移除舊的 listener 再重新綁定（用替換節點的方式）
+  const newStartInput = startInput.cloneNode(true);
+  startInput.parentNode.replaceChild(newStartInput, startInput);
+  newStartInput.addEventListener('change', () => {
+    const currentEnd = document.getElementById('ev-end-datetime').value;
+    if (!currentEnd) return; // 沒有結束時間就不處理
+    const prevStart = new Date(formStartDt.slice(0, 16));
+    const prevEnd   = new Date(formEndDt.slice(0, 16));
+    if (isNaN(prevStart) || isNaN(prevEnd)) return;
+    const durationMs = prevEnd - prevStart;
+    if (durationMs <= 0) return;
+    const newStart = new Date(newStartInput.value);
+    if (isNaN(newStart)) return;
+    const newEnd = new Date(newStart.getTime() + durationMs);
+    const pad = (n) => String(n).padStart(2, '0');
+    document.getElementById('ev-end-datetime').value =
+      `${newEnd.getFullYear()}-${pad(newEnd.getMonth()+1)}-${pad(newEnd.getDate())}T${pad(newEnd.getHours())}:${pad(newEnd.getMinutes())}`;
+  });
   document.getElementById('ev-description').value = ev.description || '';
   document.getElementById('ev-location').value    = ev.location || '';
   
