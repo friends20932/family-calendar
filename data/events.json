@@ -2292,8 +2292,8 @@
     {
       "id": "f7c761b1-afbb-49cf-bfa0-b73e0aa46928",
       "title": "炒酸菜、簡報、煎蛋、接小孩",
-      "datetime": "2026-06-12T14:00",
-      "endDatetime": "2026-06-12T17:00",
+      "datetime": "2026-06-12T14:30",
+      "endDatetime": "2026-06-12T17:30",
       "allDay": false,
       "url": "",
       "description": "",
@@ -2306,10 +2306,10 @@
       "reminder": "none",
       "repeat": "none",
       "repeatEndType": "never",
-      "repeatEndDate": null,
-      "repeatEndCount": 10,
+      "repeatEndDate": "",
+      "repeatEndCount": "10",
       "repeatWeeklyDays": [],
-      "repeatMonthlyDate": 1,
+      "repeatMonthlyDate": "1",
       "excludeDates": [],
       "createdAt": "2026-06-12T04:44:57.010Z"
     }
