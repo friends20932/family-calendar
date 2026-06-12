@@ -2263,6 +2263,30 @@
       "repeatMonthlyDate": 1,
       "excludeDates": [],
       "createdAt": "2026-06-12T02:16:09.081Z"
+    },
+    {
+      "id": "570b5b57-ef8e-4dcf-a70c-6e7e8679f9b3",
+      "title": "恩言51Talk約體驗課",
+      "datetime": "2026-08-19T00:00",
+      "endDatetime": "2026-08-19T00:00",
+      "allDay": true,
+      "url": "",
+      "description": "約8/26晚上",
+      "location": "",
+      "category": "family",
+      "color": null,
+      "memberIds": [
+        "b1c23456-0000-0000-0000-000000000001"
+      ],
+      "reminder": "none",
+      "repeat": "none",
+      "repeatEndType": "never",
+      "repeatEndDate": null,
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-06-12T04:21:07.310Z"
     }
   ],
   "categories": [
