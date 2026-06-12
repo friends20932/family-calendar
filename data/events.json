@@ -2343,28 +2343,12 @@
   ],
   "todos": [
     {
-      "id": "todo_1780898283199_cv4to",
-      "text": "南照顧區讀書園表單",
-      "priority": "high",
-      "category": "church",
-      "done": true,
-      "createdAt": "2026-06-08T05:58:03.200Z"
-    },
-    {
       "id": "todo_1780909874416_2qg6o",
       "text": "南照顧區升班聚會簡報",
       "priority": "medium",
       "category": "church",
       "done": false,
       "createdAt": "2026-06-08T09:11:14.416Z"
-    },
-    {
-      "id": "todo_1780969204875_93dn0",
-      "text": "小時達",
-      "priority": "high",
-      "category": "family",
-      "done": true,
-      "createdAt": "2026-06-09T01:40:04.875Z"
     }
   ]
 }
