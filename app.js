@@ -1208,7 +1208,15 @@ async function pullFromGitHub() {
         if (remoteData.events) saveEvents(remoteData.events);
         if (remoteData.categories) saveCategories(remoteData.categories);
         if (remoteData.members) saveMembers(remoteData.members);
-        if (Array.isArray(remoteData.todos)) { saveTodos(remoteData.todos); renderTodos(); }
+        if (Array.isArray(remoteData.todos)) {
+          // 合併策略：以本機為主，遠端只補上本機沒有的項目
+          // 避免本機清除的已完成項目被遠端覆蓋回來
+          const localTodos = loadTodos();
+          const localIds = new Set(localTodos.map(t => t.id));
+          const newFromRemote = remoteData.todos.filter(t => !localIds.has(t.id));
+          saveTodos([...localTodos, ...newFromRemote]);
+          renderTodos();
+        }
         await pullConfigFromGitHub();
       }
       refreshAll();
@@ -1640,6 +1648,8 @@ function setupTodos() {
     clearDoneTodos();
     renderTodos();
     showToast('已清除完成項目 ✓', 'info');
+    // 立即同步到 GitHub，避免下次同步時已刪除的項目又被遠端覆蓋回來
+    syncToGitHub(true);
   });
 
   // Filter tabs
