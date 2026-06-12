@@ -559,7 +559,7 @@
       "id": "73d89d5a-d185-446b-9f0d-411fb644b385",
       "title": "青少年特會預備聚會",
       "datetime": "2026-06-13T13:00",
-      "endDatetime": "2026-06-13T16:00",
+      "endDatetime": "2026-06-13T15:00",
       "allDay": false,
       "url": "",
       "description": "",
@@ -575,10 +575,10 @@
       "reminder": "none",
       "repeat": "none",
       "repeatEndType": "never",
-      "repeatEndDate": null,
-      "repeatEndCount": 10,
+      "repeatEndDate": "",
+      "repeatEndCount": "10",
       "repeatWeeklyDays": [],
-      "repeatMonthlyDate": 1,
+      "repeatMonthlyDate": "1",
       "createdAt": "2026-05-27T07:53:59.641Z"
     },
     {
