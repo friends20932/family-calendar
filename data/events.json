@@ -501,7 +501,10 @@
         4
       ],
       "repeatMonthlyDate": 1,
-      "createdAt": "2026-05-27T07:45:16.636Z"
+      "createdAt": "2026-05-27T07:45:16.636Z",
+      "excludeDates": [
+        "2026-06-11"
+      ]
     },
     {
       "id": "bfdfa8c0-8d22-457f-bcda-2631e14d3595",
@@ -2204,6 +2207,33 @@
       "repeatMonthlyDate": 1,
       "excludeDates": [],
       "createdAt": "2026-06-11T04:37:39.580Z"
+    },
+    {
+      "id": "f090afb5-cdd5-4df2-a91f-970a21637587",
+      "title": "儆晨體適能課程",
+      "datetime": "2026-07-02T19:30",
+      "endDatetime": "2026-07-02T20:20",
+      "allDay": false,
+      "url": "",
+      "description": "",
+      "location": "大里運動中心",
+      "category": "family",
+      "color": null,
+      "memberIds": [
+        "b1c23456-0000-0000-0000-000000000001",
+        "b1c23456-0000-0000-0000-000000000003"
+      ],
+      "reminder": "480",
+      "repeat": "none",
+      "repeatEndType": "date",
+      "repeatEndDate": "2026-06-25",
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [
+        4
+      ],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-06-12T02:15:01.431Z"
     }
   ],
   "categories": [
