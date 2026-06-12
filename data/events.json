@@ -495,12 +495,12 @@
       "reminder": "480",
       "repeat": "weekly",
       "repeatEndType": "date",
-      "repeatEndDate": "2026-06-25",
-      "repeatEndCount": 10,
+      "repeatEndDate": "2026-07-02",
+      "repeatEndCount": "10",
       "repeatWeeklyDays": [
         4
       ],
-      "repeatMonthlyDate": 1,
+      "repeatMonthlyDate": "1",
       "createdAt": "2026-05-27T07:45:16.636Z",
       "excludeDates": [
         "2026-06-11"
