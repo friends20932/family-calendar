@@ -2287,6 +2287,31 @@
       "repeatMonthlyDate": 1,
       "excludeDates": [],
       "createdAt": "2026-06-12T04:21:07.310Z"
+    },
+    {
+      "id": "e7c10ccd-34ed-4602-a41b-3d3b89a585f8",
+      "title": "恩言51 Talk體驗課",
+      "datetime": "2026-07-01T20:30",
+      "endDatetime": "2026-07-01T21:00",
+      "allDay": false,
+      "url": "",
+      "description": "",
+      "location": "",
+      "category": "school",
+      "color": null,
+      "memberIds": [
+        "b1c23456-0000-0000-0000-000000000001",
+        "b1c23456-0000-0000-0000-000000000002"
+      ],
+      "reminder": "none",
+      "repeat": "none",
+      "repeatEndType": "never",
+      "repeatEndDate": null,
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-06-12T04:29:53.381Z"
     }
   ],
   "categories": [
