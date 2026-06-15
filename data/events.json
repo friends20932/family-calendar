@@ -103,7 +103,8 @@
         "2026-09-24",
         "2026-06-04",
         "2026-06-11",
-        "2026-06-18"
+        "2026-06-18",
+        "2026-06-25"
       ]
     },
     {
@@ -2369,6 +2370,35 @@
       "repeatMonthlyDate": 1,
       "excludeDates": [],
       "createdAt": "2026-06-15T04:16:53.508Z"
+    },
+    {
+      "id": "fd1b2e49-7abb-473e-a267-c323fe38a4aa",
+      "title": "青職排",
+      "datetime": "2026-06-25T20:30",
+      "endDatetime": "2026-06-25T21:30",
+      "allDay": false,
+      "url": "",
+      "description": "",
+      "location": "",
+      "category": "church",
+      "color": null,
+      "memberIds": [
+        "8fd52380-c506-4a41-9302-e38ea61fff96",
+        "b1c23456-0000-0000-0000-000000000001",
+        "b1c23456-0000-0000-0000-000000000002",
+        "b1c23456-0000-0000-0000-000000000003"
+      ],
+      "reminder": "none",
+      "repeat": "none",
+      "repeatEndType": "date",
+      "repeatEndDate": "2026-12-31",
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [
+        4
+      ],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-06-15T04:17:04.575Z"
     }
   ],
   "categories": [
