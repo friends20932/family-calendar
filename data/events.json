@@ -90,7 +90,7 @@
       "reminder": "none",
       "repeat": "weekly",
       "repeatEndType": "date",
-      "repeatEndDate": "2026-12-31",
+      "repeatEndDate": "2026-07-08",
       "repeatEndCount": "10",
       "repeatWeeklyDays": [
         4
@@ -2399,6 +2399,35 @@
       "repeatMonthlyDate": 1,
       "excludeDates": [],
       "createdAt": "2026-06-15T04:17:04.575Z"
+    },
+    {
+      "id": "e62221a9-8192-427e-854d-8a6c584fedf2",
+      "title": "青職排",
+      "datetime": "2026-07-09T20:00",
+      "endDatetime": "2026-07-09T21:30",
+      "allDay": false,
+      "url": "",
+      "description": "",
+      "location": "",
+      "category": "church",
+      "color": null,
+      "memberIds": [
+        "8fd52380-c506-4a41-9302-e38ea61fff96",
+        "b1c23456-0000-0000-0000-000000000001",
+        "b1c23456-0000-0000-0000-000000000002",
+        "b1c23456-0000-0000-0000-000000000003"
+      ],
+      "reminder": "none",
+      "repeat": "weekly",
+      "repeatEndType": "date",
+      "repeatEndDate": "2026-12-31",
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [
+        4
+      ],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-06-15T04:17:15.106Z"
     }
   ],
   "categories": [
