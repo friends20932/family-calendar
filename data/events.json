@@ -2510,6 +2510,30 @@
       "repeatMonthlyDate": 1,
       "excludeDates": [],
       "createdAt": "2026-06-17T09:15:25.872Z"
+    },
+    {
+      "id": "e323555e-8d61-4704-bc4e-36590ed930e6",
+      "title": "待辦",
+      "datetime": "2026-06-18T13:00",
+      "endDatetime": "2026-06-18T16:00",
+      "allDay": false,
+      "url": "",
+      "description": "1. 做簡報\n2. 買貼紙\n3. 繳回聯絡簿\n4. 收衣服\n5. 收行李",
+      "location": "",
+      "category": "family",
+      "color": null,
+      "memberIds": [
+        "b1c23456-0000-0000-0000-000000000001"
+      ],
+      "reminder": "none",
+      "repeat": "none",
+      "repeatEndType": "never",
+      "repeatEndDate": null,
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-06-18T02:44:33.408Z"
     }
   ],
   "categories": [
