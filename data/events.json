@@ -2637,14 +2637,5 @@
       "emoji": "🍟"
     }
   ],
-  "todos": [
-    {
-      "id": "todo_1780909874416_2qg6o",
-      "text": "南照顧區升班聚會簡報",
-      "priority": "medium",
-      "category": "church",
-      "done": true,
-      "createdAt": "2026-06-08T09:11:14.416Z"
-    }
-  ]
+  "todos": []
 }
