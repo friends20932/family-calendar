@@ -1107,7 +1107,8 @@
       "repeatWeeklyDays": [],
       "repeatMonthlyDate": 1,
       "excludeDates": [
-        "2026-07-20"
+        "2026-07-20",
+        "2026-07-22"
       ],
       "createdAt": "2026-05-28T06:43:04.814Z"
     },
