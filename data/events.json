@@ -2621,6 +2621,33 @@
       "repeatMonthlyDate": 1,
       "excludeDates": [],
       "createdAt": "2026-06-22T05:26:29.066Z"
+    },
+    {
+      "id": "0fbda7e7-df28-4717-bc56-43267fd051d4",
+      "title": "錄影訓練",
+      "datetime": "2026-07-19T14:30",
+      "endDatetime": "2026-07-19T16:00",
+      "allDay": false,
+      "url": "",
+      "description": "",
+      "location": "",
+      "category": "church",
+      "color": null,
+      "memberIds": [
+        "8fd52380-c506-4a41-9302-e38ea61fff96",
+        "b1c23456-0000-0000-0000-000000000001"
+      ],
+      "reminder": "none",
+      "repeat": "weekly",
+      "repeatEndType": "date",
+      "repeatEndDate": "2026-07-26",
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [
+        0
+      ],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-06-23T12:46:31.774Z"
     }
   ],
   "categories": [
