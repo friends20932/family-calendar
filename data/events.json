@@ -1167,8 +1167,8 @@
     {
       "id": "40b831f0-da60-4f12-94de-61a92f64267a",
       "title": "錄影訓練",
-      "datetime": "2026-07-18T19:00",
-      "endDatetime": "2026-07-18T20:30",
+      "datetime": "2026-07-18T16:30",
+      "endDatetime": "2026-07-18T18:00",
       "allDay": false,
       "url": "",
       "description": "",
@@ -1183,12 +1183,12 @@
       "repeat": "weekly",
       "repeatEndType": "date",
       "repeatEndDate": "2026-07-25",
-      "repeatEndCount": 10,
+      "repeatEndCount": "10",
       "repeatWeeklyDays": [
         6,
         0
       ],
-      "repeatMonthlyDate": 1,
+      "repeatMonthlyDate": "1",
       "excludeDates": [],
       "createdAt": "2026-05-28T06:46:27.445Z"
     },
