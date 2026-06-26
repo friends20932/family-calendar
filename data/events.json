@@ -880,8 +880,8 @@
     {
       "id": "0809db20-87b8-41dc-87c0-ab8e572eafbc",
       "title": "恩言花使者－買花",
-      "datetime": "2026-06-27T17:00",
-      "endDatetime": "2026-06-27T18:00",
+      "datetime": "2026-06-27T14:00",
+      "endDatetime": "2026-06-27T15:00",
       "allDay": false,
       "url": "",
       "description": "",
@@ -889,15 +889,16 @@
       "category": "school",
       "color": null,
       "memberIds": [
+        "b1c23456-0000-0000-0000-000000000001",
         "b1c23456-0000-0000-0000-000000000002"
       ],
       "reminder": "1440",
       "repeat": "none",
       "repeatEndType": "never",
-      "repeatEndDate": null,
-      "repeatEndCount": 10,
+      "repeatEndDate": "",
+      "repeatEndCount": "10",
       "repeatWeeklyDays": [],
-      "repeatMonthlyDate": 1,
+      "repeatMonthlyDate": "1",
       "excludeDates": [],
       "createdAt": "2026-05-28T01:31:54.300Z"
     },
