@@ -2677,6 +2677,33 @@
       "repeatMonthlyDate": 1,
       "excludeDates": [],
       "createdAt": "2026-06-23T12:46:48.550Z"
+    },
+    {
+      "id": "111b0924-66f2-4ecd-99f0-a83d19816aae",
+      "title": "淑芬家愛筵服事者",
+      "datetime": "2026-06-27T17:30",
+      "endDatetime": "2026-06-27T19:15",
+      "allDay": false,
+      "url": "",
+      "description": "",
+      "location": "烤狀猿",
+      "category": "church",
+      "color": null,
+      "memberIds": [
+        "8fd52380-c506-4a41-9302-e38ea61fff96",
+        "b1c23456-0000-0000-0000-000000000001",
+        "b1c23456-0000-0000-0000-000000000002",
+        "b1c23456-0000-0000-0000-000000000003"
+      ],
+      "reminder": "none",
+      "repeat": "none",
+      "repeatEndType": "never",
+      "repeatEndDate": null,
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-06-27T05:28:29.217Z"
     }
   ],
   "categories": [
