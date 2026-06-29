@@ -2704,6 +2704,30 @@
       "repeatMonthlyDate": 1,
       "excludeDates": [],
       "createdAt": "2026-06-27T05:28:29.217Z"
+    },
+    {
+      "id": "0a967ae3-f1e7-4bf5-9c6f-6ed1078c9c57",
+      "title": "儆晨牙醫",
+      "datetime": "2026-07-01T18:30",
+      "endDatetime": "2026-07-01T19:30",
+      "allDay": false,
+      "url": "",
+      "description": "",
+      "location": "",
+      "category": "health",
+      "color": null,
+      "memberIds": [
+        "b1c23456-0000-0000-0000-000000000003"
+      ],
+      "reminder": "none",
+      "repeat": "none",
+      "repeatEndType": "never",
+      "repeatEndDate": null,
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-06-29T11:22:18.318Z"
     }
   ],
   "categories": [
