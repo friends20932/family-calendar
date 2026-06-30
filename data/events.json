@@ -2889,6 +2889,31 @@
       "repeatMonthlyDate": 1,
       "excludeDates": [],
       "createdAt": "2026-06-30T16:27:57.998Z"
+    },
+    {
+      "id": "22881a74-2d4d-48ea-9317-cfb927a72639",
+      "title": "國高中分年級相調暨服事者交通",
+      "datetime": "2026-10-24T13:00",
+      "endDatetime": "2026-10-24T15:00",
+      "allDay": false,
+      "url": "",
+      "description": "",
+      "location": "復興大樓四樓",
+      "category": "church",
+      "color": null,
+      "memberIds": [
+        "8fd52380-c506-4a41-9302-e38ea61fff96",
+        "b1c23456-0000-0000-0000-000000000001"
+      ],
+      "reminder": "none",
+      "repeat": "none",
+      "repeatEndType": "never",
+      "repeatEndDate": null,
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-06-30T16:28:31.447Z"
     }
   ],
   "categories": [
