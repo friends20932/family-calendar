@@ -2703,6 +2703,31 @@
       "repeatMonthlyDate": 1,
       "excludeDates": [],
       "createdAt": "2026-06-30T05:28:53.624Z"
+    },
+    {
+      "id": "eaa8a83f-7a0b-47d4-b691-8b1861d939a1",
+      "title": "品格園隊輔預備",
+      "datetime": "2026-07-02T18:00",
+      "endDatetime": "2026-07-02T20:00",
+      "allDay": false,
+      "url": "",
+      "description": "",
+      "location": "大里會所",
+      "category": "church",
+      "color": null,
+      "memberIds": [
+        "b1c23456-0000-0000-0000-000000000001",
+        "b1c23456-0000-0000-0000-000000000003"
+      ],
+      "reminder": "none",
+      "repeat": "none",
+      "repeatEndType": "never",
+      "repeatEndDate": null,
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-06-30T16:16:21.325Z"
     }
   ],
   "categories": [
