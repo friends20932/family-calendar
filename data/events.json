@@ -1570,7 +1570,8 @@
       ],
       "repeatMonthlyDate": 1,
       "excludeDates": [
-        "2026-07-21"
+        "2026-07-21",
+        "2026-10-06"
       ],
       "createdAt": "2026-06-01T04:50:30.801Z"
     },
@@ -2834,6 +2835,35 @@
       "repeatMonthlyDate": 1,
       "excludeDates": [],
       "createdAt": "2026-06-30T16:26:15.609Z"
+    },
+    {
+      "id": "7b98888b-3277-451b-b840-0c634a1834b3",
+      "title": "南、中各照顧區集中禱告聚會",
+      "datetime": "2026-10-06T19:30",
+      "endDatetime": "2026-10-06T21:30",
+      "allDay": false,
+      "url": "",
+      "description": "",
+      "location": "復興大樓二樓",
+      "category": "church",
+      "color": null,
+      "memberIds": [
+        "8fd52380-c506-4a41-9302-e38ea61fff96",
+        "b1c23456-0000-0000-0000-000000000001",
+        "b1c23456-0000-0000-0000-000000000002",
+        "b1c23456-0000-0000-0000-000000000003"
+      ],
+      "reminder": "none",
+      "repeat": "none",
+      "repeatEndType": "date",
+      "repeatEndDate": "2026-12-31",
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [
+        2
+      ],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-06-30T16:26:46.448Z"
     }
   ],
   "categories": [
