@@ -2914,6 +2914,33 @@
       "repeatMonthlyDate": 1,
       "excludeDates": [],
       "createdAt": "2026-06-30T16:28:31.447Z"
+    },
+    {
+      "id": "d1fab5db-5d8a-42c0-b55d-30deb98c4a45",
+      "title": "全台得榮少年牧養者交通",
+      "datetime": "2026-11-07T00:00",
+      "endDatetime": "2026-11-07T00:00",
+      "allDay": true,
+      "url": "",
+      "description": "",
+      "location": "",
+      "category": "church",
+      "color": null,
+      "memberIds": [
+        "8fd52380-c506-4a41-9302-e38ea61fff96",
+        "b1c23456-0000-0000-0000-000000000001",
+        "b1c23456-0000-0000-0000-000000000002",
+        "b1c23456-0000-0000-0000-000000000003"
+      ],
+      "reminder": "none",
+      "repeat": "none",
+      "repeatEndType": "never",
+      "repeatEndDate": null,
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-06-30T16:28:57.985Z"
     }
   ],
   "categories": [
