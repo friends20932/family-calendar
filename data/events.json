@@ -2968,6 +2968,31 @@
       "repeatMonthlyDate": 1,
       "excludeDates": [],
       "createdAt": "2026-06-30T16:29:56.233Z"
+    },
+    {
+      "id": "8c68736c-ae55-437a-a63e-09a9a32140a7",
+      "title": "錄影訓練",
+      "datetime": "2027-01-09T00:00",
+      "endDatetime": "2027-01-09T00:00",
+      "allDay": true,
+      "url": "",
+      "description": "",
+      "location": "",
+      "category": "church",
+      "color": null,
+      "memberIds": [
+        "8fd52380-c506-4a41-9302-e38ea61fff96",
+        "b1c23456-0000-0000-0000-000000000001"
+      ],
+      "reminder": "none",
+      "repeat": "none",
+      "repeatEndType": "never",
+      "repeatEndDate": null,
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-06-30T16:30:54.854Z"
     }
   ],
   "categories": [
