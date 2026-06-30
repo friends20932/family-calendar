@@ -2941,6 +2941,33 @@
       "repeatMonthlyDate": 1,
       "excludeDates": [],
       "createdAt": "2026-06-30T16:28:57.985Z"
+    },
+    {
+      "id": "25acecc5-5198-464b-9e1f-8a903f1a8f4e",
+      "title": "全召會長青聖徒年終感恩相調聚會",
+      "datetime": "2026-11-22T16:00",
+      "endDatetime": "2026-11-22T18:30",
+      "allDay": false,
+      "url": "",
+      "description": "",
+      "location": "復興大樓",
+      "category": "church",
+      "color": null,
+      "memberIds": [
+        "8fd52380-c506-4a41-9302-e38ea61fff96",
+        "b1c23456-0000-0000-0000-000000000001",
+        "b1c23456-0000-0000-0000-000000000002",
+        "b1c23456-0000-0000-0000-000000000003"
+      ],
+      "reminder": "none",
+      "repeat": "none",
+      "repeatEndType": "never",
+      "repeatEndDate": null,
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-06-30T16:29:56.233Z"
     }
   ],
   "categories": [
