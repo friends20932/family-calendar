@@ -2513,7 +2513,9 @@
       "repeatEndCount": 10,
       "repeatWeeklyDays": [],
       "repeatMonthlyDate": 1,
-      "excludeDates": [],
+      "excludeDates": [
+        "2026-07-12"
+      ],
       "createdAt": "2026-06-22T00:37:57.594Z"
     },
     {
