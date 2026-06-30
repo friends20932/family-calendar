@@ -2468,35 +2468,6 @@
       "createdAt": "2026-06-17T06:27:27.437Z"
     },
     {
-      "id": "ba1f5df2-2202-463a-a5f5-b4c6cd25f67d",
-      "title": "青職排",
-      "datetime": "2026-07-02T20:30",
-      "endDatetime": "2026-07-02T21:30",
-      "allDay": false,
-      "url": "",
-      "description": "",
-      "location": "",
-      "category": "family",
-      "color": null,
-      "memberIds": [
-        "8fd52380-c506-4a41-9302-e38ea61fff96",
-        "b1c23456-0000-0000-0000-000000000001",
-        "b1c23456-0000-0000-0000-000000000002",
-        "b1c23456-0000-0000-0000-000000000003"
-      ],
-      "reminder": "none",
-      "repeat": "none",
-      "repeatEndType": "date",
-      "repeatEndDate": "2026-07-08",
-      "repeatEndCount": 10,
-      "repeatWeeklyDays": [
-        4
-      ],
-      "repeatMonthlyDate": 1,
-      "excludeDates": [],
-      "createdAt": "2026-06-17T09:15:25.872Z"
-    },
-    {
       "id": "e323555e-8d61-4704-bc4e-36590ed930e6",
       "title": "待辦",
       "datetime": "2026-06-18T13:00",
