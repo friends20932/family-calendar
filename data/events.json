@@ -2782,6 +2782,31 @@
       "repeatMonthlyDate": 1,
       "excludeDates": [],
       "createdAt": "2026-06-30T16:23:53.677Z"
+    },
+    {
+      "id": "fd714066-a33c-485e-ae9f-99044ca0b911",
+      "title": "全召會事奉特會",
+      "datetime": "2026-09-12T09:00",
+      "endDatetime": "2026-09-12T10:00",
+      "allDay": false,
+      "url": "",
+      "description": "",
+      "location": "復興大樓",
+      "category": "church",
+      "color": null,
+      "memberIds": [
+        "8fd52380-c506-4a41-9302-e38ea61fff96",
+        "b1c23456-0000-0000-0000-000000000001"
+      ],
+      "reminder": "none",
+      "repeat": "none",
+      "repeatEndType": "never",
+      "repeatEndDate": null,
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-06-30T16:24:30.380Z"
     }
   ],
   "categories": [
