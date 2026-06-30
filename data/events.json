@@ -2680,7 +2680,7 @@
     },
     {
       "id": "b17b2534-61b4-4033-858f-aa4bf16641f7",
-      "title": "德芳社區排",
+      "title": "德芳社區排／學員愛筵",
       "datetime": "2026-07-13T18:30",
       "endDatetime": "2026-07-13T21:00",
       "allDay": false,
@@ -2698,11 +2698,11 @@
       "repeat": "none",
       "repeatEndType": "date",
       "repeatEndDate": "2026-12-31",
-      "repeatEndCount": 10,
+      "repeatEndCount": "10",
       "repeatWeeklyDays": [
         1
       ],
-      "repeatMonthlyDate": 1,
+      "repeatMonthlyDate": "1",
       "excludeDates": [],
       "createdAt": "2026-06-30T05:28:53.624Z"
     },
