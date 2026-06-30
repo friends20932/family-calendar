@@ -2787,7 +2787,7 @@
       "id": "fd714066-a33c-485e-ae9f-99044ca0b911",
       "title": "全召會事奉特會",
       "datetime": "2026-09-12T09:00",
-      "endDatetime": "2026-09-12T10:00",
+      "endDatetime": "2026-09-12T00:00",
       "allDay": false,
       "url": "",
       "description": "",
@@ -2801,10 +2801,10 @@
       "reminder": "none",
       "repeat": "none",
       "repeatEndType": "never",
-      "repeatEndDate": null,
-      "repeatEndCount": 10,
+      "repeatEndDate": "",
+      "repeatEndCount": "10",
       "repeatWeeklyDays": [],
-      "repeatMonthlyDate": 1,
+      "repeatMonthlyDate": "1",
       "excludeDates": [],
       "createdAt": "2026-06-30T16:24:30.380Z"
     }
