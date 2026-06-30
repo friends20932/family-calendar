@@ -2757,6 +2757,31 @@
       "repeatMonthlyDate": 1,
       "excludeDates": [],
       "createdAt": "2026-06-30T16:20:05.739Z"
+    },
+    {
+      "id": "c26050d2-cd58-46c0-a036-a230cb6fc8fa",
+      "title": "青少年期初特會暨小五六期初喜樂相調",
+      "datetime": "2026-08-30T09:30",
+      "endDatetime": "2026-08-30T00:30",
+      "allDay": false,
+      "url": "",
+      "description": "",
+      "location": "復興大樓二樓",
+      "category": "church",
+      "color": null,
+      "memberIds": [
+        "8fd52380-c506-4a41-9302-e38ea61fff96",
+        "b1c23456-0000-0000-0000-000000000001"
+      ],
+      "reminder": "none",
+      "repeat": "none",
+      "repeatEndType": "never",
+      "repeatEndDate": null,
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-06-30T16:23:53.677Z"
     }
   ],
   "categories": [
