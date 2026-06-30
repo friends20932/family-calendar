@@ -2993,6 +2993,55 @@
       "repeatMonthlyDate": 1,
       "excludeDates": [],
       "createdAt": "2026-06-30T16:30:54.854Z"
+    },
+    {
+      "id": "a5f29521-6b33-434d-b21e-72368830dbe9",
+      "title": "錄影訓練",
+      "datetime": "2027-01-16T00:00",
+      "endDatetime": "2027-01-16T00:00",
+      "allDay": true,
+      "url": "",
+      "description": "",
+      "location": "",
+      "category": "church",
+      "color": null,
+      "memberIds": [
+        "8fd52380-c506-4a41-9302-e38ea61fff96",
+        "b1c23456-0000-0000-0000-000000000001"
+      ],
+      "reminder": "none",
+      "repeat": "none",
+      "repeatEndType": "never",
+      "repeatEndDate": null,
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-06-30T16:31:07.573Z"
+    },
+    {
+      "id": "9d5d954c-d13a-423a-b980-7c7a0d0eb2e6",
+      "title": "青少年寒假特會",
+      "datetime": "2027-01-23T00:00",
+      "endDatetime": "2027-01-25T00:00",
+      "allDay": true,
+      "url": "",
+      "description": "",
+      "location": "台南曾文青少年活動中心",
+      "category": "church",
+      "color": null,
+      "memberIds": [
+        "8fd52380-c506-4a41-9302-e38ea61fff96"
+      ],
+      "reminder": "none",
+      "repeat": "none",
+      "repeatEndType": "never",
+      "repeatEndDate": null,
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-06-30T16:32:02.791Z"
     }
   ],
   "categories": [
