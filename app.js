@@ -1209,11 +1209,11 @@ async function pullFromGitHub() {
         if (remoteData.categories) saveCategories(remoteData.categories);
         if (remoteData.members) saveMembers(remoteData.members);
         if (Array.isArray(remoteData.todos)) {
-          // 合併策略：以本機為主，遠端只補上本機沒有的項目
+          // 合併策略：以本機為主，遠端只補上本機沒有的「未完成」項目
           // 避免本機清除的已完成項目被遠端覆蓋回來
           const localTodos = loadTodos();
           const localIds = new Set(localTodos.map(t => t.id));
-          const newFromRemote = remoteData.todos.filter(t => !localIds.has(t.id));
+          const newFromRemote = remoteData.todos.filter(t => !localIds.has(t.id) && !t.done);
           saveTodos([...localTodos, ...newFromRemote]);
           renderTodos();
         }
