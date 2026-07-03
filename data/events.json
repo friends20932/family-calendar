@@ -3310,6 +3310,30 @@
       "repeatMonthlyDate": 1,
       "excludeDates": [],
       "createdAt": "2026-07-03T01:02:15.796Z"
+    },
+    {
+      "id": "f7d0e35d-5fd8-4fd7-a9f4-152a52d33d05",
+      "title": "Long Weekend",
+      "datetime": "2027-11-05T00:00",
+      "endDatetime": "2027-11-05T00:00",
+      "allDay": true,
+      "url": "",
+      "description": "",
+      "location": "",
+      "category": "work",
+      "color": null,
+      "memberIds": [
+        "b1c23456-0000-0000-0000-000000000001"
+      ],
+      "reminder": "none",
+      "repeat": "none",
+      "repeatEndType": "never",
+      "repeatEndDate": null,
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-07-03T01:02:47.016Z"
     }
   ],
   "categories": [
