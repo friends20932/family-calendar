@@ -3118,6 +3118,30 @@
       "repeatMonthlyDate": 1,
       "excludeDates": [],
       "createdAt": "2026-07-01T15:47:31.488Z"
+    },
+    {
+      "id": "4f05135a-da08-468e-8ffd-e33e19a10fce",
+      "title": "Long Weekend",
+      "datetime": "2027-01-15T00:00",
+      "endDatetime": "2027-01-15T00:00",
+      "allDay": true,
+      "url": "",
+      "description": "",
+      "location": "",
+      "category": "work",
+      "color": null,
+      "memberIds": [
+        "b1c23456-0000-0000-0000-000000000001"
+      ],
+      "reminder": "none",
+      "repeat": "none",
+      "repeatEndType": "never",
+      "repeatEndDate": null,
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-07-03T00:59:02.184Z"
     }
   ],
   "categories": [
@@ -3196,14 +3220,5 @@
       "emoji": "🍟"
     }
   ],
-  "todos": [
-    {
-      "id": "todo_1782836130703_ov1ah",
-      "text": "特會小排蒙恩分享",
-      "priority": "high",
-      "category": "",
-      "done": true,
-      "createdAt": "2026-06-30T16:15:30.703Z"
-    }
-  ]
+  "todos": []
 }
