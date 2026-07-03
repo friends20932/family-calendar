@@ -3264,11 +3264,11 @@
       "createdAt": "2026-07-03T01:01:41.088Z"
     },
     {
-      "id": "942fa780-a176-4e89-91e4-414bd1c6e671",
+      "id": "8eb82f0e-889c-41d2-82f1-3ffa525f125d",
       "title": "Long Weekend",
-      "datetime": "2027-07-23T09:00",
-      "endDatetime": "2027-07-23T10:00",
-      "allDay": false,
+      "datetime": "2027-08-06T00:00",
+      "endDatetime": "2027-08-06T00:00",
+      "allDay": true,
       "url": "",
       "description": "",
       "location": "",
@@ -3285,7 +3285,7 @@
       "repeatWeeklyDays": [],
       "repeatMonthlyDate": 1,
       "excludeDates": [],
-      "createdAt": "2026-07-03T01:01:51.611Z"
+      "createdAt": "2026-07-03T01:02:03.684Z"
     }
   ],
   "categories": [
