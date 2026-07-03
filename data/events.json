@@ -3286,6 +3286,30 @@
       "repeatMonthlyDate": 1,
       "excludeDates": [],
       "createdAt": "2026-07-03T01:02:03.684Z"
+    },
+    {
+      "id": "aa349182-7de0-4457-b6a3-27e641d8a760",
+      "title": "Long Weekend",
+      "datetime": "2027-08-20T00:00",
+      "endDatetime": "2027-08-20T00:00",
+      "allDay": true,
+      "url": "",
+      "description": "",
+      "location": "",
+      "category": "work",
+      "color": null,
+      "memberIds": [
+        "b1c23456-0000-0000-0000-000000000001"
+      ],
+      "reminder": "none",
+      "repeat": "none",
+      "repeatEndType": "never",
+      "repeatEndDate": null,
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-07-03T01:02:15.796Z"
     }
   ],
   "categories": [
