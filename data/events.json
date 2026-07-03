@@ -3338,9 +3338,9 @@
     {
       "id": "195f007f-1a41-402d-b93a-ea60d47c1a81",
       "title": "Long Weekend",
-      "datetime": "2027-11-19T09:00",
-      "endDatetime": "2027-11-19T10:00",
-      "allDay": false,
+      "datetime": "2027-11-19T00:00",
+      "endDatetime": "2027-11-19T00:00",
+      "allDay": true,
       "url": "",
       "description": "",
       "location": "",
@@ -3352,10 +3352,10 @@
       "reminder": "none",
       "repeat": "none",
       "repeatEndType": "never",
-      "repeatEndDate": null,
-      "repeatEndCount": 10,
+      "repeatEndDate": "",
+      "repeatEndCount": "10",
       "repeatWeeklyDays": [],
-      "repeatMonthlyDate": 1,
+      "repeatMonthlyDate": "1",
       "excludeDates": [],
       "createdAt": "2026-07-03T01:02:58.956Z"
     }
