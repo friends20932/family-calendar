@@ -19,7 +19,7 @@ import {
   requestNotificationPermission, scheduleLocalReminders, startPeriodicCheck
 } from './notifications.js?v=2';
 import {
-  loadTodos, saveTodos, addTodo, toggleTodo, deleteTodo, clearDoneTodos, updateTodo, PRIORITY_CONFIG
+  loadTodos, saveTodos, addTodo, toggleTodo, deleteTodo, clearDoneTodos, updateTodo, PRIORITY_CONFIG, loadDeletedTodoIds
 } from './todos.js';
 
 // ── State ───────────────────────────────────────────────────
@@ -1210,10 +1210,13 @@ async function pullFromGitHub() {
         if (remoteData.members) saveMembers(remoteData.members);
         if (Array.isArray(remoteData.todos)) {
           // 合併策略：以本機為主，遠端只補上本機沒有的「未完成」項目
-          // 避免本機清除的已完成項目被遠端覆蓋回來
+          // 同時排除本機已明確刪除的 ID（黑名單），避免清除後又被遠端覆蓋回來
           const localTodos = loadTodos();
           const localIds = new Set(localTodos.map(t => t.id));
-          const newFromRemote = remoteData.todos.filter(t => !localIds.has(t.id) && !t.done);
+          const deletedIds = new Set(loadDeletedTodoIds());
+          const newFromRemote = remoteData.todos.filter(
+            t => !localIds.has(t.id) && !t.done && !deletedIds.has(t.id)
+          );
           saveTodos([...localTodos, ...newFromRemote]);
           renderTodos();
         }

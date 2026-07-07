@@ -3,6 +3,8 @@
 // ============================================================
 
 const TODO_STORAGE_KEY = 'family_calendar_todos';
+// IDs that were explicitly deleted locally — used to prevent pull from restoring them
+const TODO_DELETED_IDS_KEY = 'family_calendar_todos_deleted';
 
 const PRIORITY_CONFIG = {
   high:   { label: '高', color: '#d97373', bg: '#fef2f2', border: '#fecaca' },
@@ -42,13 +44,33 @@ export function toggleTodo(id) {
   return todo;
 }
 
+/** 取得本機已明確刪除的 Todo ID 黑名單 */
+export function loadDeletedTodoIds() {
+  try {
+    return JSON.parse(localStorage.getItem(TODO_DELETED_IDS_KEY)) || [];
+  } catch { return []; }
+}
+
+/** 將 ID 加入黑名單，避免 pull 時被遠端覆蓋回來 */
+function markAsDeleted(ids) {
+  const existing = new Set(loadDeletedTodoIds());
+  ids.forEach(id => existing.add(id));
+  // 只保留最近 500 筆，避免無限增長
+  const trimmed = [...existing].slice(-500);
+  localStorage.setItem(TODO_DELETED_IDS_KEY, JSON.stringify(trimmed));
+}
+
 export function deleteTodo(id) {
+  markAsDeleted([id]);
   const todos = loadTodos().filter(t => t.id !== id);
   saveTodos(todos);
 }
 
 export function clearDoneTodos() {
-  saveTodos(loadTodos().filter(t => !t.done));
+  const all = loadTodos();
+  const doneIds = all.filter(t => t.done).map(t => t.id);
+  markAsDeleted(doneIds);
+  saveTodos(all.filter(t => !t.done));
 }
 
 export function updateTodo(id, changes) {
