@@ -88,7 +88,10 @@ const todayEvents = events
   .sort((a, b) => {
     if (a.allDay && !b.allDay) return -1;
     if (!a.allDay && b.allDay) return 1;
-    return (a.datetime || '').localeCompare(b.datetime || '');
+    // 只取 HH:MM（第 11~16 字元）比較，避免重複行程的原始日期干擾排序
+    const timeA = (a.datetime || '').slice(11, 16);
+    const timeB = (b.datetime || '').slice(11, 16);
+    return timeA.localeCompare(timeB);
   });
 
 console.log(`✅ 今日行程：${todayEvents.length} 筆`);
