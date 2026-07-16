@@ -3508,7 +3508,7 @@
       "text": "小時達",
       "priority": "high",
       "category": "family",
-      "done": false,
+      "done": true,
       "createdAt": "2026-06-09T01:40:04.875Z"
     },
     {
@@ -3516,7 +3516,7 @@
       "text": "特會小排蒙恩分享",
       "priority": "high",
       "category": "",
-      "done": false,
+      "done": true,
       "createdAt": "2026-06-30T16:15:30.703Z"
     }
   ]
