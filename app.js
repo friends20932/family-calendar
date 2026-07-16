@@ -1213,7 +1213,14 @@ async function pullFromGitHub() {
           // 同時排除本機已明確刪除的 ID（黑名單），避免清除後又被遠端覆蓋回來
           const localTodos = loadTodos();
           const localIds = new Set(localTodos.map(t => t.id));
-          const deletedIds = new Set(loadDeletedTodoIds());
+          // 合併本機和遠端的刪除黑名單，並持久化
+          const localDeletedIds = loadDeletedTodoIds();
+          const remoteDeletedIds = Array.isArray(remoteData.deletedTodoIds) ? remoteData.deletedTodoIds : [];
+          const mergedDeletedIds = [...new Set([...localDeletedIds, ...remoteDeletedIds])];
+          if (mergedDeletedIds.length > localDeletedIds.length) {
+            localStorage.setItem('family_calendar_todos_deleted', JSON.stringify(mergedDeletedIds.slice(-500)));
+          }
+          const deletedIds = new Set(mergedDeletedIds);
           const newFromRemote = remoteData.todos.filter(
             t => !localIds.has(t.id) && !t.done && !deletedIds.has(t.id)
           );
@@ -1393,11 +1400,13 @@ async function syncToGitHub(silent = false) {
     return;
   }
 
-  // Update UI
-  btn.disabled = true;
-  icon.textContent = '⏳';
-  status.textContent = '同步中…';
-  status.className = 'sync-status syncing';
+  // Update UI (guard against null in silent mode)
+  if (btn) btn.disabled = true;
+  if (icon) icon.textContent = '⏳';
+  if (status) {
+    status.textContent = '同步中…';
+    status.className = 'sync-status syncing';
+  }
 
   try {
     let events  = loadEvents();
@@ -1449,7 +1458,8 @@ async function syncToGitHub(silent = false) {
     }
 
     const todos = loadTodos();
-    const syncData = { events, categories, members, todos };
+    const deletedTodoIds = loadDeletedTodoIds();
+    const syncData = { events, categories, members, todos, deletedTodoIds };
     const content = btoa(unescape(encodeURIComponent(JSON.stringify(syncData, null, 2))));
     const headers = {
       'Authorization': `token ${pat}`,
@@ -1511,22 +1521,26 @@ async function syncToGitHub(silent = false) {
     // Push config.json as well to keep members/categories synced
     await pushConfigToGitHub();
 
-    icon.textContent = '✅';
-    status.textContent = `已同步 ${events.length} 筆行程、${todos.length} 筆待辦`;
-    status.className = 'sync-status success';
+    if (icon) icon.textContent = '✅';
+    if (status) {
+      status.textContent = `已同步 ${events.length} 筆行程、${todos.length} 筆待辦`;
+      status.className = 'sync-status success';
+    }
     if (!silent) showToast(`✅ 已同步 ${events.length} 筆行程、${todos.length} 筆待辦到 GitHub`);
 
   } catch (e) {
     console.error('Sync error:', e);
-    icon.textContent = '❌';
-    status.textContent = e.message || '同步失敗';
-    status.className = 'sync-status error';
+    if (icon) icon.textContent = '❌';
+    if (status) {
+      status.textContent = e.message || '同步失敗';
+      status.className = 'sync-status error';
+    }
     if (!silent) showToast('❌ 同步失敗：' + (e.message || '未知錯誤'), 'error');
   } finally {
-    btn.disabled = false;
+    if (btn) btn.disabled = false;
     setTimeout(() => {
-      icon.textContent = '☁️';
-      if (status.className.includes('success')) {
+      if (icon) icon.textContent = '☁️';
+      if (status && status.className.includes('success')) {
         status.className = 'sync-status';
       }
     }, 5000);
