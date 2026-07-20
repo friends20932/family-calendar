@@ -3408,6 +3408,31 @@
       "repeatMonthlyDate": 1,
       "excludeDates": [],
       "createdAt": "2026-07-15T09:00:14.438Z"
+    },
+    {
+      "id": "566567fa-1145-4ba2-aa0f-0b5f22884ba5",
+      "title": "儆晨回診",
+      "datetime": "2026-07-23T18:00",
+      "endDatetime": "2026-07-23T19:00",
+      "allDay": false,
+      "url": "",
+      "description": "",
+      "location": "",
+      "category": "health",
+      "color": null,
+      "memberIds": [
+        "b1c23456-0000-0000-0000-000000000001",
+        "b1c23456-0000-0000-0000-000000000003"
+      ],
+      "reminder": "none",
+      "repeat": "none",
+      "repeatEndType": "never",
+      "repeatEndDate": null,
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-07-20T02:16:56.218Z"
     }
   ],
   "categories": [
