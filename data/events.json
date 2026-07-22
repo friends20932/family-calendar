@@ -3421,16 +3421,15 @@
       "category": "health",
       "color": null,
       "memberIds": [
-        "b1c23456-0000-0000-0000-000000000001",
         "b1c23456-0000-0000-0000-000000000003"
       ],
       "reminder": "none",
       "repeat": "none",
       "repeatEndType": "never",
-      "repeatEndDate": null,
-      "repeatEndCount": 10,
+      "repeatEndDate": "",
+      "repeatEndCount": "10",
       "repeatWeeklyDays": [],
-      "repeatMonthlyDate": 1,
+      "repeatMonthlyDate": "1",
       "excludeDates": [],
       "createdAt": "2026-07-20T02:16:56.218Z"
     },
