@@ -3458,6 +3458,30 @@
       "repeatMonthlyDate": 1,
       "excludeDates": [],
       "createdAt": "2026-07-20T02:18:52.834Z"
+    },
+    {
+      "id": "c54c1e39-3d17-4e06-ad0d-8e494bea72e1",
+      "title": "月嫂洽談",
+      "datetime": "2026-07-23T19:00",
+      "endDatetime": "2026-07-23T19:30",
+      "allDay": false,
+      "url": "",
+      "description": "",
+      "location": "",
+      "category": "family",
+      "color": null,
+      "memberIds": [
+        "b1c23456-0000-0000-0000-000000000001"
+      ],
+      "reminder": "none",
+      "repeat": "none",
+      "repeatEndType": "never",
+      "repeatEndDate": null,
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-07-22T03:10:29.003Z"
     }
   ],
   "categories": [
