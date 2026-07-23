@@ -3532,11 +3532,11 @@
       "createdAt": "2026-07-23T15:02:53.598Z"
     },
     {
-      "id": "eea2c76b-d42f-43ea-a4b4-52ad65e20949",
+      "id": "4af271fa-a4a4-489b-a587-29032721b3f8",
       "title": "大里會所住宿相調",
-      "datetime": "2026-08-01T16:00",
-      "endDatetime": "2026-08-02T13:00",
-      "allDay": false,
+      "datetime": "2026-08-01T00:00",
+      "endDatetime": "2026-08-02T00:00",
+      "allDay": true,
       "url": "",
       "description": "",
       "location": "",
@@ -3556,7 +3556,7 @@
       "repeatWeeklyDays": [],
       "repeatMonthlyDate": 1,
       "excludeDates": [],
-      "createdAt": "2026-07-23T15:03:49.799Z"
+      "createdAt": "2026-07-23T15:04:21.188Z"
     }
   ],
   "categories": [
