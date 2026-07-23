@@ -3557,6 +3557,30 @@
       "repeatMonthlyDate": 1,
       "excludeDates": [],
       "createdAt": "2026-07-23T15:04:21.188Z"
+    },
+    {
+      "id": "884873a2-bf81-4bca-aa56-516a204b905d",
+      "title": "台中婦幼展",
+      "datetime": "2026-08-21T10:00",
+      "endDatetime": "2026-08-21T12:00",
+      "allDay": false,
+      "url": "",
+      "description": "",
+      "location": "",
+      "category": "family",
+      "color": null,
+      "memberIds": [
+        "b1c23456-0000-0000-0000-000000000001"
+      ],
+      "reminder": "none",
+      "repeat": "none",
+      "repeatEndType": "never",
+      "repeatEndDate": null,
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-07-23T15:05:21.189Z"
     }
   ],
   "categories": [
