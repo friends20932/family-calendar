@@ -3506,6 +3506,30 @@
       "repeatMonthlyDate": 1,
       "excludeDates": [],
       "createdAt": "2026-07-23T14:59:22.932Z"
+    },
+    {
+      "id": "deccbb8c-90e5-4586-ab4d-d1dd4cfe4f46",
+      "title": "汽車保養",
+      "datetime": "2026-08-07T09:30",
+      "endDatetime": "2026-08-07T10:30",
+      "allDay": false,
+      "url": "",
+      "description": "",
+      "location": "",
+      "category": "family",
+      "color": null,
+      "memberIds": [
+        "b1c23456-0000-0000-0000-000000000001"
+      ],
+      "reminder": "none",
+      "repeat": "none",
+      "repeatEndType": "never",
+      "repeatEndDate": null,
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-07-23T15:02:53.598Z"
     }
   ],
   "categories": [
