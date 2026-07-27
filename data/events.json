@@ -3605,6 +3605,30 @@
       "repeatMonthlyDate": 1,
       "excludeDates": [],
       "createdAt": "2026-07-27T07:08:33.697Z"
+    },
+    {
+      "id": "ae7c5c03-def4-4e3e-b18e-9ea4cc7bf5fb",
+      "title": "恩言遠足物品預備",
+      "datetime": "2026-08-05T00:00",
+      "endDatetime": "2026-08-05T00:00",
+      "allDay": true,
+      "url": "",
+      "description": "",
+      "location": "",
+      "category": "school",
+      "color": null,
+      "memberIds": [
+        "b1c23456-0000-0000-0000-000000000002"
+      ],
+      "reminder": "30",
+      "repeat": "none",
+      "repeatEndType": "never",
+      "repeatEndDate": null,
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-07-27T07:08:48.219Z"
     }
   ],
   "categories": [
