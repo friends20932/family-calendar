@@ -3581,6 +3581,30 @@
       "repeatMonthlyDate": "1",
       "excludeDates": [],
       "createdAt": "2026-07-23T15:05:21.189Z"
+    },
+    {
+      "id": "36074db6-2b7f-467c-a6ad-ef93d45b85f7",
+      "title": "恩言水仗物品攜帶",
+      "datetime": "2026-07-29T00:00",
+      "endDatetime": "2026-07-29T00:00",
+      "allDay": true,
+      "url": "",
+      "description": "",
+      "location": "",
+      "category": "school",
+      "color": null,
+      "memberIds": [
+        "b1c23456-0000-0000-0000-000000000002"
+      ],
+      "reminder": "30",
+      "repeat": "none",
+      "repeatEndType": "never",
+      "repeatEndDate": null,
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-07-27T07:08:33.697Z"
     }
   ],
   "categories": [
