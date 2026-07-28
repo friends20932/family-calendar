@@ -3629,6 +3629,33 @@
       "repeatMonthlyDate": 1,
       "excludeDates": [],
       "createdAt": "2026-07-27T07:08:48.219Z"
+    },
+    {
+      "id": "c7a8c6ea-f30c-40d7-b13b-4893380d3a10",
+      "title": "大買家",
+      "datetime": "2026-07-29T18:00",
+      "endDatetime": "2026-07-29T20:00",
+      "allDay": false,
+      "url": "",
+      "description": "儆晨鞋子\n米\n雞蛋\n布丁\n牛奶",
+      "location": "",
+      "category": "family",
+      "color": null,
+      "memberIds": [
+        "8fd52380-c506-4a41-9302-e38ea61fff96",
+        "b1c23456-0000-0000-0000-000000000001",
+        "b1c23456-0000-0000-0000-000000000002",
+        "b1c23456-0000-0000-0000-000000000003"
+      ],
+      "reminder": "30",
+      "repeat": "none",
+      "repeatEndType": "never",
+      "repeatEndDate": null,
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-07-28T00:41:01.503Z"
     }
   ],
   "categories": [
