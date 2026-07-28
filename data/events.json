@@ -3734,7 +3734,7 @@
     },
     {
       "id": "32e03906-42d1-45b4-bcf7-fe4576a282d5",
-      "title": "新約追求",
+      "title": "登峰計畫－新約追求",
       "datetime": "2026-07-29T21:30",
       "endDatetime": "2026-07-29T22:00",
       "allDay": false,
@@ -3750,11 +3750,11 @@
       "repeat": "weekly",
       "repeatEndType": "date",
       "repeatEndDate": "2026-12-31",
-      "repeatEndCount": 10,
+      "repeatEndCount": "10",
       "repeatWeeklyDays": [
         3
       ],
-      "repeatMonthlyDate": 1,
+      "repeatMonthlyDate": "1",
       "excludeDates": [],
       "createdAt": "2026-07-28T07:22:07.916Z"
     }
