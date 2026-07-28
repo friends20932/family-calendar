@@ -3757,6 +3757,32 @@
       "repeatMonthlyDate": "1",
       "excludeDates": [],
       "createdAt": "2026-07-28T07:22:07.916Z"
+    },
+    {
+      "id": "749695f8-588f-47fd-90fb-dc9c398cf3f8",
+      "title": "登峰計畫－書報追求",
+      "datetime": "2026-07-27T21:30",
+      "endDatetime": "2026-07-27T22:30",
+      "allDay": false,
+      "url": "",
+      "description": "",
+      "location": "",
+      "category": "church",
+      "color": null,
+      "memberIds": [
+        "b1c23456-0000-0000-0000-000000000001"
+      ],
+      "reminder": "none",
+      "repeat": "weekly",
+      "repeatEndType": "date",
+      "repeatEndDate": "2026-12-31",
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [
+        1
+      ],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-07-28T07:22:45.906Z"
     }
   ],
   "categories": [
