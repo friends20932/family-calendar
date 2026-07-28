@@ -3731,6 +3731,32 @@
       "repeatMonthlyDate": 1,
       "excludeDates": [],
       "createdAt": "2026-07-28T07:21:28.689Z"
+    },
+    {
+      "id": "32e03906-42d1-45b4-bcf7-fe4576a282d5",
+      "title": "新約追求",
+      "datetime": "2026-07-29T21:30",
+      "endDatetime": "2026-07-29T22:00",
+      "allDay": false,
+      "url": "",
+      "description": "",
+      "location": "",
+      "category": "church",
+      "color": null,
+      "memberIds": [
+        "b1c23456-0000-0000-0000-000000000001"
+      ],
+      "reminder": "none",
+      "repeat": "weekly",
+      "repeatEndType": "date",
+      "repeatEndDate": "2026-12-31",
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [
+        3
+      ],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-07-28T07:22:07.916Z"
     }
   ],
   "categories": [
