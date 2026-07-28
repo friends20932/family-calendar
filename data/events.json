@@ -3812,9 +3812,9 @@
     {
       "id": "e797205f-2db1-4c9e-91d5-b7e469cfd3b9",
       "title": "小孩開學",
-      "datetime": "2027-02-15T09:00",
-      "endDatetime": "2027-02-15T10:00",
-      "allDay": false,
+      "datetime": "2027-02-15T00:00",
+      "endDatetime": "2027-02-15T00:00",
+      "allDay": true,
       "url": "",
       "description": "",
       "location": "",
@@ -3827,10 +3827,10 @@
       "reminder": "none",
       "repeat": "none",
       "repeatEndType": "never",
-      "repeatEndDate": null,
-      "repeatEndCount": 10,
+      "repeatEndDate": "",
+      "repeatEndCount": "10",
       "repeatWeeklyDays": [],
-      "repeatMonthlyDate": 1,
+      "repeatMonthlyDate": "1",
       "excludeDates": [],
       "createdAt": "2026-07-28T07:25:07.380Z"
     }
