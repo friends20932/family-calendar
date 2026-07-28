@@ -3659,7 +3659,7 @@
     },
     {
       "id": "017c0715-bb34-4e7a-abe3-adee5340d0f9",
-      "title": "申請X光片",
+      "title": "申請X光片/產檢收據",
       "datetime": "2026-07-31T13:30",
       "endDatetime": "2026-07-31T14:00",
       "allDay": false,
@@ -3674,10 +3674,10 @@
       "reminder": "none",
       "repeat": "none",
       "repeatEndType": "never",
-      "repeatEndDate": null,
-      "repeatEndCount": 10,
+      "repeatEndDate": "",
+      "repeatEndCount": "10",
       "repeatWeeklyDays": [],
-      "repeatMonthlyDate": 1,
+      "repeatMonthlyDate": "1",
       "excludeDates": [],
       "createdAt": "2026-07-28T03:40:08.605Z"
     },
