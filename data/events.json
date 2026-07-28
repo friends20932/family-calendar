@@ -831,7 +831,7 @@
       "reminder": "none",
       "repeat": "weekly",
       "repeatEndType": "date",
-      "repeatEndDate": "2026-12-31",
+      "repeatEndDate": "2026-08-23",
       "repeatEndCount": 10,
       "repeatWeeklyDays": [
         1
