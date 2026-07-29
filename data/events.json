@@ -3833,6 +3833,31 @@
       "repeatMonthlyDate": "1",
       "excludeDates": [],
       "createdAt": "2026-07-28T07:25:07.380Z"
+    },
+    {
+      "id": "ab4614f9-7009-4da2-a10f-411a452eed24",
+      "title": "搬衣物",
+      "datetime": "2026-08-02T15:30",
+      "endDatetime": "2026-08-02T16:30",
+      "allDay": false,
+      "url": "https://maps.app.goo.gl/Su8Ng5jE3QzjYsw69",
+      "description": "廖慧玲姐妹\n家電：04-26521939",
+      "location": "遊園南路340號",
+      "category": "church",
+      "color": null,
+      "memberIds": [
+        "8fd52380-c506-4a41-9302-e38ea61fff96",
+        "b1c23456-0000-0000-0000-000000000001"
+      ],
+      "reminder": "none",
+      "repeat": "none",
+      "repeatEndType": "never",
+      "repeatEndDate": null,
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-07-29T00:25:47.676Z"
     }
   ],
   "categories": [
