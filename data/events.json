@@ -3936,6 +3936,32 @@
       "repeatMonthlyDate": 1,
       "excludeDates": [],
       "createdAt": "2026-08-03T01:11:22.166Z"
+    },
+    {
+      "id": "4ad881b3-666e-473a-89b3-0001833aa840",
+      "title": "幼兒班服事",
+      "datetime": "2026-12-06T09:00",
+      "endDatetime": "2026-12-06T00:00",
+      "allDay": false,
+      "url": "",
+      "description": "",
+      "location": "",
+      "category": "church",
+      "color": null,
+      "memberIds": [
+        "b1c23456-0000-0000-0000-000000000001",
+        "b1c23456-0000-0000-0000-000000000002",
+        "b1c23456-0000-0000-0000-000000000003"
+      ],
+      "reminder": "none",
+      "repeat": "none",
+      "repeatEndType": "never",
+      "repeatEndDate": null,
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-08-03T01:11:54.740Z"
     }
   ],
   "categories": [
