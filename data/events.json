@@ -3986,6 +3986,33 @@
       "repeatMonthlyDate": 1,
       "excludeDates": [],
       "createdAt": "2026-08-04T01:45:13.299Z"
+    },
+    {
+      "id": "19977e14-1103-4576-b694-4b895b5156c4",
+      "title": "23大區青少年服事交通",
+      "datetime": "2026-08-04T18:00",
+      "endDatetime": "2026-08-04T20:00",
+      "allDay": false,
+      "url": "",
+      "description": "",
+      "location": "",
+      "category": "church",
+      "color": null,
+      "memberIds": [
+        "8fd52380-c506-4a41-9302-e38ea61fff96",
+        "b1c23456-0000-0000-0000-000000000001",
+        "b1c23456-0000-0000-0000-000000000002",
+        "b1c23456-0000-0000-0000-000000000003"
+      ],
+      "reminder": "none",
+      "repeat": "none",
+      "repeatEndType": "never",
+      "repeatEndDate": null,
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-08-04T01:52:32.526Z"
     }
   ],
   "categories": [
