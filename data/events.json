@@ -4013,6 +4013,30 @@
       "repeatMonthlyDate": 1,
       "excludeDates": [],
       "createdAt": "2026-08-04T01:52:32.526Z"
+    },
+    {
+      "id": "bc33fe43-cc2b-4e95-827f-0929b9b8af78",
+      "title": "姊妹成全",
+      "datetime": "2026-08-08T19:45",
+      "endDatetime": "2026-08-08T21:00",
+      "allDay": false,
+      "url": "",
+      "description": "",
+      "location": "",
+      "category": "church",
+      "color": null,
+      "memberIds": [
+        "b1c23456-0000-0000-0000-000000000001"
+      ],
+      "reminder": "none",
+      "repeat": "none",
+      "repeatEndType": "never",
+      "repeatEndDate": null,
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-08-04T12:25:31.570Z"
     }
   ],
   "categories": [
