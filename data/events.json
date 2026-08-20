@@ -4097,7 +4097,7 @@
       "url": "",
       "description": "",
       "location": "",
-      "category": "church",
+      "category": "health",
       "color": null,
       "memberIds": [
         "8fd52380-c506-4a41-9302-e38ea61fff96",
@@ -4106,10 +4106,10 @@
       "reminder": "none",
       "repeat": "none",
       "repeatEndType": "never",
-      "repeatEndDate": null,
-      "repeatEndCount": 10,
+      "repeatEndDate": "",
+      "repeatEndCount": "10",
       "repeatWeeklyDays": [],
-      "repeatMonthlyDate": 1,
+      "repeatMonthlyDate": "1",
       "excludeDates": [],
       "createdAt": "2026-08-20T01:43:04.634Z"
     },
