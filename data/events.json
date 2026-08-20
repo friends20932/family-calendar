@@ -4136,6 +4136,33 @@
       "repeatMonthlyDate": 1,
       "excludeDates": [],
       "createdAt": "2026-08-20T01:43:25.158Z"
+    },
+    {
+      "id": "87d3c900-db3f-4704-96fa-fb00562bd0f7",
+      "title": "買品格園飲品",
+      "datetime": "2026-08-22T15:00",
+      "endDatetime": "2026-08-22T16:00",
+      "allDay": false,
+      "url": "",
+      "description": "",
+      "location": "",
+      "category": "church",
+      "color": null,
+      "memberIds": [
+        "8fd52380-c506-4a41-9302-e38ea61fff96",
+        "b1c23456-0000-0000-0000-000000000001",
+        "b1c23456-0000-0000-0000-000000000002",
+        "b1c23456-0000-0000-0000-000000000003"
+      ],
+      "reminder": "none",
+      "repeat": "none",
+      "repeatEndType": "never",
+      "repeatEndDate": null,
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-08-20T01:44:17.106Z"
     }
   ],
   "categories": [
