@@ -4260,6 +4260,30 @@
       "repeatMonthlyDate": 1,
       "excludeDates": [],
       "createdAt": "2026-08-22T02:47:20.630Z"
+    },
+    {
+      "id": "35821eba-ec15-4f81-9ff4-0e9f1b7d83cb",
+      "title": "儆晨買花",
+      "datetime": "2026-12-13T00:00",
+      "endDatetime": "2026-12-13T00:00",
+      "allDay": true,
+      "url": "",
+      "description": "",
+      "location": "",
+      "category": "school",
+      "color": null,
+      "memberIds": [
+        "b1c23456-0000-0000-0000-000000000003"
+      ],
+      "reminder": "30",
+      "repeat": "none",
+      "repeatEndType": "never",
+      "repeatEndDate": null,
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-08-22T02:47:54.916Z"
     }
   ],
   "categories": [
