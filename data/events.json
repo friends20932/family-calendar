@@ -4284,6 +4284,30 @@
       "repeatMonthlyDate": 1,
       "excludeDates": [],
       "createdAt": "2026-08-22T02:47:54.916Z"
+    },
+    {
+      "id": "13f0407b-2569-4cee-8bdf-a013a25761c2",
+      "title": "儆晨圖書分享",
+      "datetime": "2027-01-11T00:00",
+      "endDatetime": "2027-01-11T00:00",
+      "allDay": true,
+      "url": "",
+      "description": "",
+      "location": "",
+      "category": "school",
+      "color": null,
+      "memberIds": [
+        "b1c23456-0000-0000-0000-000000000003"
+      ],
+      "reminder": "30",
+      "repeat": "none",
+      "repeatEndType": "never",
+      "repeatEndDate": null,
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-08-22T02:48:15.543Z"
     }
   ],
   "categories": [
