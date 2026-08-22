@@ -4163,6 +4163,30 @@
       "repeatMonthlyDate": 1,
       "excludeDates": [],
       "createdAt": "2026-08-20T01:44:17.106Z"
+    },
+    {
+      "id": "ddce411c-03d7-4a6d-aa16-152f1479a140",
+      "title": "儆晨戶外教學",
+      "datetime": "2026-10-21T00:00",
+      "endDatetime": "2026-10-21T00:00",
+      "allDay": true,
+      "url": "",
+      "description": "",
+      "location": "科博館",
+      "category": "school",
+      "color": null,
+      "memberIds": [
+        "b1c23456-0000-0000-0000-000000000003"
+      ],
+      "reminder": "30",
+      "repeat": "none",
+      "repeatEndType": "never",
+      "repeatEndDate": null,
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-08-22T02:44:26.782Z"
     }
   ],
   "categories": [
