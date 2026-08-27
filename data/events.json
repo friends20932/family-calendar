@@ -4356,6 +4356,30 @@
       "repeatMonthlyDate": 1,
       "excludeDates": [],
       "createdAt": "2026-08-27T03:23:19.777Z"
+    },
+    {
+      "id": "a159bb08-3181-4045-8cd2-d46db1f3af91",
+      "title": "恩言戶外教學",
+      "datetime": "2026-09-23T00:00",
+      "endDatetime": "2026-09-23T00:00",
+      "allDay": true,
+      "url": "",
+      "description": "",
+      "location": "",
+      "category": "school",
+      "color": null,
+      "memberIds": [
+        "b1c23456-0000-0000-0000-000000000002"
+      ],
+      "reminder": "30",
+      "repeat": "none",
+      "repeatEndType": "never",
+      "repeatEndDate": null,
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-08-27T03:27:33.505Z"
     }
   ],
   "categories": [
