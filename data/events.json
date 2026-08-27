@@ -4380,6 +4380,30 @@
       "repeatMonthlyDate": "1",
       "excludeDates": [],
       "createdAt": "2026-08-27T03:27:33.505Z"
+    },
+    {
+      "id": "a82ea33d-6b95-4bfa-b96a-232a41782393",
+      "title": "恩言戶外教學",
+      "datetime": "2026-10-28T00:00",
+      "endDatetime": "2026-10-28T00:00",
+      "allDay": true,
+      "url": "",
+      "description": "",
+      "location": "科博館",
+      "category": "school",
+      "color": null,
+      "memberIds": [
+        "b1c23456-0000-0000-0000-000000000002"
+      ],
+      "reminder": "30",
+      "repeat": "none",
+      "repeatEndType": "never",
+      "repeatEndDate": null,
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-08-27T03:28:12.753Z"
     }
   ],
   "categories": [
