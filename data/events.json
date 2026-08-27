@@ -4404,6 +4404,30 @@
       "repeatMonthlyDate": 1,
       "excludeDates": [],
       "createdAt": "2026-08-27T04:09:58.665Z"
+    },
+    {
+      "id": "a73def1a-3a65-4641-bbdb-20046b21da64",
+      "title": "恩言圖書分享",
+      "datetime": "2026-10-20T00:00",
+      "endDatetime": "2026-10-20T00:00",
+      "allDay": true,
+      "url": "",
+      "description": "",
+      "location": "",
+      "category": "school",
+      "color": null,
+      "memberIds": [
+        "b1c23456-0000-0000-0000-000000000002"
+      ],
+      "reminder": "30",
+      "repeat": "none",
+      "repeatEndType": "never",
+      "repeatEndDate": null,
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-08-27T04:10:39.495Z"
     }
   ],
   "categories": [
