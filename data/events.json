@@ -4286,30 +4286,6 @@
       "createdAt": "2026-08-22T02:48:15.543Z"
     },
     {
-      "id": "cb141a4e-b462-4056-abe2-ecda2dd02b0e",
-      "title": "全聯換購調理機",
-      "datetime": "2026-08-28T00:00",
-      "endDatetime": "2026-08-28T00:00",
-      "allDay": true,
-      "url": "",
-      "description": "",
-      "location": "",
-      "category": "family",
-      "color": null,
-      "memberIds": [
-        "b1c23456-0000-0000-0000-000000000001"
-      ],
-      "reminder": "30",
-      "repeat": "none",
-      "repeatEndType": "never",
-      "repeatEndDate": "",
-      "repeatEndCount": "10",
-      "repeatWeeklyDays": [],
-      "repeatMonthlyDate": "1",
-      "excludeDates": [],
-      "createdAt": "2026-08-27T03:22:37.387Z"
-    },
-    {
       "id": "7a4fcc01-2022-4eee-886b-ebcc12e25486",
       "title": "洗水塔師傅場勘",
       "datetime": "2026-08-28T12:00",
