@@ -4428,6 +4428,30 @@
       "repeatMonthlyDate": 1,
       "excludeDates": [],
       "createdAt": "2026-08-27T04:10:56.895Z"
+    },
+    {
+      "id": "be97885e-97d4-4f0a-8016-2a705a907e96",
+      "title": "借書／買大黃瓜",
+      "datetime": "2026-08-28T00:00",
+      "endDatetime": "2026-08-28T00:00",
+      "allDay": true,
+      "url": "",
+      "description": "",
+      "location": "",
+      "category": "family",
+      "color": null,
+      "memberIds": [
+        "b1c23456-0000-0000-0000-000000000001"
+      ],
+      "reminder": "30",
+      "repeat": "none",
+      "repeatEndType": "never",
+      "repeatEndDate": null,
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-08-28T01:26:52.584Z"
     }
   ],
   "categories": [
