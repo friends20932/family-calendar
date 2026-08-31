@@ -4677,6 +4677,32 @@
       "repeatMonthlyDate": 1,
       "excludeDates": [],
       "createdAt": "2026-08-31T02:12:00.174Z"
+    },
+    {
+      "id": "f20ed1cd-3d80-4a79-a0a8-5d9684d8b641",
+      "title": "恩言買禮物+慶生",
+      "datetime": "2026-09-24T00:00",
+      "endDatetime": "2026-09-24T00:00",
+      "allDay": true,
+      "url": "",
+      "description": "",
+      "location": "",
+      "category": "family",
+      "color": null,
+      "memberIds": [
+        "b1c23456-0000-0000-0000-000000000001",
+        "b1c23456-0000-0000-0000-000000000002",
+        "b1c23456-0000-0000-0000-000000000003"
+      ],
+      "reminder": "30",
+      "repeat": "none",
+      "repeatEndType": "never",
+      "repeatEndDate": null,
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-08-31T02:14:41.498Z"
     }
   ],
   "categories": [
