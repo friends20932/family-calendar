@@ -4611,14 +4611,16 @@
       "location": "",
       "category": "church",
       "color": null,
-      "memberIds": [],
+      "memberIds": [
+        "b1c23456-0000-0000-0000-000000000001"
+      ],
       "reminder": "30",
       "repeat": "none",
       "repeatEndType": "never",
-      "repeatEndDate": null,
-      "repeatEndCount": 10,
+      "repeatEndDate": "",
+      "repeatEndCount": "10",
       "repeatWeeklyDays": [],
-      "repeatMonthlyDate": 1,
+      "repeatMonthlyDate": "1",
       "excludeDates": [],
       "createdAt": "2026-08-31T01:45:35.321Z"
     }
