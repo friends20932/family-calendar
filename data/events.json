@@ -4061,7 +4061,9 @@
         4
       ],
       "repeatMonthlyDate": 1,
-      "excludeDates": [],
+      "excludeDates": [
+        "2026-10-08"
+      ],
       "createdAt": "2026-08-20T01:42:35.306Z"
     },
     {
@@ -4647,6 +4649,32 @@
       "repeatMonthlyDate": 1,
       "excludeDates": [],
       "createdAt": "2026-08-31T02:11:49.268Z"
+    },
+    {
+      "id": "01087853-aa39-4cdc-8a45-6bdef81927e0",
+      "title": "得榮少年上課",
+      "datetime": "2026-10-15T19:00",
+      "endDatetime": "2026-10-15T20:00",
+      "allDay": false,
+      "url": "",
+      "description": "",
+      "location": "",
+      "category": "church",
+      "color": null,
+      "memberIds": [
+        "b1c23456-0000-0000-0000-000000000001"
+      ],
+      "reminder": "none",
+      "repeat": "none",
+      "repeatEndType": "count",
+      "repeatEndDate": null,
+      "repeatEndCount": 8,
+      "repeatWeeklyDays": [
+        4
+      ],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-08-31T02:12:00.174Z"
     }
   ],
   "categories": [
