@@ -4500,6 +4500,30 @@
       "repeatMonthlyDate": "1",
       "excludeDates": [],
       "createdAt": "2026-08-31T01:43:47.214Z"
+    },
+    {
+      "id": "86281658-f98d-4d5b-afe4-89b6c2ae3aab",
+      "title": "主日司琴服事",
+      "datetime": "2026-10-11T09:00",
+      "endDatetime": "2026-10-11T10:00",
+      "allDay": false,
+      "url": "",
+      "description": "",
+      "location": "",
+      "category": "church",
+      "color": null,
+      "memberIds": [
+        "b1c23456-0000-0000-0000-000000000001"
+      ],
+      "reminder": "30",
+      "repeat": "none",
+      "repeatEndType": "never",
+      "repeatEndDate": null,
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-08-31T01:44:25.621Z"
     }
   ],
   "categories": [
