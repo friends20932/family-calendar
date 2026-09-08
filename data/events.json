@@ -4703,6 +4703,30 @@
       "repeatMonthlyDate": 1,
       "excludeDates": [],
       "createdAt": "2026-08-31T02:14:41.498Z"
+    },
+    {
+      "id": "79db788c-5131-4f60-9aec-c07c5b53f4cb",
+      "title": "產檢",
+      "datetime": "2026-10-05T18:00",
+      "endDatetime": "2026-10-05T19:00",
+      "allDay": false,
+      "url": "",
+      "description": "",
+      "location": "",
+      "category": "health",
+      "color": null,
+      "memberIds": [
+        "b1c23456-0000-0000-0000-000000000001"
+      ],
+      "reminder": "30",
+      "repeat": "none",
+      "repeatEndType": "never",
+      "repeatEndDate": null,
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-09-08T06:56:48.010Z"
     }
   ],
   "categories": [
