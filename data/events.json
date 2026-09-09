@@ -4751,6 +4751,31 @@
       "repeatMonthlyDate": 1,
       "excludeDates": [],
       "createdAt": "2026-09-09T03:57:31.652Z"
+    },
+    {
+      "id": "8cf1ca4c-811f-4bb0-ba9c-1e31f653cdd3",
+      "title": "露營行前交通",
+      "datetime": "2026-09-12T21:00",
+      "endDatetime": "2026-09-12T22:00",
+      "allDay": false,
+      "url": "",
+      "description": "",
+      "location": "",
+      "category": "church",
+      "color": null,
+      "memberIds": [
+        "8fd52380-c506-4a41-9302-e38ea61fff96",
+        "b1c23456-0000-0000-0000-000000000001"
+      ],
+      "reminder": "30",
+      "repeat": "none",
+      "repeatEndType": "never",
+      "repeatEndDate": null,
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-09-09T03:57:56.018Z"
     }
   ],
   "categories": [
