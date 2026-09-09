@@ -4727,6 +4727,30 @@
       "repeatMonthlyDate": 1,
       "excludeDates": [],
       "createdAt": "2026-09-08T06:56:48.010Z"
+    },
+    {
+      "id": "ac998bcf-b65f-470f-a106-10063756c707",
+      "title": "月嫂來訪簽約",
+      "datetime": "2026-09-14T19:00",
+      "endDatetime": "2026-09-14T20:00",
+      "allDay": false,
+      "url": "",
+      "description": "",
+      "location": "",
+      "category": "family",
+      "color": null,
+      "memberIds": [
+        "b1c23456-0000-0000-0000-000000000001"
+      ],
+      "reminder": "30",
+      "repeat": "none",
+      "repeatEndType": "never",
+      "repeatEndDate": null,
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-09-09T03:57:31.652Z"
     }
   ],
   "categories": [
