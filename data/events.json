@@ -4059,8 +4059,8 @@
       ],
       "reminder": "none",
       "repeat": "weekly",
-      "repeatEndType": "count",
-      "repeatEndDate": null,
+      "repeatEndType": "date",
+      "repeatEndDate": "2026-09-30",
       "repeatEndCount": 8,
       "repeatWeeklyDays": [
         4
