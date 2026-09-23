@@ -4987,6 +4987,30 @@
       "repeatMonthlyDate": 1,
       "excludeDates": [],
       "createdAt": "2026-09-22T02:55:29.341Z"
+    },
+    {
+      "id": "04fbf6a3-7154-45cd-a57f-7d4e73a777ad",
+      "title": "嘉義聖徒用餐相調",
+      "datetime": "2026-09-30T12:00",
+      "endDatetime": "2026-09-30T14:00",
+      "allDay": false,
+      "url": "https://share.google/zulMDit58rqbpbzTm",
+      "description": "",
+      "location": "厝秘",
+      "category": "church",
+      "color": null,
+      "memberIds": [
+        "b1c23456-0000-0000-0000-000000000001"
+      ],
+      "reminder": "30",
+      "repeat": "none",
+      "repeatEndType": "never",
+      "repeatEndDate": null,
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-09-23T06:35:55.730Z"
     }
   ],
   "categories": [
