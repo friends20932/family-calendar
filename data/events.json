@@ -5011,6 +5011,32 @@
       "repeatMonthlyDate": 1,
       "excludeDates": [],
       "createdAt": "2026-09-23T06:35:55.730Z"
+    },
+    {
+      "id": "6706d56a-4bba-4be1-9cd3-8ec2927057b9",
+      "title": "弟兄禱研背講",
+      "datetime": "2026-10-03T07:00",
+      "endDatetime": "2026-10-03T08:00",
+      "allDay": false,
+      "url": "",
+      "description": "",
+      "location": "",
+      "category": "church",
+      "color": null,
+      "memberIds": [
+        "8fd52380-c506-4a41-9302-e38ea61fff96"
+      ],
+      "reminder": "30",
+      "repeat": "weekly",
+      "repeatEndType": "date",
+      "repeatEndDate": "2027-01-31",
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [
+        6
+      ],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-09-29T00:46:52.661Z"
     }
   ],
   "categories": [
