@@ -5037,6 +5037,33 @@
       "repeatMonthlyDate": 1,
       "excludeDates": [],
       "createdAt": "2026-09-29T00:46:52.661Z"
+    },
+    {
+      "id": "233bca6b-7904-42e3-9c72-e2f8c73b4b67",
+      "title": "23會所兒童野餐相調",
+      "datetime": "2026-10-17T09:00",
+      "endDatetime": "2026-10-17T16:00",
+      "allDay": false,
+      "url": "",
+      "description": "",
+      "location": "",
+      "category": "church",
+      "color": null,
+      "memberIds": [
+        "8fd52380-c506-4a41-9302-e38ea61fff96",
+        "b1c23456-0000-0000-0000-000000000001",
+        "b1c23456-0000-0000-0000-000000000002",
+        "b1c23456-0000-0000-0000-000000000003"
+      ],
+      "reminder": "30",
+      "repeat": "none",
+      "repeatEndType": "never",
+      "repeatEndDate": null,
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-09-29T00:47:37.331Z"
     }
   ],
   "categories": [
