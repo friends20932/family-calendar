@@ -5089,6 +5089,33 @@
       "repeatMonthlyDate": 1,
       "excludeDates": [],
       "createdAt": "2026-09-29T00:48:01.422Z"
+    },
+    {
+      "id": "aee225ba-d144-4bd7-8baf-45d8db5902b6",
+      "title": "誰來我家－施宇昕",
+      "datetime": "2026-10-03T19:00",
+      "endDatetime": "2026-10-03T20:00",
+      "allDay": false,
+      "url": "",
+      "description": "",
+      "location": "",
+      "category": "church",
+      "color": null,
+      "memberIds": [
+        "8fd52380-c506-4a41-9302-e38ea61fff96",
+        "b1c23456-0000-0000-0000-000000000001",
+        "b1c23456-0000-0000-0000-000000000002",
+        "b1c23456-0000-0000-0000-000000000003"
+      ],
+      "reminder": "30",
+      "repeat": "none",
+      "repeatEndType": "never",
+      "repeatEndDate": null,
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-09-29T01:14:44.240Z"
     }
   ],
   "categories": [
