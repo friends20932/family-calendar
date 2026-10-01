@@ -5170,7 +5170,16 @@
       "emoji": "🍟"
     }
   ],
-  "todos": [],
+  "todos": [
+    {
+      "id": "todo_1790757916951_c22w6",
+      "text": "打流感疫苗",
+      "priority": "high",
+      "category": "",
+      "done": false,
+      "createdAt": "2026-09-30T08:45:16.951Z"
+    }
+  ],
   "deletedTodoIds": [
     "todo_1780898283199_cv4to",
     "todo_1780909874416_2qg6o",
