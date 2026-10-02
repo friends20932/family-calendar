@@ -5092,6 +5092,31 @@
       "repeatMonthlyDate": 1,
       "excludeDates": [],
       "createdAt": "2026-09-29T01:14:44.240Z"
+    },
+    {
+      "id": "1a856cbc-e3e9-4e1f-8d11-9d2b2e44395e",
+      "title": "恩言音樂體驗課",
+      "datetime": "2026-10-12T18:00",
+      "endDatetime": "2026-10-12T19:00",
+      "allDay": false,
+      "url": "https://maps.app.goo.gl/xFMF2q3aGZkE9sGX7",
+      "description": "",
+      "location": "藝佳音樂教室",
+      "category": "family",
+      "color": null,
+      "memberIds": [
+        "b1c23456-0000-0000-0000-000000000001",
+        "b1c23456-0000-0000-0000-000000000002"
+      ],
+      "reminder": "30",
+      "repeat": "none",
+      "repeatEndType": "never",
+      "repeatEndDate": null,
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-10-02T01:29:52.586Z"
     }
   ],
   "categories": [
