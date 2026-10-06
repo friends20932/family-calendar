@@ -5246,6 +5246,31 @@
       "repeatMonthlyDate": 1,
       "excludeDates": [],
       "createdAt": "2026-10-06T02:36:39.019Z"
+    },
+    {
+      "id": "b77c2637-9a41-47ae-bc6c-15b8f7ccf7b6",
+      "title": "行憲紀念日連假",
+      "datetime": "2026-12-25T00:00",
+      "endDatetime": "2026-12-25T00:00",
+      "allDay": true,
+      "url": "",
+      "description": "",
+      "location": "",
+      "category": "work",
+      "color": null,
+      "memberIds": [
+        "8fd52380-c506-4a41-9302-e38ea61fff96",
+        "b1c23456-0000-0000-0000-000000000001"
+      ],
+      "reminder": "30",
+      "repeat": "none",
+      "repeatEndType": "never",
+      "repeatEndDate": null,
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-10-06T04:35:22.991Z"
     }
   ],
   "categories": [
