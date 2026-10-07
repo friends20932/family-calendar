@@ -5296,6 +5296,33 @@
       "repeatMonthlyDate": 1,
       "excludeDates": [],
       "createdAt": "2026-10-06T04:35:37.962Z"
+    },
+    {
+      "id": "f11e0b6e-3e32-4487-b0d3-31acbfbd57d7",
+      "title": "大專排",
+      "datetime": "2026-10-15T18:00",
+      "endDatetime": "2026-10-15T20:00",
+      "allDay": false,
+      "url": "",
+      "description": "",
+      "location": "不點家",
+      "category": "church",
+      "color": null,
+      "memberIds": [
+        "8fd52380-c506-4a41-9302-e38ea61fff96",
+        "b1c23456-0000-0000-0000-000000000001",
+        "b1c23456-0000-0000-0000-000000000002",
+        "b1c23456-0000-0000-0000-000000000003"
+      ],
+      "reminder": "30",
+      "repeat": "none",
+      "repeatEndType": "never",
+      "repeatEndDate": null,
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-10-07T02:09:34.952Z"
     }
   ],
   "categories": [
