@@ -5378,6 +5378,31 @@
       "repeatMonthlyDate": 1,
       "excludeDates": [],
       "createdAt": "2026-10-07T02:17:17.531Z"
+    },
+    {
+      "id": "922a51b9-8167-46ef-8fe2-2bd4d8970242",
+      "title": "國際華語特會",
+      "datetime": "2027-02-20T00:00",
+      "endDatetime": "2027-02-21T00:00",
+      "allDay": true,
+      "url": "",
+      "description": "",
+      "location": "",
+      "category": "church",
+      "color": null,
+      "memberIds": [
+        "8fd52380-c506-4a41-9302-e38ea61fff96",
+        "b1c23456-0000-0000-0000-000000000001"
+      ],
+      "reminder": "30",
+      "repeat": "none",
+      "repeatEndType": "never",
+      "repeatEndDate": null,
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-10-10T01:52:28.250Z"
     }
   ],
   "categories": [
@@ -5462,7 +5487,7 @@
       "text": "打流感疫苗",
       "priority": "high",
       "category": "",
-      "done": true,
+      "done": false,
       "createdAt": "2026-09-30T08:45:16.951Z"
     }
   ],
