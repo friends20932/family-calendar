@@ -5403,6 +5403,31 @@
       "repeatMonthlyDate": 1,
       "excludeDates": [],
       "createdAt": "2026-10-10T01:52:28.250Z"
+    },
+    {
+      "id": "99845b83-34c1-4256-8645-c9867da95f24",
+      "title": "公司尾牙",
+      "datetime": "2027-01-14T14:00",
+      "endDatetime": "2027-01-14T22:00",
+      "allDay": false,
+      "url": "",
+      "description": "",
+      "location": "",
+      "category": "work",
+      "color": null,
+      "memberIds": [
+        "b1c23456-0000-0000-0000-000000000001",
+        "b1c23456-0000-0000-0000-000000000002"
+      ],
+      "reminder": "30",
+      "repeat": "none",
+      "repeatEndType": "never",
+      "repeatEndDate": null,
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-10-12T01:04:13.912Z"
     }
   ],
   "categories": [
@@ -5487,7 +5512,7 @@
       "text": "打流感疫苗",
       "priority": "high",
       "category": "",
-      "done": false,
+      "done": true,
       "createdAt": "2026-09-30T08:45:16.951Z"
     }
   ],
