@@ -5428,6 +5428,30 @@
       "repeatMonthlyDate": 1,
       "excludeDates": [],
       "createdAt": "2026-10-12T01:04:13.912Z"
+    },
+    {
+      "id": "e5adbd23-bcb7-4e69-8afa-48445ff45e06",
+      "title": "訂位-島語",
+      "datetime": "2026-11-01T10:50",
+      "endDatetime": "2026-11-01T11:00",
+      "allDay": false,
+      "url": "https://inline.app/booking/-NeqTSgDQOAYi30lg4a7:inline-live-3/-OUYVD5L8af9l-fOxBi5",
+      "description": "",
+      "location": "",
+      "category": "family",
+      "color": null,
+      "memberIds": [
+        "b1c23456-0000-0000-0000-000000000001"
+      ],
+      "reminder": "30",
+      "repeat": "none",
+      "repeatEndType": "never",
+      "repeatEndDate": null,
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-10-12T06:33:08.117Z"
     }
   ],
   "categories": [
