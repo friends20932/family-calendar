@@ -5500,6 +5500,33 @@
       "repeatMonthlyDate": 1,
       "excludeDates": [],
       "createdAt": "2026-10-13T03:21:03.949Z"
+    },
+    {
+      "id": "514f3fe1-ed63-4535-9e41-59ff7eee388d",
+      "title": "家庭出遊",
+      "datetime": "2027-01-14T00:00",
+      "endDatetime": "2027-01-15T00:00",
+      "allDay": true,
+      "url": "",
+      "description": "",
+      "location": "",
+      "category": "family",
+      "color": null,
+      "memberIds": [
+        "8fd52380-c506-4a41-9302-e38ea61fff96",
+        "b1c23456-0000-0000-0000-000000000001",
+        "b1c23456-0000-0000-0000-000000000002",
+        "b1c23456-0000-0000-0000-000000000003"
+      ],
+      "reminder": "30",
+      "repeat": "none",
+      "repeatEndType": "never",
+      "repeatEndDate": null,
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-10-13T03:21:36.724Z"
     }
   ],
   "categories": [
