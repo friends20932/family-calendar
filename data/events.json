@@ -4485,7 +4485,7 @@
     },
     {
       "id": "3e0808d9-7f77-4069-a596-474a149010f6",
-      "title": "23會所集中主日（司琴服事）",
+      "title": "23大區集中主日",
       "datetime": "2026-11-08T09:00",
       "endDatetime": "2026-11-08T10:00",
       "allDay": false,
@@ -4503,10 +4503,10 @@
       "reminder": "30",
       "repeat": "none",
       "repeatEndType": "never",
-      "repeatEndDate": null,
-      "repeatEndCount": 10,
+      "repeatEndDate": "",
+      "repeatEndCount": "10",
       "repeatWeeklyDays": [],
-      "repeatMonthlyDate": 1,
+      "repeatMonthlyDate": "1",
       "excludeDates": [],
       "createdAt": "2026-08-31T01:44:53.441Z"
     },
