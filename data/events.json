@@ -5551,6 +5551,30 @@
       "repeatMonthlyDate": 1,
       "excludeDates": [],
       "createdAt": "2026-10-13T07:50:17.875Z"
+    },
+    {
+      "id": "0ccc321f-1698-482c-bf95-3d556780c0d9",
+      "title": "青職事奉相調交通",
+      "datetime": "2026-10-18T15:00",
+      "endDatetime": "2026-10-18T17:00",
+      "allDay": false,
+      "url": "",
+      "description": "",
+      "location": "",
+      "category": "church",
+      "color": null,
+      "memberIds": [
+        "b1c23456-0000-0000-0000-000000000001"
+      ],
+      "reminder": "30",
+      "repeat": "none",
+      "repeatEndType": "never",
+      "repeatEndDate": null,
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-10-14T01:48:50.890Z"
     }
   ],
   "categories": [
