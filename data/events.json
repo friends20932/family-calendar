@@ -5623,6 +5623,30 @@
       "repeatMonthlyDate": 1,
       "excludeDates": [],
       "createdAt": "2026-10-14T08:07:05.011Z"
+    },
+    {
+      "id": "3562cf02-35ac-488e-8d5f-3dba840389d9",
+      "title": "公告國光公園抽籤結果",
+      "datetime": "2026-10-23T09:00",
+      "endDatetime": "2026-10-23T10:00",
+      "allDay": false,
+      "url": "",
+      "description": "",
+      "location": "",
+      "category": "family",
+      "color": null,
+      "memberIds": [
+        "b1c23456-0000-0000-0000-000000000001"
+      ],
+      "reminder": "30",
+      "repeat": "none",
+      "repeatEndType": "never",
+      "repeatEndDate": null,
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-10-14T08:07:15.675Z"
     }
   ],
   "categories": [
