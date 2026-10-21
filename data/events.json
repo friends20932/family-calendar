@@ -5748,6 +5748,33 @@
       "repeatMonthlyDate": 1,
       "excludeDates": [],
       "createdAt": "2026-10-21T04:16:40.988Z"
+    },
+    {
+      "id": "eab98e9f-1aad-4821-8e63-15f8fbafa627",
+      "title": "整理雜物、IKEA購物",
+      "datetime": "2026-10-26T00:00",
+      "endDatetime": "2026-10-26T00:00",
+      "allDay": true,
+      "url": "",
+      "description": "",
+      "location": "",
+      "category": "family",
+      "color": null,
+      "memberIds": [
+        "8fd52380-c506-4a41-9302-e38ea61fff96",
+        "b1c23456-0000-0000-0000-000000000001",
+        "b1c23456-0000-0000-0000-000000000002",
+        "b1c23456-0000-0000-0000-000000000003"
+      ],
+      "reminder": "30",
+      "repeat": "none",
+      "repeatEndType": "never",
+      "repeatEndDate": null,
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-10-21T07:54:53.435Z"
     }
   ],
   "categories": [
