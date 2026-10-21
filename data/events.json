@@ -5750,6 +5750,30 @@
       "repeatMonthlyDate": 1,
       "excludeDates": [],
       "createdAt": "2026-10-21T07:54:53.435Z"
+    },
+    {
+      "id": "38b81c68-bcad-4650-897d-8404648941a6",
+      "title": "Yamaha課程匯款",
+      "datetime": "2026-10-31T00:00",
+      "endDatetime": "2026-10-31T00:00",
+      "allDay": true,
+      "url": "",
+      "description": "全額 $8,250\n匯款帳號：\n銀行：台北富邦 水湳分行\n代碼：012\n戶頭名稱：藝佳樂器有限公司\n銀行帳號：051-2693-6975-888",
+      "location": "",
+      "category": "family",
+      "color": null,
+      "memberIds": [
+        "b1c23456-0000-0000-0000-000000000001"
+      ],
+      "reminder": "30",
+      "repeat": "none",
+      "repeatEndType": "never",
+      "repeatEndDate": null,
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-10-21T09:01:58.340Z"
     }
   ],
   "categories": [
