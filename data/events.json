@@ -5774,6 +5774,33 @@
       "repeatMonthlyDate": 1,
       "excludeDates": [],
       "createdAt": "2026-10-21T09:01:58.340Z"
+    },
+    {
+      "id": "a6f3cc14-1bfb-4b31-ae73-1d360e692891",
+      "title": "17秋姊妹來訪",
+      "datetime": "2026-10-31T14:00",
+      "endDatetime": "2026-10-31T16:00",
+      "allDay": false,
+      "url": "",
+      "description": "",
+      "location": "",
+      "category": "church",
+      "color": null,
+      "memberIds": [
+        "8fd52380-c506-4a41-9302-e38ea61fff96",
+        "b1c23456-0000-0000-0000-000000000001",
+        "b1c23456-0000-0000-0000-000000000002",
+        "b1c23456-0000-0000-0000-000000000003"
+      ],
+      "reminder": "30",
+      "repeat": "none",
+      "repeatEndType": "never",
+      "repeatEndDate": null,
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-10-22T04:32:52.985Z"
     }
   ],
   "categories": [
@@ -5852,7 +5879,16 @@
       "emoji": "🍟"
     }
   ],
-  "todos": [],
+  "todos": [
+    {
+      "id": "todo_1790757916951_c22w6",
+      "text": "打流感疫苗",
+      "priority": "high",
+      "category": "",
+      "done": false,
+      "createdAt": "2026-09-30T08:45:16.951Z"
+    }
+  ],
   "deletedTodoIds": [
     "todo_1780898283199_cv4to",
     "todo_1780909874416_2qg6o",
