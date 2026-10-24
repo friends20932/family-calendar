@@ -5774,6 +5774,31 @@
       "repeatMonthlyDate": 1,
       "excludeDates": [],
       "createdAt": "2026-10-22T04:32:52.985Z"
+    },
+    {
+      "id": "beb4e246-6531-4c98-8247-41009e9d5a98",
+      "title": "南照顧區青少年服事交通",
+      "datetime": "2026-11-07T12:00",
+      "endDatetime": "2026-11-07T14:00",
+      "allDay": false,
+      "url": "",
+      "description": "",
+      "location": "",
+      "category": "church",
+      "color": null,
+      "memberIds": [
+        "8fd52380-c506-4a41-9302-e38ea61fff96",
+        "b1c23456-0000-0000-0000-000000000001"
+      ],
+      "reminder": "30",
+      "repeat": "none",
+      "repeatEndType": "never",
+      "repeatEndDate": null,
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-10-24T07:33:28.395Z"
     }
   ],
   "categories": [
