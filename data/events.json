@@ -5802,7 +5802,7 @@
     },
     {
       "id": "f9884b61-67df-4a73-a762-206015ac2ea7",
-      "title": "恩言音樂觀課",
+      "title": "恩言音樂課觀課",
       "datetime": "2026-11-25T14:30",
       "endDatetime": "2026-11-25T15:30",
       "allDay": false,
@@ -5812,16 +5812,15 @@
       "category": "school",
       "color": null,
       "memberIds": [
-        "b1c23456-0000-0000-0000-000000000001",
-        "b1c23456-0000-0000-0000-000000000002"
+        "b1c23456-0000-0000-0000-000000000001"
       ],
       "reminder": "30",
       "repeat": "none",
       "repeatEndType": "never",
-      "repeatEndDate": null,
-      "repeatEndCount": 10,
+      "repeatEndDate": "",
+      "repeatEndCount": "10",
       "repeatWeeklyDays": [],
-      "repeatMonthlyDate": 1,
+      "repeatMonthlyDate": "1",
       "excludeDates": [],
       "createdAt": "2026-10-27T03:24:13.668Z"
     },
