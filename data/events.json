@@ -5957,6 +5957,30 @@
       "repeatMonthlyDate": 1,
       "excludeDates": [],
       "createdAt": "2026-10-28T02:05:23.218Z"
+    },
+    {
+      "id": "92262f5f-7380-4b62-a387-d041561753e0",
+      "title": "洗衣機清洗",
+      "datetime": "2026-11-04T11:00",
+      "endDatetime": "2026-11-04T12:00",
+      "allDay": false,
+      "url": "",
+      "description": "",
+      "location": "",
+      "category": "family",
+      "color": null,
+      "memberIds": [
+        "b1c23456-0000-0000-0000-000000000001"
+      ],
+      "reminder": "30",
+      "repeat": "none",
+      "repeatEndType": "never",
+      "repeatEndDate": null,
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-10-28T07:23:08.716Z"
     }
   ],
   "categories": [
