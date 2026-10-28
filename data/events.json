@@ -5981,6 +5981,30 @@
       "repeatMonthlyDate": 1,
       "excludeDates": [],
       "createdAt": "2026-10-28T07:23:08.716Z"
+    },
+    {
+      "id": "563ac2d3-0d46-41e0-aab6-e790cff6d784",
+      "title": "圖書館取書",
+      "datetime": "2026-10-30T13:00",
+      "endDatetime": "2026-10-30T14:00",
+      "allDay": false,
+      "url": "",
+      "description": "",
+      "location": "",
+      "category": "family",
+      "color": null,
+      "memberIds": [
+        "b1c23456-0000-0000-0000-000000000001"
+      ],
+      "reminder": "30",
+      "repeat": "none",
+      "repeatEndType": "never",
+      "repeatEndDate": null,
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-10-28T09:07:10.650Z"
     }
   ],
   "categories": [
