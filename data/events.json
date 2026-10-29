@@ -6029,6 +6029,30 @@
       "repeatMonthlyDate": 1,
       "excludeDates": [],
       "createdAt": "2026-10-29T02:15:48.024Z"
+    },
+    {
+      "id": "d3d98c90-14c5-4a58-bc5e-f5a220d5dd23",
+      "title": "恩言操作課觀課",
+      "datetime": "2026-11-12T09:15",
+      "endDatetime": "2026-11-12T10:30",
+      "allDay": false,
+      "url": "",
+      "description": "",
+      "location": "",
+      "category": "school",
+      "color": null,
+      "memberIds": [
+        "b1c23456-0000-0000-0000-000000000001"
+      ],
+      "reminder": "30",
+      "repeat": "none",
+      "repeatEndType": "never",
+      "repeatEndDate": null,
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-10-29T02:16:14.801Z"
     }
   ],
   "categories": [
