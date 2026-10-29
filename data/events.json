@@ -6005,6 +6005,30 @@
       "repeatMonthlyDate": 1,
       "excludeDates": [],
       "createdAt": "2026-10-28T09:07:10.650Z"
+    },
+    {
+      "id": "6a6c09a7-3f18-4a18-a022-bb93bebc0f5b",
+      "title": "恩言英文課觀課",
+      "datetime": "2026-11-09T15:45",
+      "endDatetime": "2026-11-09T16:45",
+      "allDay": false,
+      "url": "",
+      "description": "",
+      "location": "",
+      "category": "school",
+      "color": null,
+      "memberIds": [
+        "b1c23456-0000-0000-0000-000000000001"
+      ],
+      "reminder": "30",
+      "repeat": "none",
+      "repeatEndType": "never",
+      "repeatEndDate": null,
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-10-29T02:15:48.024Z"
     }
   ],
   "categories": [
