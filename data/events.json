@@ -6053,6 +6053,32 @@
       "repeatMonthlyDate": 1,
       "excludeDates": [],
       "createdAt": "2026-10-29T02:16:14.801Z"
+    },
+    {
+      "id": "70b54d27-04b9-4009-81b5-cf204dc9de6f",
+      "title": "回基隆",
+      "datetime": "2026-11-12T14:30",
+      "endDatetime": "2026-11-12T17:40",
+      "allDay": false,
+      "url": "",
+      "description": "",
+      "location": "",
+      "category": "family",
+      "color": null,
+      "memberIds": [
+        "b1c23456-0000-0000-0000-000000000001",
+        "b1c23456-0000-0000-0000-000000000002",
+        "b1c23456-0000-0000-0000-000000000003"
+      ],
+      "reminder": "30",
+      "repeat": "none",
+      "repeatEndType": "never",
+      "repeatEndDate": null,
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-10-29T02:17:08.874Z"
     }
   ],
   "categories": [
