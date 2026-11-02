@@ -6087,6 +6087,30 @@
       "repeatMonthlyDate": 1,
       "excludeDates": [],
       "createdAt": "2026-11-02T08:25:18.749Z"
+    },
+    {
+      "id": "a62197f3-542d-4857-be06-59f9bc4683aa",
+      "title": "產檢",
+      "datetime": "2026-12-02T13:30",
+      "endDatetime": "2026-12-02T14:30",
+      "allDay": false,
+      "url": "",
+      "description": "",
+      "location": "",
+      "category": "health",
+      "color": null,
+      "memberIds": [
+        "b1c23456-0000-0000-0000-000000000001"
+      ],
+      "reminder": "30",
+      "repeat": "none",
+      "repeatEndType": "never",
+      "repeatEndDate": null,
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-11-02T10:30:28.052Z"
     }
   ],
   "categories": [
@@ -6165,7 +6189,16 @@
       "emoji": "🍟"
     }
   ],
-  "todos": [],
+  "todos": [
+    {
+      "id": "todo_1790757916951_c22w6",
+      "text": "打流感疫苗",
+      "priority": "high",
+      "category": "",
+      "done": false,
+      "createdAt": "2026-09-30T08:45:16.951Z"
+    }
+  ],
   "deletedTodoIds": [
     "todo_1780898283199_cv4to",
     "todo_1780909874416_2qg6o",
