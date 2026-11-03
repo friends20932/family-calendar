@@ -6135,6 +6135,33 @@
       "repeatMonthlyDate": 1,
       "excludeDates": [],
       "createdAt": "2026-11-03T01:31:58.150Z"
+    },
+    {
+      "id": "ab4ac336-5188-4487-bfc7-5463d3e415df",
+      "title": "高中聯合福音聚會",
+      "datetime": "2026-11-10T17:30",
+      "endDatetime": "2026-11-10T18:30",
+      "allDay": false,
+      "url": "",
+      "description": "",
+      "location": "",
+      "category": "church",
+      "color": null,
+      "memberIds": [
+        "8fd52380-c506-4a41-9302-e38ea61fff96",
+        "b1c23456-0000-0000-0000-000000000001",
+        "b1c23456-0000-0000-0000-000000000002",
+        "b1c23456-0000-0000-0000-000000000003"
+      ],
+      "reminder": "30",
+      "repeat": "none",
+      "repeatEndType": "never",
+      "repeatEndDate": null,
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-11-03T02:26:43.915Z"
     }
   ],
   "categories": [
