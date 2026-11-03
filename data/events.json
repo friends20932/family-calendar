@@ -6111,6 +6111,30 @@
       "repeatMonthlyDate": 1,
       "excludeDates": [],
       "createdAt": "2026-11-02T10:30:28.052Z"
+    },
+    {
+      "id": "628aec37-514c-4a3f-88f8-713bd72b5c2d",
+      "title": "產檢－糖水檢測",
+      "datetime": "2026-11-06T08:30",
+      "endDatetime": "2026-11-06T11:30",
+      "allDay": false,
+      "url": "",
+      "description": "",
+      "location": "",
+      "category": "health",
+      "color": null,
+      "memberIds": [
+        "b1c23456-0000-0000-0000-000000000001"
+      ],
+      "reminder": "30",
+      "repeat": "none",
+      "repeatEndType": "never",
+      "repeatEndDate": null,
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-11-03T01:31:58.150Z"
     }
   ],
   "categories": [
@@ -6189,16 +6213,7 @@
       "emoji": "🍟"
     }
   ],
-  "todos": [
-    {
-      "id": "todo_1790757916951_c22w6",
-      "text": "打流感疫苗",
-      "priority": "high",
-      "category": "",
-      "done": false,
-      "createdAt": "2026-09-30T08:45:16.951Z"
-    }
-  ],
+  "todos": [],
   "deletedTodoIds": [
     "todo_1780898283199_cv4to",
     "todo_1780909874416_2qg6o",
