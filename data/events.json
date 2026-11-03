@@ -5524,9 +5524,9 @@
     },
     {
       "id": "18998678-eebb-40ab-b1c8-5e2a9284cf7d",
-      "title": "聯絡預約參觀",
-      "datetime": "2026-11-06T09:00",
-      "endDatetime": "2026-11-06T10:00",
+      "title": "參觀愛寶托嬰中心",
+      "datetime": "2026-11-05T18:15",
+      "endDatetime": "2026-11-05T19:15",
       "allDay": false,
       "url": "https://share.google/Kbk9piUp80bwTo4Q2",
       "description": "04-2482-2006",
@@ -5534,15 +5534,18 @@
       "category": "family",
       "color": null,
       "memberIds": [
-        "b1c23456-0000-0000-0000-000000000001"
+        "8fd52380-c506-4a41-9302-e38ea61fff96",
+        "b1c23456-0000-0000-0000-000000000001",
+        "b1c23456-0000-0000-0000-000000000002",
+        "b1c23456-0000-0000-0000-000000000003"
       ],
       "reminder": "30",
       "repeat": "none",
       "repeatEndType": "never",
-      "repeatEndDate": null,
-      "repeatEndCount": 10,
+      "repeatEndDate": "",
+      "repeatEndCount": "10",
       "repeatWeeklyDays": [],
-      "repeatMonthlyDate": 1,
+      "repeatMonthlyDate": "1",
       "excludeDates": [],
       "createdAt": "2026-10-14T08:42:53.456Z"
     },
