@@ -6165,6 +6165,30 @@
       "repeatMonthlyDate": "1",
       "excludeDates": [],
       "createdAt": "2026-11-03T02:26:43.915Z"
+    },
+    {
+      "id": "9baf215e-1bfe-4705-b7cf-befa218d5e93",
+      "title": "台南弟兄交通",
+      "datetime": "2026-11-07T09:30",
+      "endDatetime": "2026-11-07T11:30",
+      "allDay": false,
+      "url": "",
+      "description": "",
+      "location": "復興大樓",
+      "category": "church",
+      "color": null,
+      "memberIds": [
+        "8fd52380-c506-4a41-9302-e38ea61fff96"
+      ],
+      "reminder": "30",
+      "repeat": "none",
+      "repeatEndType": "never",
+      "repeatEndDate": null,
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-11-05T08:02:00.753Z"
     }
   ],
   "categories": [
