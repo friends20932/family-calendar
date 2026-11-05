@@ -6215,6 +6215,31 @@
       "repeatMonthlyDate": "1",
       "excludeDates": [],
       "createdAt": "2026-11-05T08:02:23.758Z"
+    },
+    {
+      "id": "f8ba6bc3-aca0-4e55-bc59-5cf2535d742f",
+      "title": "23大區青少年服事交通",
+      "datetime": "2026-11-07T20:00",
+      "endDatetime": "2026-11-07T21:00",
+      "allDay": false,
+      "url": "",
+      "description": "",
+      "location": "",
+      "category": "church",
+      "color": null,
+      "memberIds": [
+        "8fd52380-c506-4a41-9302-e38ea61fff96",
+        "b1c23456-0000-0000-0000-000000000001"
+      ],
+      "reminder": "30",
+      "repeat": "none",
+      "repeatEndType": "never",
+      "repeatEndDate": null,
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-11-05T08:03:04.082Z"
     }
   ],
   "categories": [
