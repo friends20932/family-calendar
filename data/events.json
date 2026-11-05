@@ -6189,6 +6189,32 @@
       "repeatMonthlyDate": 1,
       "excludeDates": [],
       "createdAt": "2026-11-05T08:02:00.753Z"
+    },
+    {
+      "id": "77d7fa44-c8e8-4406-b588-0f6f9e193868",
+      "title": "親子館",
+      "datetime": "2026-11-07T08:45",
+      "endDatetime": "2026-11-07T11:00",
+      "allDay": false,
+      "url": "",
+      "description": "",
+      "location": "大里親子館",
+      "category": "family",
+      "color": null,
+      "memberIds": [
+        "b1c23456-0000-0000-0000-000000000001",
+        "b1c23456-0000-0000-0000-000000000002",
+        "b1c23456-0000-0000-0000-000000000003"
+      ],
+      "reminder": "30",
+      "repeat": "none",
+      "repeatEndType": "never",
+      "repeatEndDate": null,
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-11-05T08:02:23.758Z"
     }
   ],
   "categories": [
