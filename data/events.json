@@ -6298,8 +6298,8 @@
     {
       "id": "6cea9515-cbad-451b-afa4-62b01c09f104",
       "title": "韓國青少年相調聚會",
-      "datetime": "2026-12-19T06:00",
-      "endDatetime": "2026-12-19T07:00",
+      "datetime": "2026-12-19T18:00",
+      "endDatetime": "2026-12-19T20:30",
       "allDay": false,
       "url": "",
       "description": "",
@@ -6315,10 +6315,10 @@
       "reminder": "30",
       "repeat": "none",
       "repeatEndType": "never",
-      "repeatEndDate": null,
-      "repeatEndCount": 10,
+      "repeatEndDate": "",
+      "repeatEndCount": "10",
       "repeatWeeklyDays": [],
-      "repeatMonthlyDate": 1,
+      "repeatMonthlyDate": "1",
       "excludeDates": [],
       "createdAt": "2026-11-16T05:58:14.013Z"
     }
