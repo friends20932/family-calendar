@@ -6321,6 +6321,30 @@
       "repeatMonthlyDate": "1",
       "excludeDates": [],
       "createdAt": "2026-11-16T05:58:14.013Z"
+    },
+    {
+      "id": "6efa2581-9448-4929-af3f-314ed3335d6e",
+      "title": "換鎖芯",
+      "datetime": "2026-11-25T10:00",
+      "endDatetime": "2026-11-25T11:00",
+      "allDay": false,
+      "url": "",
+      "description": "",
+      "location": "",
+      "category": "family",
+      "color": null,
+      "memberIds": [
+        "b1c23456-0000-0000-0000-000000000001"
+      ],
+      "reminder": "30",
+      "repeat": "none",
+      "repeatEndType": "never",
+      "repeatEndDate": null,
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-11-19T01:11:45.949Z"
     }
   ],
   "categories": [
