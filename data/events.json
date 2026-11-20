@@ -6397,6 +6397,30 @@
       "repeatMonthlyDate": 1,
       "excludeDates": [],
       "createdAt": "2026-11-20T03:06:31.473Z"
+    },
+    {
+      "id": "4e10a677-bf0a-4b6c-a02e-d638c9bb684d",
+      "title": "夜間擘餅司琴",
+      "datetime": "2026-11-22T19:00",
+      "endDatetime": "2026-11-22T20:00",
+      "allDay": false,
+      "url": "",
+      "description": "",
+      "location": "",
+      "category": "church",
+      "color": null,
+      "memberIds": [
+        "b1c23456-0000-0000-0000-000000000001"
+      ],
+      "reminder": "30",
+      "repeat": "none",
+      "repeatEndType": "never",
+      "repeatEndDate": null,
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-11-20T03:07:00.121Z"
     }
   ],
   "categories": [
