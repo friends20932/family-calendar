@@ -6372,6 +6372,31 @@
       "repeatMonthlyDate": 1,
       "excludeDates": [],
       "createdAt": "2026-11-20T03:06:15.552Z"
+    },
+    {
+      "id": "6aa06aaa-6c52-4db0-b4c8-0ddbd80a4a5f",
+      "title": "投票",
+      "datetime": "2026-11-28T08:00",
+      "endDatetime": "2026-11-28T10:00",
+      "allDay": false,
+      "url": "",
+      "description": "",
+      "location": "",
+      "category": "family",
+      "color": null,
+      "memberIds": [
+        "8fd52380-c506-4a41-9302-e38ea61fff96",
+        "b1c23456-0000-0000-0000-000000000001"
+      ],
+      "reminder": "30",
+      "repeat": "none",
+      "repeatEndType": "never",
+      "repeatEndDate": null,
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-11-20T03:06:31.473Z"
     }
   ],
   "categories": [
