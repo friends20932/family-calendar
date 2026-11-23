@@ -6474,6 +6474,31 @@
       "repeatMonthlyDate": 1,
       "excludeDates": [],
       "createdAt": "2026-11-23T02:23:27.624Z"
+    },
+    {
+      "id": "6fe49a43-c2be-4670-abfc-10ca2aa90079",
+      "title": "結婚紀念餐",
+      "datetime": "2026-11-27T12:00",
+      "endDatetime": "2026-11-27T14:00",
+      "allDay": false,
+      "url": "",
+      "description": "",
+      "location": "饗食天堂",
+      "category": "family",
+      "color": null,
+      "memberIds": [
+        "8fd52380-c506-4a41-9302-e38ea61fff96",
+        "b1c23456-0000-0000-0000-000000000001"
+      ],
+      "reminder": "30",
+      "repeat": "none",
+      "repeatEndType": "never",
+      "repeatEndDate": null,
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-11-23T02:23:51.891Z"
     }
   ],
   "categories": [
