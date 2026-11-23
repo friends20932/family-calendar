@@ -6548,7 +6548,7 @@
       "reminder": "none",
       "repeat": "weekly",
       "repeatEndType": "date",
-      "repeatEndDate": "2026-12-31",
+      "repeatEndDate": "2026-12-24",
       "repeatEndCount": 10,
       "repeatWeeklyDays": [
         5
@@ -6556,6 +6556,34 @@
       "repeatMonthlyDate": 1,
       "excludeDates": [],
       "createdAt": "2026-11-23T02:24:15.323Z"
+    },
+    {
+      "id": "9263ad68-0272-475d-b035-db7240dc8b84",
+      "title": "幼幼排",
+      "datetime": "2026-12-25T20:00",
+      "endDatetime": "2026-12-25T21:00",
+      "allDay": false,
+      "url": "",
+      "description": "",
+      "location": "",
+      "category": "church",
+      "color": null,
+      "memberIds": [
+        "b1c23456-0000-0000-0000-000000000001",
+        "b1c23456-0000-0000-0000-000000000002",
+        "b1c23456-0000-0000-0000-000000000003"
+      ],
+      "reminder": "none",
+      "repeat": "weekly",
+      "repeatEndType": "date",
+      "repeatEndDate": "2026-12-31",
+      "repeatEndCount": 10,
+      "repeatWeeklyDays": [
+        5
+      ],
+      "repeatMonthlyDate": 1,
+      "excludeDates": [],
+      "createdAt": "2026-11-23T02:24:23.739Z"
     }
   ],
   "categories": [
